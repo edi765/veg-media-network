@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - VEG Media Network</title>
+    <link rel="icon" type="image/png" href="../images/logo.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #0f2649 0%, #1a3a6d 100%);
+            min-height: 100vh;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding-top: 60px;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            background: rgba(15, 38, 73, 0.15) !important;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(15, 38, 73, 0.35) !important;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #ffffff !important;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 0.3rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand img {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand:hover {
+            transform: translateY(-2px);
+        }
+
+        .navbar-brand:hover img {
+            transform: rotate(360deg);
+        }
+
+        .navbar-brand div {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            white-space: nowrap;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8) !important;
+            font-weight: 500;
+            padding: 0.4rem 0.8rem !important;
+            margin: 0 0.2rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 0.9rem;
+            overflow: hidden;
+        }
+
+        .nav-link:hover {
+            color: #ffffff !important;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .nav-link.active {
+            color: #ffffff !important;
+            background: rgba(25, 118, 210, 0.2);
+            border: 1px solid rgba(25, 118, 210, 0.3);
+        }
+
+        @media (max-width: 991px) {
+            .navbar-brand {
+                font-size: 1rem;
+            }
+
+            .navbar-brand div {
+                white-space: normal;
+            }
+
+            .navbar-collapse {
+                background: rgba(15, 38, 73, 0.25);
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+                border-radius: 15px;
+                padding: 1rem;
+                margin-top: 1rem;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .nav-link {
+                padding: 0.8rem 1.2rem !important;
+                margin: 0.2rem 0;
+            }
+        }
+
+        .contact-hero {
+            background: linear-gradient(rgba(15, 38, 73, 0.8), rgba(26, 58, 109, 0.8)), 
+                        url('../images/hero-bg.jpg') center/cover;
+            padding: 120px 0;
+            text-align: center;
+            position: relative;
+            margin-bottom: 50px;
+            overflow: hidden;
+        }
+
+        .contact-hero::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 150px;
+            background: linear-gradient(to top, #0f2649, transparent);
+        }
+
+        .contact-hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+            display: inline-block;
+        }
+
+        .contact-hero h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #ffffff, transparent);
+            border-radius: 2px;
+        }
+
+        .contact-hero p {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .contact-section {
+            padding: 80px 0;
+            background: transparent;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #ffffff;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ffffff, transparent);
+            border-radius: 2px;
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-info-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(5px);
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            font-size: 1.5rem;
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .contact-info-item:hover .contact-icon {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .contact-text h3 {
+            color: #ffffff;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .contact-text p {
+            color: rgba(255, 255, 255, 0.8);
+            margin: 0;
+        }
+
+        .contact-text a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-text a:hover {
+            color: #4CAF50;
+        }
+
+        .contact-form {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-form .form-control {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1rem 1.2rem;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-form .form-control:focus {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: #4CAF50;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+        }
+
+        .contact-form .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .contact-form textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .btn-send {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-send:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.2rem;
+            margin-top: 2.5rem;
+        }
+
+        .social-link {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #ffffff;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .social-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+            color: #ffffff;
+        }
+
+        .map-section {
+            margin-top: 80px;
+            width: 100%;
+            height: 450px;
+            position: relative;
+        }
+
+        .map-container {
+            height: 450px;
+            width: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        @media (max-width: 768px) {
+            .contact-hero {
+                padding: 80px 0;
+            }
+
+            .contact-hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .contact-hero p {
+                font-size: 1.1rem;
+                padding: 0 20px;
+            }
+
+            .contact-card, .contact-form {
+                padding: 2rem;
+            }
+
+            .map-section {
+                height: 350px;
+            }
+
+            .map-container {
+                height: 350px;
+            }
+
+            .contact-info-item {
+                padding: 1.2rem;
+            }
+
+            .contact-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        .dropdown-menu {
+            background: rgba(13, 25, 48, 0.95);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 0.5rem;
+            margin-top: 0.5rem;
+            min-width: 200px;
+        }
+
+        .dropdown-item {
+            color: rgba(255, 255, 255, 0.9);
+            padding: 0.7rem 1rem;
+            font-size: 0.9rem;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-item i {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+            width: 20px;
+            text-align: center;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        .dropdown-item:hover i {
+            color: #ffffff;
+        }
+
+        .dropdown-divider {
+            border-color: rgba(255, 255, 255, 0.1);
+            margin: 0.5rem 0;
+        }
+
+        .dropdown-item:last-child {
+            color: #ff4d4d;
+        }
+
+        .dropdown-item:last-child i {
+            color: #ff4d4d;
+        }
+
+        .dropdown-item:last-child:hover {
+            background: rgba(255, 77, 77, 0.1);
+        }
+
+        /* Logout Button Style */
+        .dropdown-menu .dropdown-item[onclick="logout(event)"] {
+            color: #ff4d4d;
+        }
+
+        .dropdown-menu .dropdown-item[onclick="logout(event)"] i {
+            color: #ff4d4d;
+        }
+
+        .dropdown-menu .dropdown-item[onclick="logout(event)"]:hover {
+            background: rgba(255, 77, 77, 0.1);
+        }
+
+        @keyframes dropdownFade {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">
+                <img src="../images/logo.png" alt="VEG Media Network Logo">
+                <div>
+                    VEG Media Network - Platformă Educațională
+                </div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Acasă</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cursuri.html">Cursuri</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="despre.html">Despre Noi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle account-btn" href="#" role="button" data-bs-toggle="dropdown" style="display: none;">
+                            <i class="fas fa-user-circle"></i>
+                            <span id="userName">Cont</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="profil.html"><i class="fas fa-user"></i> Profilul meu</a></li>
+                            <li><a class="dropdown-item" href="cursuri-mele.html"><i class="fas fa-book"></i> Cursurile mele</a></li>
+                            <li><a class="dropdown-item" href="certificate.html"><i class="fas fa-certificate"></i> Certificate</a></li>
+                            <li><a class="dropdown-item" href="setari.html"><i class="fas fa-cog"></i> Setări</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" onclick="logout(event)"><i class="fas fa-sign-out-alt"></i> Deconectare</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link auth-btn" href="autentificare.html">Autentificare</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="contact-hero">
+        <div class="container">
+            <h1>Contactează-ne</h1>
+            <p>Suntem aici pentru tine! Fie că ai întrebări despre cursurile noastre, dorești să colaborăm sau ai nevoie de informații suplimentare, echipa noastră îți stă la dispoziție.</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="contact-card">
+                        <h2 class="section-title">Informații de Contact</h2>
+                        
+                        <!-- Adresa -->
+                        <div class="contact-info-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h3>Adresa Noastră</h3>
+                                <p><a href="https://www.google.com/maps/place/Liceul+%22Regina+Maria%22+Dorohoi/@47.9405234,26.4078788,3a,75y,234.85h,90t/data=!3m7!1e1!3m5!1sMLCuhLY84-ZouaVAhpDXRQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DMLCuhLY84-ZouaVAhpDXRQ%26yaw%3D234.84846!7i16384!8i8192!4m6!3m5!1s0x47348a7c4dccc821:0x9ab7f499a44b1f33!8m2!3d47.940368!4d26.4075564!16s%2Fg%2F1tj83mcs?entry=ttu" target="_blank">Liceul Regina Maria Dorohoi</a></p>
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="contact-info-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h3>Email</h3>
+                                <p><a href="mailto:vegmedianetwork@gmail.com">vegmedianetwork@gmail.com</a></p>
+                            </div>
+                        </div>
+
+                        <!-- Telefon -->
+                        <div class="contact-info-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h3>Telefon</h3>
+                                <p><a href="tel:+40759388695">0759 388 695</a></p>
+                            </div>
+                        </div>
+
+                        <!-- Program -->
+                        <div class="contact-info-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h3>Program</h3>
+                                <p>Luni - Vineri: 09:00 - 17:00</p>
+                                <p>Sâmbătă - Duminică: Închis</p>
+                            </div>
+                        </div>
+
+                        <!-- Social Media -->
+                        <div class="social-links">
+                            <a href="#" class="social-link" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-link" title="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-link" title="YouTube"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <!-- Formular de Contact -->
+                    <div class="contact-form">
+                        <h2 class="section-title">Trimite-ne un Mesaj</h2>
+                        <form id="contactForm" class="needs-validation" novalidate>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" id="name" placeholder="Numele tău complet" required>
+                                <div class="invalid-feedback">
+                                    Te rugăm să introduci numele tău.
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <input type="email" class="form-control" id="email" placeholder="Adresa ta de email" required>
+                                <div class="invalid-feedback">
+                                    Te rugăm să introduci un email valid.
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <input type="tel" class="form-control" id="phone" placeholder="Numărul tău de telefon">
+                            </div>
+                            <div class="mb-3">
+                                <select class="form-control" id="subject" required>
+                                    <option value="">Selectează subiectul</option>
+                                    <option value="cursuri">Informații Cursuri</option>
+                                    <option value="colaborare">Propunere de Colaborare</option>
+                                    <option value="suport">Suport Tehnic</option>
+                                    <option value="altele">Altele</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Te rugăm să selectezi un subiect.
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <textarea class="form-control" id="message" rows="5" placeholder="Mesajul tău" required></textarea>
+                                <div class="invalid-feedback">
+                                    Te rugăm să introduci mesajul tău.
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-send">
+                                <i class="fas fa-paper-plane me-2"></i>Trimite Mesajul
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section">
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!4v1711191744708!6m8!1m7!1sMLCuhLY84-ZouaVAhpDXRQ!2m2!1d47.94052341760934!2d26.40787883750916!3f234.84846!4f0!5f0.7820865974627469" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Verifică starea autentificării
+        function checkAuthStatus() {
+            const authState = JSON.parse(localStorage.getItem('authState') || sessionStorage.getItem('authState') || '{}');
+            const accountBtn = document.querySelector('.account-btn');
+            const authBtn = document.querySelector('.auth-btn');
+            const userName = document.getElementById('userName');
+            
+            console.log('Status autentificare:', authState.isAuthenticated);
+            console.log('Date utilizator:', authState.user);
+            
+            if (authState.isAuthenticated) {
+                if (accountBtn) {
+                    accountBtn.style.display = 'block';
+                    console.log('Buton cont vizibil');
+                }
+                if (authBtn) {
+                    authBtn.style.display = 'none';
+                    console.log('Buton autentificare ascuns');
+                }
+                
+                try {
+                    const displayName = authState.user?.name || authState.user?.numeComplet || 'Contul meu';
+                    if (userName) {
+                        userName.textContent = displayName;
+                        console.log('Nume utilizator setat:', displayName);
+                    }
+                } catch (error) {
+                    console.error('Eroare la setarea numelui utilizatorului:', error);
+                    if (userName) userName.textContent = 'Contul meu';
+                }
+            } else {
+                if (accountBtn) {
+                    accountBtn.style.display = 'none';
+                    console.log('Buton cont ascuns');
+                }
+                if (authBtn) {
+                    authBtn.style.display = 'block';
+                    console.log('Buton autentificare vizibil');
+                }
+            }
+        }
+
+        // Funcție pentru deconectare
+        function logout(e) {
+            if (e) e.preventDefault();
+            console.log('Deconectare inițiată...');
+            
+            localStorage.removeItem('authState');
+            sessionStorage.removeItem('authState');
+            
+            checkAuthStatus();
+            
+            console.log('Redirecționare către pagina de autentificare...');
+            window.location.href = 'autentificare.html';
+            
+            return false;
+        }
+
+        // Verifică starea de autentificare la încărcarea paginii
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuthStatus();
+        });
+
+        // Verifică periodic starea de autentificare
+        setInterval(checkAuthStatus, 1000);
+    </script>
+</body>
+</html> 

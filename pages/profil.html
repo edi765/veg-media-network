@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profilul meu - VEG Media Network</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #ffffff;
+            --secondary-color: #0f2649;
+            --accent-color: #1a3a6d;
+            --text-color: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.8);
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f2649 0%, #1a3a6d 100%);
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+
+        .navbar {
+            background: rgba(15, 38, 73, 0.15) !important;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #ffffff !important;
+        }
+
+        .navbar-brand img {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8) !important;
+            font-weight: 500;
+            padding: 0.4rem 0.8rem !important;
+            margin: 0 0.2rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #ffffff !important;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-link.active {
+            color: #ffffff !important;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .profile-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .profile-header {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            opacity: 0.1;
+        }
+
+        .profile-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: rgba(255, 255, 255, 0.8);
+            position: relative;
+            overflow: hidden;
+            border: 4px solid var(--primary-color);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-avatar .avatar-upload {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 0.5rem;
+            text-align: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s ease;
+            color: #ffffff;
+        }
+
+        .profile-avatar:hover .avatar-upload {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .profile-avatar .avatar-upload i {
+            margin-right: 5px;
+        }
+
+        .profile-info {
+            flex: 1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-name {
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.8) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .profile-email {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .profile-stats {
+            display: flex;
+            gap: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-item {
+            text-align: center;
+            flex: 1;
+            position: relative;
+        }
+
+        .stat-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: -1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 40px;
+            width: 1px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.3rem;
+        }
+
+        .stat-label {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .profile-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+
+        .profile-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .profile-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title i {
+            color: var(--primary-color);
+        }
+
+        .form-control {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--primary-color);
+            color: #ffffff;
+            box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25);
+        }
+
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .form-label {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        .btn-primary:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .form-control:read-only {
+            background: rgba(255, 255, 255, 0.05);
+            cursor: not-allowed;
+        }
+
+        .form-control:read-only:focus {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: none;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .recent-activity {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(5px);
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .activity-item:hover .activity-icon {
+            transform: scale(1.1);
+            background: var(--primary-color);
+            color: var(--secondary-color);
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-title {
+            font-weight: 500;
+            margin-bottom: 0.2rem;
+        }
+
+        .activity-date {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        @media (max-width: 991px) {
+            .profile-content {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .profile-stats {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .profile-container {
+                padding: 1rem;
+            }
+
+            .profile-header {
+                padding: 1.5rem;
+            }
+
+            .profile-avatar {
+                width: 120px;
+                height: 120px;
+                font-size: 3rem;
+            }
+
+            .profile-name {
+                font-size: 1.5rem;
+            }
+
+            .profile-stats {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+        }
+
+        /* Account Button Styles */
+        .account-btn {
+            display: none;
+        }
+
+        .account-btn .btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.8);
+            padding: 0.4rem 1rem;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .account-btn .btn:hover {
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .account-btn .btn i {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .account-btn .btn:hover i {
+            transform: scale(1.1);
+            color: #ffffff;
+        }
+
+        #userName {
+            max-width: 150px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* Dropdown Styles */
+        .dropdown-menu {
+            background: rgba(15, 38, 73, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 0.5rem;
+            margin-top: 0.5rem;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+            animation: dropdownFade 0.3s ease;
+        }
+
+        .dropdown-menu .dropdown-item {
+            color: rgba(255, 255, 255, 0.8);
+            padding: 0.7rem 1.2rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .dropdown-menu .dropdown-item i {
+            width: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-menu .dropdown-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            transform: translateX(5px);
+        }
+
+        .dropdown-menu .dropdown-item:hover i {
+            transform: scale(1.1);
+        }
+
+        .dropdown-divider {
+            border-color: rgba(255, 255, 255, 0.1);
+            margin: 0.5rem 0;
+        }
+
+        /* Logout Button Style */
+        .dropdown-menu .dropdown-item[onclick="logout(event)"] {
+            color: #ff4d4d;
+        }
+
+        .dropdown-menu .dropdown-item[onclick="logout(event)"] i {
+            color: #ff4d4d;
+        }
+
+        .dropdown-menu .dropdown-item[onclick="logout(event)"]:hover {
+            background: rgba(255, 77, 77, 0.1);
+        }
+
+        @keyframes dropdownFade {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">
+                <img src="../images/logo.png" alt="VEG Media Network Logo">
+                <div>VEG Media Network - Platformă Educațională</div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Acasă</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cursuri.html">Cursuri</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="despre.html">Despre Noi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle account-btn" href="#" role="button" data-bs-toggle="dropdown" style="display: none;">
+                            <i class="fas fa-user-circle"></i>
+                            <span id="userName">Cont</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="profil.html"><i class="fas fa-user"></i> Profilul meu</a></li>
+                            <li><a class="dropdown-item" href="cursuri-mele.html"><i class="fas fa-book"></i> Cursurile mele</a></li>
+                            <li><a class="dropdown-item" href="certificate.html"><i class="fas fa-certificate"></i> Certificate</a></li>
+                            <li><a class="dropdown-item" href="setari.html"><i class="fas fa-cog"></i> Setări</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" onclick="logout(event)"><i class="fas fa-sign-out-alt"></i> Deconectare</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link auth-btn" href="autentificare.html">Autentificare</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Profile Content -->
+    <div class="profile-container">
+        <!-- Profile Header -->
+        <div class="profile-header">
+            <div class="profile-avatar">
+                <i class="fas fa-user"></i>
+                <div class="avatar-upload">
+                    <i class="fas fa-camera"></i> Schimbă imaginea
+                </div>
+                <input type="file" id="avatarInput" accept="image/*" style="display: none;">
+            </div>
+            <div class="profile-info">
+                <h1 class="profile-name" id="profileName">Nume Utilizator</h1>
+                <div class="profile-email" id="profileEmail">email@example.com</div>
+                <div class="profile-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">5</div>
+                        <div class="stat-label">Cursuri Înscrise</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">3</div>
+                        <div class="stat-label">Certificate Obținute</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">85%</div>
+                        <div class="stat-label">Progres Mediu</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-content">
+            <!-- Main Profile Section -->
+            <div class="profile-section">
+                <h2 class="section-title">
+                    <i class="fas fa-user-circle"></i>
+                    Informații Personale
+                </h2>
+                <form id="profileForm">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Nume</label>
+                            <input type="text" class="form-control" id="firstName" placeholder="Numele tău" readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Prenume</label>
+                            <input type="text" class="form-control" id="lastName" placeholder="Prenumele tău" readonly>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="email@example.com" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Telefon</label>
+                        <input type="tel" class="form-control" id="phone" placeholder="+40 123 456 789" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Adresă</label>
+                        <textarea class="form-control" id="address" rows="3" placeholder="Adresa ta completă" readonly>Adresa nu este specificată</textarea>
+                    </div>
+                    <div class="button-group">
+                        <button type="button" class="btn btn-secondary" id="editButton">
+                            <i class="fas fa-edit"></i>
+                            Editează Informațiile
+                        </button>
+                        <button type="submit" class="btn btn-primary" id="saveButton" style="display: none;">
+                            <i class="fas fa-save"></i>
+                            Salvează Modificările
+                        </button>
+                        <button type="button" class="btn btn-secondary" id="cancelButton" style="display: none;">
+                            <i class="fas fa-times"></i>
+                            Anulează
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Recent Activity Section -->
+            <div class="profile-section">
+                <h2 class="section-title">
+                    <i class="fas fa-history"></i>
+                    Activitate Recentă
+                </h2>
+                <ul class="recent-activity">
+                    <li class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Ai început cursul "Dezvoltare Web"</div>
+                            <div class="activity-date">Acum 2 zile</div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Ai obținut certificatul pentru "Marketing Digital"</div>
+                            <div class="activity-date">Acum 5 zile</div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Ai finalizat modulul "SEO Avansat"</div>
+                            <div class="activity-date">Acum 1 săptămână</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Gestionare încărcare imagine profil
+        document.querySelector('.avatar-upload').addEventListener('click', function() {
+            document.getElementById('avatarInput').click();
+        });
+
+        document.getElementById('avatarInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const avatarImg = document.createElement('img');
+                    avatarImg.src = e.target.result;
+                    avatarImg.alt = 'Profil';
+                    const avatarContainer = document.querySelector('.profile-avatar');
+                    avatarContainer.innerHTML = '';
+                    avatarImg.style.width = '100%';
+                    avatarImg.style.height = '100%';
+                    avatarImg.style.objectFit = 'cover';
+                    avatarContainer.appendChild(avatarImg);
+                    avatarContainer.appendChild(document.querySelector('.avatar-upload'));
+
+                    // Salvează imaginea în starea de autentificare
+                    const authState = JSON.parse(localStorage.getItem('authState') || sessionStorage.getItem('authState') || '{}');
+                    if (authState.user) {
+                        authState.user.avatar = e.target.result;
+                        localStorage.setItem('authState', JSON.stringify(authState));
+                        sessionStorage.setItem('authState', JSON.stringify(authState));
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Funcție pentru încărcarea imaginii de profil
+        function loadProfileImage() {
+            const authState = JSON.parse(localStorage.getItem('authState') || sessionStorage.getItem('authState') || '{}');
+            if (authState.user?.avatar) {
+                const avatarImg = document.createElement('img');
+                avatarImg.src = authState.user.avatar;
+                avatarImg.alt = 'Profil';
+                const avatarContainer = document.querySelector('.profile-avatar');
+                avatarContainer.innerHTML = '';
+                avatarImg.style.width = '100%';
+                avatarImg.style.height = '100%';
+                avatarImg.style.objectFit = 'cover';
+                avatarContainer.appendChild(avatarImg);
+                avatarContainer.appendChild(document.querySelector('.avatar-upload'));
+            }
+        }
+
+        // Verifică starea autentificării
+        function checkAuthStatus() {
+            const authState = JSON.parse(localStorage.getItem('authState') || sessionStorage.getItem('authState') || '{}');
+            const userDropdown = document.querySelector('.account-btn');
+            const authBtn = document.querySelector('.auth-btn');
+            const userName = document.getElementById('userName');
+            const profileName = document.getElementById('profileName');
+            const profileEmail = document.getElementById('profileEmail');
+            
+            if (authState.isAuthenticated) {
+                if (userDropdown) {
+                    userDropdown.style.display = 'block';
+                }
+                if (authBtn) {
+                    authBtn.style.display = 'none';
+                }
+                
+                try {
+                    const user = authState.user;
+                    const displayName = user?.name || user?.numeComplet || 'Contul meu';
+                    
+                    // Actualizează numele în navbar și header
+                    if (userName) {
+                        userName.textContent = displayName;
+                    }
+                    if (profileName) {
+                        profileName.textContent = displayName;
+                    }
+                    if (profileEmail) {
+                        profileEmail.textContent = user?.email || 'email@example.com';
+                    }
+
+                    // Încarcă imaginea de profil
+                    loadProfileImage();
+
+                    // Completează formularul cu datele utilizatorului
+                    if (user) {
+                        // Separă numele complet în nume și prenume
+                        const fullName = displayName.split(' ');
+                        const firstName = fullName[0] || '';
+                        const lastName = fullName.slice(1).join(' ') || '';
+
+                        // Completează câmpurile formularului
+                        document.getElementById('firstName').value = firstName;
+                        document.getElementById('lastName').value = lastName;
+                        document.getElementById('email').value = user.email || '';
+                        document.getElementById('phone').value = user.phone || user.telefon || '';
+                        document.getElementById('address').value = user.address || 'Adresa nu este specificată';
+                    }
+                } catch (error) {
+                    console.error('Eroare la setarea datelor utilizatorului:', error);
+                }
+            } else {
+                if (userDropdown) {
+                    userDropdown.style.display = 'none';
+                }
+                if (authBtn) {
+                    authBtn.style.display = 'block';
+                }
+                // Redirecționează către pagina de autentificare dacă utilizatorul nu este autentificat
+                window.location.href = 'autentificare.html';
+            }
+        }
+
+        // Funcție pentru deconectare
+        function logout(e) {
+            if (e) e.preventDefault();
+            localStorage.removeItem('authState');
+            sessionStorage.removeItem('authState');
+            window.location.href = 'autentificare.html';
+            return false;
+        }
+
+        // Gestionare formular profil
+        const form = document.getElementById('profileForm');
+        const editButton = document.getElementById('editButton');
+        const saveButton = document.getElementById('saveButton');
+        const cancelButton = document.getElementById('cancelButton');
+        const inputs = form.querySelectorAll('input, textarea');
+
+        // Funcție pentru activarea modului de editare
+        function enableEditMode() {
+            inputs.forEach(input => input.readOnly = false);
+            editButton.style.display = 'none';
+            saveButton.style.display = 'block';
+            cancelButton.style.display = 'block';
+        }
+
+        // Funcție pentru dezactivarea modului de editare
+        function disableEditMode() {
+            inputs.forEach(input => input.readOnly = true);
+            editButton.style.display = 'block';
+            saveButton.style.display = 'none';
+            cancelButton.style.display = 'none';
+            checkAuthStatus(); // Reîncarcă datele originale
+        }
+
+        // Event listeners pentru butoane
+        editButton.addEventListener('click', enableEditMode);
+        cancelButton.addEventListener('click', disableEditMode);
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Salvează noile date în starea de autentificare
+            const authState = JSON.parse(localStorage.getItem('authState') || sessionStorage.getItem('authState') || '{}');
+            if (authState.user) {
+                authState.user.name = document.getElementById('firstName').value + ' ' + document.getElementById('lastName').value;
+                authState.user.email = document.getElementById('email').value;
+                authState.user.phone = document.getElementById('phone').value;
+                authState.user.address = document.getElementById('address').value;
+                
+                // Salvează în storage
+                localStorage.setItem('authState', JSON.stringify(authState));
+                sessionStorage.setItem('authState', JSON.stringify(authState));
+                
+                // Actualizează interfața și dezactivează modul de editare
+                checkAuthStatus();
+                disableEditMode();
+                
+                alert('Modificările au fost salvate cu succes!');
+            }
+        });
+
+        // Verifică starea de autentificare la încărcarea paginii
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuthStatus();
+        });
+    </script>
+</body>
+</html> 

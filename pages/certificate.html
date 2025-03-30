@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate - VEG Media Network</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #0f2649 0%, #1a3a6d 100%);
+            min-height: 100vh;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding-top: 60px;
+        }
+
+        .navbar {
+            background: rgba(15, 38, 73, 0.15) !important;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(15, 38, 73, 0.35) !important;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #ffffff !important;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 0.3rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand img {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand:hover {
+            transform: translateY(-2px);
+        }
+
+        .navbar-brand:hover img {
+            transform: rotate(360deg);
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8) !important;
+            font-weight: 500;
+            padding: 0.4rem 0.8rem !important;
+            margin: 0 0.2rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 0.9rem;
+            overflow: hidden;
+        }
+
+        .nav-link:hover {
+            color: #ffffff !important;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .nav-link.active {
+            color: #ffffff !important;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .certificate-hero {
+            padding: 120px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .certificate-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            z-index: 1;
+        }
+
+        .hero-content-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            padding: 4rem 0;
+        }
+
+        .certificate-hero-content {
+            flex: 1;
+            padding-right: 2rem;
+        }
+
+        .certificate-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #ffffff, #f0f0f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .certificate-hero p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .hero-video-container {
+            flex: 1;
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(15, 38, 73, 0.4), rgba(15, 38, 73, 0.2));
+            pointer-events: none;
+        }
+
+        .certificate-section {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .certificate-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #ffffff, #f0f0f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-title p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .certificate-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 40px 0;
+        }
+
+        .certificate-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .certificate-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.1), transparent 70%);
+            opacity: 0;
+            transition: 0.5s;
+        }
+
+        .certificate-card:hover::before {
+            opacity: 1;
+        }
+
+        .certificate-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .certificate-icon {
+            font-size: 3rem;
+            color: #ffffff;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .certificate-card:hover .certificate-icon {
+            transform: scale(1.1);
+        }
+
+        .certificate-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .certificate-description {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .certificate-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 25px 0;
+        }
+
+        .certificate-features li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .certificate-features li i {
+            color: #ffffff;
+            font-size: 1.1rem;
+        }
+
+        .btn-certificate {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(45deg, #ffffff, #f0f0f0);
+            color: #0f2649 !important;
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-certificate:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+            background: linear-gradient(45deg, #f0f0f0, #ffffff);
+            text-decoration: none;
+            color: #0f2649 !important;
+        }
+
+        .btn-certificate:active {
+            transform: translateY(1px);
+        }
+
+        .btn-certificate i {
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            color: #0f2649;
+        }
+
+        .btn-certificate:hover i {
+            transform: translateX(5px);
+        }
+
+        .certificate-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, #ffffff, #f0f0f0);
+            color: #0f2649;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .reviews-section {
+            padding: 80px 0;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 20px 0;
+        }
+
+        .review-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .review-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .review-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .review-info h4 {
+            margin: 0;
+            font-size: 1.1rem;
+            color: #ffffff;
+        }
+
+        .review-rating {
+            color: #ffd700;
+            margin-top: 5px;
+        }
+
+        .review-text {
+            color: rgba(255, 255, 255, 0.9);
+            font-style: italic;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .review-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        .review-course {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5px 15px;
+            border-radius: 15px;
+        }
+
+        @media (max-width: 991px) {
+            .hero-content-wrapper {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-video-container {
+                order: -1;
+                margin-bottom: 30px;
+            }
+
+            .certificate-hero-content {
+                padding: 0 20px;
+            }
+
+            .certificate-hero {
+                padding: 100px 0 60px;
+            }
+
+            .certificate-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .certificate-hero p {
+                font-size: 1.1rem;
+            }
+
+            .certificate-grid {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+
+            .reviews-grid {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+
+            .navbar-collapse {
+                background: rgba(15, 38, 73, 0.25);
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+                border-radius: 15px;
+                padding: 1rem;
+                margin-top: 1rem;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content-wrapper {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .certificate-hero-content {
+                padding-right: 0;
+            }
+            
+            .hero-video-container {
+                width: 100%;
+                aspect-ratio: 16/9;
+            }
+        }
+
+        /* Stiluri pentru review-uri */
+        .review-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .review-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 0%, rgba(62, 100, 255, 0.2), transparent 70%);
+            opacity: 0;
+            transition: 0.5s;
+        }
+
+        .review-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-color);
+        }
+
+        .review-card:hover::before {
+            opacity: 1;
+        }
+
+        .review-section {
+            position: relative;
+            padding: 0 60px;
+            overflow: hidden;
+        }
+
+        #reviews-container {
+            display: flex;
+            transition: transform 0.5s ease;
+            gap: 30px;
+            flex-wrap: nowrap;
+        }
+
+        .review-item {
+            flex: 0 0 calc(33.333% - 20px);
+            max-width: calc(33.333% - 20px);
+            transition: all 0.3s ease;
+        }
+
+        .review-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .review-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            margin-right: 1rem;
+        }
+
+        .review-info {
+            flex: 1;
+        }
+
+        .review-name {
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 0.2rem;
+        }
+
+        .review-title {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        .review-content {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .review-rating {
+            color: #ffd700;
+            margin-bottom: 0;
+        }
+
+        .review-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .review-nav:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .review-nav.prev {
+            left: 0;
+        }
+
+        .review-nav.next {
+            right: 0;
+        }
+
+        .review-nav i {
+            font-size: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .review-section {
+                padding: 0 40px;
+            }
+            
+            .review-item {
+                flex: 0 0 calc(100% - 20px);
+                max-width: calc(100% - 20px);
+            }
+            
+            .review-nav {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .review-nav i {
+                font-size: 1.2rem;
+            }
+        }
+
+        .dropdown-menu {
+            background: rgba(15, 38, 73, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 0.5rem;
+            margin-top: 0.5rem;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+            animation: dropdownFade 0.3s ease;
+        }
+
+        .dropdown-menu .dropdown-item {
+            color: rgba(255, 255, 255, 0.8);
+            padding: 0.7rem 1.2rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .dropdown-menu .dropdown-item i {
+            width: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-menu .dropdown-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            transform: translateX(5px);
+        }
+
+        .dropdown-menu .dropdown-item:hover i {
+            transform: scale(1.1);
+        }
+
+        .dropdown-divider {
+            border-color: rgba(255, 255, 255, 0.1);
+            margin: 0.5rem 0;
+        }
+
+        /* Logout Button Style */
+        .dropdown-menu .dropdown-item[onclick="logout(event)"] {
+            color: #ff4d4d;
+        }
+
+        .dropdown-menu .dropdown-item[onclick="logout(event)"] i {
+            color: #ff4d4d;
+        }
+
+        .dropdown-menu .dropdown-item[onclick="logout(event)"]:hover {
+            background: rgba(255, 77, 77, 0.1);
+        }
+
+        #userDropdown .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        #userDropdown .nav-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        #userDropdown .nav-link i {
+            transition: all 0.3s ease;
+        }
+
+        #userName {
+            max-width: 150px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        @keyframes dropdownFade {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">
+                <img src="../images/logo.png" alt="VEG Media Network Logo">
+                <div>
+                    VEG Media Network - Platformă Educațională
+                </div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Acasă</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cursuri.html">Cursuri</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="despre.html">Despre Noi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="certificate.html">Certificate</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle account-btn" href="#" role="button" data-bs-toggle="dropdown" style="display: none;">
+                            <i class="fas fa-user-circle"></i>
+                            <span id="userName">Cont</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="profil.html"><i class="fas fa-user"></i> Profilul meu</a></li>
+                            <li><a class="dropdown-item" href="cursuri-mele.html"><i class="fas fa-book"></i> Cursurile mele</a></li>
+                            <li><a class="dropdown-item" href="certificate.html"><i class="fas fa-certificate"></i> Certificate</a></li>
+                            <li><a class="dropdown-item" href="setari.html"><i class="fas fa-cog"></i> Setări</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger" href="#" onclick="logout(event)"><i class="fas fa-sign-out-alt"></i> Deconectare</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link auth-btn" href="autentificare.html">Autentificare</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="certificate-hero">
+        <div class="container">
+            <div class="hero-content-wrapper">
+                <div class="certificate-hero-content">
+                    <h1>Certificate Recunoscute</h1>
+                    <p>Obține certificări profesionale care îți validează competențele și îți deschid noi oportunități în carieră. Certificatele noastre sunt recunoscute în industrie și reprezintă dovada expertizei tale.</p>
+                </div>
+                <div class="hero-video-container">
+                    <video class="hero-video" autoplay muted loop playsinline>
+                        <source src="../videos/certificate-intro.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="video-overlay"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificate Section -->
+    <section class="certificate-section" id="certificate-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Programe de Certificare</h2>
+                <p>Alege programul care ți se potrivește și începe călătoria ta spre certificare</p>
+            </div>
+            <div class="certificate-grid">
+                <!-- Certificate Card 1 -->
+                <div class="certificate-card">
+                    <div class="certificate-badge">Popular</div>
+                    <div class="certificate-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3 class="certificate-title">UI/UX Design</h3>
+                    <p class="certificate-description">Program complet de certificare pentru designeri UI/UX, cu focus pe principiile de design modern și experiența utilizatorului.</p>
+                    <ul class="certificate-features">
+                        <li><i class="fas fa-check-circle"></i> Durată: 6 luni</li>
+                        <li><i class="fas fa-check-circle"></i> Practică: 400 ore</li>
+                        <li><i class="fas fa-check-circle"></i> Certificare: ANPC</li>
+                        <li><i class="fas fa-check-circle"></i> Suport: 24/7</li>
+                    </ul>
+                    <a href="../diplome/uiux_diploma.pdf" class="btn-certificate" onclick="window.open('../diplome/uiux_diploma.pdf', '_blank')">
+                        Vezi Diploma
+                        <i class="fas fa-file-pdf"></i>
+                    </a>
+                </div>
+
+                <!-- Certificate Card 2 -->
+                <div class="certificate-card">
+                    <div class="certificate-badge">Premium</div>
+                    <div class="certificate-icon">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h3 class="certificate-title">Marketing Digital</h3>
+                    <p class="certificate-description">Program specializat pentru marketeri digitali, acoperind toate aspectele moderne ale marketingului online.</p>
+                    <ul class="certificate-features">
+                        <li><i class="fas fa-check-circle"></i> Durată: 4 luni</li>
+                        <li><i class="fas fa-check-circle"></i> Practică: 300 ore</li>
+                        <li><i class="fas fa-check-circle"></i> Certificare: ANPC</li>
+                        <li><i class="fas fa-check-circle"></i> Suport: 24/7</li>
+                    </ul>
+                    <a href="../diplome/marketing_diploma.pdf" class="btn-certificate" onclick="window.open('../diplome/marketing_diploma.pdf', '_blank')">
+                        Vezi Diploma
+                        <i class="fas fa-file-pdf"></i>
+                    </a>
+                </div>
+
+                <!-- Certificate Card 3 -->
+                <div class="certificate-card">
+                    <div class="certificate-badge">Nou</div>
+                    <div class="certificate-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="certificate-title">Dezvoltare Web</h3>
+                    <p class="certificate-description">Program avansat pentru dezvoltatori web, cu accent pe tehnologii moderne și practică.</p>
+                    <ul class="certificate-features">
+                        <li><i class="fas fa-check-circle"></i> Durată: 5 luni</li>
+                        <li><i class="fas fa-check-circle"></i> Practică: 350 ore</li>
+                        <li><i class="fas fa-check-circle"></i> Certificare: ANPC</li>
+                        <li><i class="fas fa-check-circle"></i> Suport: 24/7</li>
+                    </ul>
+                    <a href="../diplome/webdev_diploma.pdf" class="btn-certificate" onclick="window.open('../diplome/webdev_diploma.pdf', '_blank')">
+                        Vezi Diploma
+                        <i class="fas fa-file-pdf"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Recenzii Certificate</h2>
+            <div class="review-section">
+                <div class="review-nav prev" onclick="moveReviews('prev')">
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+                <div class="review-nav next" onclick="moveReviews('next')">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                <div id="reviews-container">
+                    <!-- Review Cards -->
+                    <div class="review-item">
+                        <div class="review-card">
+                            <div class="review-header">
+                                <img src="../images/reviews/review1.jpeg" alt="Vanessa Vatamanu" class="review-image">
+                                <div class="review-info">
+                                    <h4 class="review-name">Vanessa Vatamanu</h4>
+                                    <p class="review-title">UI/UX Designer</p>
+                                </div>
+                            </div>
+                            <p class="review-content">"Certificatul obținut mi-a deschis noi oportunități în carieră. Cursurile sunt acreditate și recunoscute în industrie."</p>
+                            <div class="review-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="review-item">
+                        <div class="review-card">
+                            <div class="review-header">
+                                <img src="../images/reviews/review2.jpeg" alt="Raluca Antoniac" class="review-image">
+                                <div class="review-info">
+                                    <h4 class="review-name">Raluca Antoniac</h4>
+                                    <p class="review-title">Dezvoltator Frontend</p>
+                                </div>
+                            </div>
+                            <p class="review-content">"Procesul de certificare a fost foarte bine organizat. Am primit diploma imediat după finalizarea cursului."</p>
+                            <div class="review-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="review-item">
+                        <div class="review-card">
+                            <div class="review-header">
+                                <img src="../images/reviews/review3.jpeg" alt="Surmei Alexandru" class="review-image">
+                                <div class="review-info">
+                                    <h4 class="review-name">Surmei Alexandru</h4>
+                                    <p class="review-title">Marketing Digital</p>
+                                </div>
+                            </div>
+                            <p class="review-content">"Certificarea primită este recunoscută internațional. Am reușit să-mi găsesc un job mai bun datorită acestei diplome."</p>
+                            <div class="review-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="review-item">
+                        <div class="review-card">
+                            <div class="review-header">
+                                <img src="../images/reviews/review4.png" alt="Vrajitoru Iuliana" class="review-image">
+                                <div class="review-info">
+                                    <h4 class="review-name">Vrajitoru Iuliana</h4>
+                                    <p class="review-title">Project Manager</p>
+                                </div>
+                            </div>
+                            <p class="review-content">"Certificatul obținut m-a ajutat să avansez în carieră. Angajatorii apreciază acreditările de la VEG Media Network."</p>
+                            <div class="review-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="review-item">
+                        <div class="review-card">
+                            <div class="review-header">
+                                <img src="../images/reviews/review5.png" alt="Tănăsele Codrut" class="review-image">
+                                <div class="review-info">
+                                    <h4 class="review-name">Tănăsele Codrut</h4>
+                                    <p class="review-title">Software Developer</p>
+                                </div>
+                            </div>
+                            <p class="review-content">"Certificarea este completă și relevantă pentru piața muncii. Procesul de evaluare este riguros și profesionist."</p>
+                            <div class="review-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+    function checkAndOpenDiploma(event, diplomaName) {
+        event.preventDefault();
+        const link = event.currentTarget;
+        const pdfUrl = link.getAttribute('href');
+        // Deschidem diploma direct într-o fereastră nouă
+        window.open(pdfUrl, '_blank');
+    }
+
+    let currentPosition = 0;
+    const reviewsPerPage = window.innerWidth <= 768 ? 1 : 3;
+    const totalReviews = document.querySelectorAll('.review-item').length;
+
+    function moveReviews(direction) {
+        if (direction === 'next' && currentPosition < totalReviews - reviewsPerPage) {
+            currentPosition++;
+        } else if (direction === 'prev' && currentPosition > 0) {
+            currentPosition--;
+        }
+        
+        const itemWidth = 100 / reviewsPerPage;
+        const offset = -currentPosition * itemWidth;
+        document.getElementById('reviews-container').style.transform = `translateX(${offset}%)`;
+        
+        // Actualizăm vizibilitatea săgeților
+        document.querySelector('.review-nav.prev').style.opacity = currentPosition === 0 ? '0.5' : '1';
+        document.querySelector('.review-nav.next').style.opacity = 
+            currentPosition >= totalReviews - reviewsPerPage ? '0.5' : '1';
+    }
+
+    // Inițializăm starea săgeților și responsive behavior
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelector('.review-nav.prev').style.opacity = '0.5';
+        
+        // Actualizăm numărul de review-uri per pagină la redimensionare
+        window.addEventListener('resize', () => {
+            const newReviewsPerPage = window.innerWidth <= 768 ? 1 : 3;
+            if (newReviewsPerPage !== reviewsPerPage) {
+                currentPosition = 0;
+                moveReviews('reset');
+            }
+        });
+    });
+
+    // Verifică starea autentificării
+    function checkAuthStatus() {
+        const authState = JSON.parse(localStorage.getItem('authState') || sessionStorage.getItem('authState') || '{}');
+        const accountBtn = document.querySelector('.account-btn');
+        const authBtn = document.querySelector('.auth-btn');
+        const userName = document.getElementById('userName');
+        
+        console.log('Status autentificare:', authState.isAuthenticated);
+        console.log('Date utilizator:', authState.user);
+        
+        if (authState.isAuthenticated) {
+            if (accountBtn) {
+                accountBtn.style.display = 'block';
+                console.log('Buton cont vizibil');
+            }
+            if (authBtn) {
+                authBtn.style.display = 'none';
+                console.log('Buton autentificare ascuns');
+            }
+            
+            try {
+                const displayName = authState.user?.name || authState.user?.numeComplet || 'Contul meu';
+                if (userName) {
+                    userName.textContent = displayName;
+                    console.log('Nume utilizator setat:', displayName);
+                }
+            } catch (error) {
+                console.error('Eroare la setarea numelui utilizatorului:', error);
+                if (userName) userName.textContent = 'Contul meu';
+            }
+        } else {
+            if (accountBtn) {
+                accountBtn.style.display = 'none';
+                console.log('Buton cont ascuns');
+            }
+            if (authBtn) {
+                authBtn.style.display = 'block';
+                console.log('Buton autentificare vizibil');
+            }
+        }
+    }
+
+    // Funcție pentru deconectare
+    function logout(e) {
+        if (e) e.preventDefault();
+        console.log('Deconectare inițiată...');
+        
+        localStorage.removeItem('authState');
+        sessionStorage.removeItem('authState');
+        
+        checkAuthStatus();
+        
+        console.log('Redirecționare către pagina de autentificare...');
+        window.location.href = 'autentificare.html';
+        
+        return false;
+    }
+
+    // Verifică starea de autentificare la încărcarea paginii
+    document.addEventListener('DOMContentLoaded', function() {
+        checkAuthStatus();
+    });
+
+    // Verifică periodic starea de autentificare
+    setInterval(checkAuthStatus, 1000);
+    </script>
+</body>
+</html> 

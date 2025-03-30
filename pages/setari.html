@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setări - VEG Media Network</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #ffffff;
+            --secondary-color: #0f2649;
+            --accent-color: #1a3a6d;
+            --text-color: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.8);
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f2649 0%, #1a3a6d 100%);
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+
+        .navbar {
+            background: rgba(15, 38, 73, 0.15) !important;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #ffffff !important;
+        }
+
+        .navbar-brand img {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8) !important;
+            font-weight: 500;
+            padding: 0.4rem 0.8rem !important;
+            margin: 0 0.2rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #ffffff !important;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-link.active {
+            color: #ffffff !important;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .settings-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .settings-header {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .settings-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.8) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .settings-subtitle {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+        }
+
+        .settings-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-title i {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .settings-group {
+            margin-bottom: 2rem;
+        }
+
+        .settings-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .setting-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .setting-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .setting-info {
+            flex: 1;
+        }
+
+        .setting-label {
+            font-weight: 500;
+            color: #ffffff;
+            margin-bottom: 0.3rem;
+        }
+
+        .setting-description {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        .setting-control {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* Stiluri pentru switch */
+        .form-switch {
+            padding-left: 3rem;
+        }
+
+        .form-switch .form-check-input {
+            width: 3rem;
+            height: 1.5rem;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .form-switch .form-check-input:checked {
+            background-color: #ffffff;
+            border-color: #ffffff;
+        }
+
+        .form-switch .form-check-input:focus {
+            box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.25);
+        }
+
+        /* Stiluri pentru select */
+        .form-select {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .form-select:focus {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.25);
+        }
+
+        .form-select option {
+            background-color: #1a3a6d;
+            color: #ffffff;
+        }
+
+        /* Stiluri pentru butoane */
+        .btn-save {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-save:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Account Button Styles */
+        .account-btn {
+            display: none;
+        }
+
+        .account-btn .btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.8);
+            padding: 0.4rem 1rem;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .account-btn .btn:hover {
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .account-btn .btn i {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .account-btn .btn:hover i {
+            transform: scale(1.1);
+            color: #ffffff;
+        }
+
+        #userName {
+            max-width: 150px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* Dropdown Styles */
+        .dropdown-menu {
+            background: rgba(15, 38, 73, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 0.5rem;
+            margin-top: 0.5rem;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+            animation: dropdownFade 0.3s ease;
+        }
+
+        .dropdown-menu .dropdown-item {
+            color: rgba(255, 255, 255, 0.8);
+            padding: 0.7rem 1.2rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .dropdown-menu .dropdown-item i {
+            width: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-menu .dropdown-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            transform: translateX(5px);
+        }
+
+        .dropdown-menu .dropdown-item:hover i {
+            transform: scale(1.1);
+        }
+
+        .dropdown-divider {
+            border-color: rgba(255, 255, 255, 0.1);
+            margin: 0.5rem 0;
+        }
+
+        /* Logout Button Style */
+        .dropdown-menu .dropdown-item[onclick="logout(event)"] {
+            color: #ff4d4d;
+        }
+
+        .dropdown-menu .dropdown-item[onclick="logout(event)"] i {
+            color: #ff4d4d;
+        }
+
+        .dropdown-menu .dropdown-item[onclick="logout(event)"]:hover {
+            background: rgba(255, 77, 77, 0.1);
+        }
+
+        @keyframes dropdownFade {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .settings-container {
+                padding: 1rem;
+            }
+
+            .settings-header {
+                padding: 1.5rem;
+            }
+
+            .settings-title {
+                font-size: 1.8rem;
+            }
+
+            .settings-section {
+                padding: 1.5rem;
+            }
+
+            .setting-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .setting-control {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">
+                <img src="../images/logo.png" alt="VEG Media Network Logo">
+                <div>VEG Media Network - Platformă Educațională</div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Acasă</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cursuri.html">Cursuri</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="despre.html">Despre Noi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle account-btn" href="#" role="button" data-bs-toggle="dropdown" style="display: none;">
+                            <i class="fas fa-user-circle"></i>
+                            <span id="userName">Cont</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="profil.html"><i class="fas fa-user"></i> Profilul meu</a></li>
+                            <li><a class="dropdown-item" href="cursuri-mele.html"><i class="fas fa-book"></i> Cursurile mele</a></li>
+                            <li><a class="dropdown-item" href="certificate.html"><i class="fas fa-certificate"></i> Certificate</a></li>
+                            <li><a class="dropdown-item" href="setari.html"><i class="fas fa-cog"></i> Setări</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" onclick="logout(event)"><i class="fas fa-sign-out-alt"></i> Deconectare</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link auth-btn" href="autentificare.html">Autentificare</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Settings Content -->
+    <div class="settings-container">
+        <div class="settings-header">
+            <h1 class="settings-title">Setări</h1>
+            <p class="settings-subtitle">Personalizează-ți experiența pe platformă</p>
+        </div>
+
+        <!-- Notificări -->
+        <div class="settings-section">
+            <h2 class="section-title">
+                <i class="fas fa-bell"></i>
+                Notificări
+            </h2>
+            <div class="settings-group">
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-label">Notificări prin email</div>
+                        <div class="setting-description">Primește notificări despre progresul tău și actualizări noi</div>
+                    </div>
+                    <div class="setting-control">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="emailNotifications" checked>
+                        </div>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-label">Notificări despre cursuri noi</div>
+                        <div class="setting-description">Fii informat despre cursurile noi adăugate în catalog</div>
+                    </div>
+                    <div class="setting-control">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="newCoursesNotifications" checked>
+                        </div>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-label">Notificări despre certificate</div>
+                        <div class="setting-description">Primește notificări când obții certificate noi</div>
+                    </div>
+                    <div class="setting-control">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="certificateNotifications" checked>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Preferințe -->
+        <div class="settings-section">
+            <h2 class="section-title">
+                <i class="fas fa-sliders-h"></i>
+                Preferințe
+            </h2>
+            <div class="settings-group">
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-label">Limbă interfață</div>
+                        <div class="setting-description">Alege limba în care dorești să vezi interfața platformei</div>
+                    </div>
+                    <div class="setting-control">
+                        <select class="form-select" id="language">
+                            <option value="ro">Română</option>
+                            <option value="en">English</option>
+                            <option value="fr">Français</option>
+                            <option value="de">Deutsch</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-label">Mod întunecat</div>
+                        <div class="setting-description">Activează modul întunecat pentru o experiență mai confortabilă</div>
+                    </div>
+                    <div class="setting-control">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="darkMode">
+                        </div>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-label">Calitate video</div>
+                        <div class="setting-description">Alege calitatea implicită pentru lecțiile video</div>
+                    </div>
+                    <div class="setting-control">
+                        <select class="form-select" id="videoQuality">
+                            <option value="auto">Automată</option>
+                            <option value="1080p">1080p</option>
+                            <option value="720p">720p</option>
+                            <option value="480p">480p</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Securitate -->
+        <div class="settings-section">
+            <h2 class="section-title">
+                <i class="fas fa-shield-alt"></i>
+                Securitate
+            </h2>
+            <div class="settings-group">
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-label">Autentificare în două etape</div>
+                        <div class="setting-description">Activează autentificarea în două etape pentru o securitate sporită</div>
+                    </div>
+                    <div class="setting-control">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="twoFactorAuth">
+                        </div>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-label">Sesiuni active</div>
+                        <div class="setting-description">Gestionează dispozitivele conectate la contul tău</div>
+                    </div>
+                    <div class="setting-control">
+                        <button class="btn-save" onclick="manageSessions()">
+                            <i class="fas fa-desktop"></i>
+                            Gestionează
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Buton Salvare -->
+        <div class="text-end">
+            <button class="btn-save" onclick="saveSettings()">
+                <i class="fas fa-save"></i>
+                Salvează Modificările
+            </button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Verifică starea autentificării
+        function checkAuthStatus() {
+            const authState = JSON.parse(localStorage.getItem('authState') || sessionStorage.getItem('authState') || '{}');
+            const userDropdown = document.querySelector('.account-btn');
+            const authBtn = document.querySelector('.auth-btn');
+            const userName = document.getElementById('userName');
+            
+            if (authState.isAuthenticated) {
+                if (userDropdown) {
+                    userDropdown.style.display = 'block';
+                }
+                if (authBtn) {
+                    authBtn.style.display = 'none';
+                }
+                
+                try {
+                    const displayName = authState.user?.name || authState.user?.numeComplet || 'Contul meu';
+                    if (userName) {
+                        userName.textContent = displayName;
+                    }
+                } catch (error) {
+                    console.error('Eroare la setarea numelui utilizatorului:', error);
+                    if (userName) userName.textContent = 'Contul meu';
+                }
+
+                // Încarcă setările salvate
+                loadSettings();
+            } else {
+                if (userDropdown) {
+                    userDropdown.style.display = 'none';
+                }
+                if (authBtn) {
+                    authBtn.style.display = 'block';
+                }
+                // Redirecționează către pagina de autentificare dacă utilizatorul nu este autentificat
+                window.location.href = 'autentificare.html';
+            }
+        }
+
+        // Funcție pentru deconectare
+        function logout(e) {
+            if (e) e.preventDefault();
+            localStorage.removeItem('authState');
+            sessionStorage.removeItem('authState');
+            window.location.href = 'autentificare.html';
+            return false;
+        }
+
+        // Încarcă setările salvate
+        function loadSettings() {
+            const settings = JSON.parse(localStorage.getItem('userSettings') || '{}');
+            
+            // Setează valorile pentru notificări
+            document.getElementById('emailNotifications').checked = settings.emailNotifications !== false;
+            document.getElementById('newCoursesNotifications').checked = settings.newCoursesNotifications !== false;
+            document.getElementById('certificateNotifications').checked = settings.certificateNotifications !== false;
+            
+            // Setează valorile pentru preferințe
+            document.getElementById('language').value = settings.language || 'ro';
+            document.getElementById('darkMode').checked = settings.darkMode || false;
+            document.getElementById('videoQuality').value = settings.videoQuality || 'auto';
+            
+            // Setează valorile pentru securitate
+            document.getElementById('twoFactorAuth').checked = settings.twoFactorAuth || false;
+        }
+
+        // Salvează setările
+        function saveSettings() {
+            const settings = {
+                emailNotifications: document.getElementById('emailNotifications').checked,
+                newCoursesNotifications: document.getElementById('newCoursesNotifications').checked,
+                certificateNotifications: document.getElementById('certificateNotifications').checked,
+                language: document.getElementById('language').value,
+                darkMode: document.getElementById('darkMode').checked,
+                videoQuality: document.getElementById('videoQuality').value,
+                twoFactorAuth: document.getElementById('twoFactorAuth').checked
+            };
+
+            localStorage.setItem('userSettings', JSON.stringify(settings));
+            
+            // Aplică setările imediat
+            applySettings(settings);
+            
+            // Afișează mesaj de succes
+            alert('Setările au fost salvate cu succes!');
+        }
+
+        // Aplică setările
+        function applySettings(settings) {
+            // Aplică limba
+            document.documentElement.lang = settings.language;
+            
+            // Aplică modul întunecat
+            if (settings.darkMode) {
+                document.body.classList.add('dark-mode');
+            } else {
+                document.body.classList.remove('dark-mode');
+            }
+        }
+
+        // Gestionează sesiunile active
+        function manageSessions() {
+            // Implementează logica pentru gestionarea sesiunilor
+            alert('Funcționalitatea de gestionare a sesiunilor va fi disponibilă în curând!');
+        }
+
+        // Verifică starea de autentificare la încărcarea paginii
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuthStatus();
+        });
+    </script>
+</body>
+</html> 

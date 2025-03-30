@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursuri - VEG Media Network</title>
+    <link rel="icon" type="image/png" href="../images/logo.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #0f2649 0%, #1a3a6d 100%);
+            min-height: 100vh;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding-top: 60px;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            background: rgba(15, 38, 73, 0.15) !important;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(15, 38, 73, 0.35) !important;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #ffffff !important;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 0.3rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand:hover {
+            transform: translateY(-2px);
+        }
+
+        .navbar-brand img {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand:hover img {
+            transform: rotate(360deg);
+        }
+
+        .navbar-brand div {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            white-space: nowrap;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8) !important;
+            font-weight: 500;
+            padding: 0.4rem 0.8rem !important;
+            margin: 0 0.2rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 0.9rem;
+            overflow: hidden;
+        }
+
+        .nav-link:hover {
+            color: #ffffff !important;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .nav-link.active {
+            color: #ffffff !important;
+            background: rgba(25, 118, 210, 0.2);
+            border: 1px solid rgba(25, 118, 210, 0.3);
+        }
+
+        @media (max-width: 991px) {
+            .navbar-brand {
+                font-size: 1rem;
+            }
+
+            .navbar-brand div {
+                white-space: normal;
+            }
+
+            .navbar-collapse {
+                background: rgba(15, 38, 73, 0.25);
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+                border-radius: 15px;
+                padding: 1rem;
+                margin-top: 1rem;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .nav-link {
+                padding: 0.8rem 1.2rem !important;
+                margin: 0.2rem 0;
+            }
+        }
+
+        .courses-hero {
+            padding: 60px 0;
+            text-align: center;
+            position: relative;
+            background: transparent;
+        }
+
+        .courses-hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .courses-hero p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .course-filters {
+            margin: 30px 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            background: transparent;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .course-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .course-card:hover .course-image {
+            transform: scale(1.05);
+        }
+
+        .course-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(0deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 100%);
+            pointer-events: none;
+        }
+
+        .course-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 0;
+            margin-bottom: 30px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+            color: white;
+            text-decoration: none;
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .course-card * {
+            pointer-events: none;
+        }
+
+        .course-content {
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .course-category {
+            display: inline-block;
+            padding: 5px 15px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .course-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .course-description {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .course-price {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #4CAF50;
+        }
+
+        .course-rating {
+            color: #FFD700;
+        }
+
+        .course-stats {
+            display: flex;
+            gap: 15px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        .course-stat {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .search-box {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            padding: 10px 20px;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto 30px;
+            color: white;
+        }
+
+        .search-box::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            .courses-hero h1 {
+                font-size: 2rem;
+            }
+
+            .courses-hero p {
+                font-size: 1rem;
+                padding: 0 20px;
+            }
+
+            .course-card {
+                margin: 0 15px 30px;
+            }
+
+            .filter-btn {
+                padding: 8px 20px;
+                font-size: 0.9rem;
+            }
+        }
+
+        .section-title {
+            color: white;
+            font-size: 2rem;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .course-categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+            background: transparent;
+        }
+
+        .category-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .category-btn i {
+            font-size: 1.2rem;
+        }
+
+        .category-btn:hover, .category-btn.active {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            color: white;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+            background: transparent;
+        }
+
+        .category-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .category-badge.tehnologie {
+            background: rgba(25, 118, 210, 0.2);
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .category-badge.dezvoltare-personala {
+            background: rgba(76, 175, 80, 0.2);
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .category-badge.limbi-straine {
+            background: rgba(156, 39, 176, 0.2);
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .card-title {
+            color: white;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-text {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1rem;
+        }
+
+        .course-details {
+            display: flex;
+            gap: 20px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        .course-details span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .card-footer {
+            background: rgba(255, 255, 255, 0.03);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 1.5rem;
+        }
+
+        .btn-primary {
+            background: rgba(25, 118, 210, 0.3);
+            border: 1px solid rgba(25, 118, 210, 0.5);
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            width: 100%;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: rgba(25, 118, 210, 0.5);
+            border-color: rgba(25, 118, 210, 0.7);
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        .courses-grid {
+            background: transparent;
+        }
+
+        .dropdown-divider {
+            border-color: rgba(255, 255, 255, 0.1);
+            margin: 0.5rem 0;
+        }
+
+        /* Logout Button Style */
+        .dropdown-menu .dropdown-item[onclick="logout(event)"] {
+            color: #ff4d4d;
+        }
+
+        .dropdown-menu .dropdown-item[onclick="logout(event)"] i {
+            color: #ff4d4d;
+        }
+
+        .dropdown-menu .dropdown-item[onclick="logout(event)"]:hover {
+            background: rgba(255, 77, 77, 0.1);
+        }
+
+        @keyframes dropdownFade {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">
+                <img src="../images/logo.png" alt="VEG Media Network Logo">
+                <div>
+                    VEG Media Network - Platformă Educațională
+                </div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Acasă</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="cursuri.html">Cursuri</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="despre.html">Despre Noi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle account-btn" href="#" role="button" data-bs-toggle="dropdown" style="display: none;">
+                            <i class="fas fa-user-circle"></i>
+                            <span id="userName">Cont</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="profil.html"><i class="fas fa-user"></i> Profilul meu</a></li>
+                            <li><a class="dropdown-item" href="cursuri-mele.html"><i class="fas fa-book"></i> Cursurile mele</a></li>
+                            <li><a class="dropdown-item" href="certificate.html"><i class="fas fa-certificate"></i> Certificate</a></li>
+                            <li><a class="dropdown-item" href="setari.html"><i class="fas fa-cog"></i> Setări</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" onclick="logout(event)"><i class="fas fa-sign-out-alt"></i> Deconectare</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link auth-btn" href="autentificare.html">Autentificare</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="courses-hero">
+        <div class="container">
+            <h1>Descoperă Cursurile Noastre</h1>
+            <p>Dezvoltă-ți abilitățile digitale cu cursuri interactive create de experți în domeniu. Alege din varietatea noastră de cursuri și începe călătoria ta în lumea tehnologiei.</p>
+            
+            <!-- Search Box -->
+            <input type="text" class="search-box" placeholder="Caută cursuri...">
+
+            <!-- Course Filters -->
+            <div class="course-filters">
+                <button class="filter-btn active" data-category="toate">Toate</button>
+                <button class="filter-btn" data-category="tehnologie">Tehnologie & IT</button>
+                <button class="filter-btn" data-category="dezvoltare-personala">Dezvoltare Personală</button>
+                <button class="filter-btn" data-category="limbi-straine">Limbi Străine</button>
+                <button class="filter-btn" data-category="cursuri-practice">Cursuri Practice</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Grid -->
+    <section class="courses-grid py-5">
+        <div class="container">
+            <!-- Tehnologie & IT -->
+            <h2 class="section-title mb-4">Tehnologie & IT</h2>
+            <div class="row">
+                <!-- Course Card 1 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="course-card" onclick="window.location.href='autentificare.html'">
+                        <img src="../images/courses/programming.jpeg" alt="Introducere în Programare" class="course-image">
+                        <div class="course-content">
+                            <span class="course-category">Tehnologie & IT</span>
+                            <h3 class="course-title">Introducere în Programare</h3>
+                            <p class="course-description">Python, JavaScript, HTML & CSS - de la zero la dezvoltator web.</p>
+                            <div class="course-stats">
+                                <div class="course-stat">
+                                    <i class="fas fa-clock"></i>
+                                    <span>40 ore</span>
+                                </div>
+                                <div class="course-stat">
+                                    <i class="fas fa-user-graduate"></i>
+                                    <span>450 cursanți</span>
+                                </div>
+                            </div>
+                            <div class="course-meta">
+                                <div class="course-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span>(4.9)</span>
+                                </div>
+                                <div class="course-price">Gratuit</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Card 2 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="course-card" onclick="window.location.href='autentificare.html'">
+                        <img src="../images/courses/cybersecurity.jpeg" alt="Securitate Cibernetică" class="course-image">
+                        <div class="course-content">
+                            <span class="course-category">Tehnologie & IT</span>
+                            <h3 class="course-title">Securitate Cibernetică pentru Începători</h3>
+                            <p class="course-description">Învață să protejezi datele și sistemele împotriva amenințărilor cibernetice.</p>
+                            <div class="course-stats">
+                                <div class="course-stat">
+                                    <i class="fas fa-clock"></i>
+                                    <span>25 ore</span>
+                                </div>
+                                <div class="course-stat">
+                                    <i class="fas fa-user-graduate"></i>
+                                    <span>320 cursanți</span>
+                                </div>
+                            </div>
+                            <div class="course-meta">
+                                <div class="course-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <span>(4.6)</span>
+                                </div>
+                                <div class="course-price">70 RON</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Card 3 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="course-card" onclick="window.location.href='autentificare.html'">
+                        <img src="../images/courses/mobile-dev.jpeg" alt="Dezvoltare Mobile" class="course-image">
+                        <div class="course-content">
+                            <span class="course-category">Tehnologie & IT</span>
+                            <h3 class="course-title">Dezvoltare Aplicații Mobile</h3>
+                            <p class="course-description">Android & iOS Basics - creează aplicații mobile native.</p>
+                            <div class="course-stats">
+                                <div class="course-stat">
+                                    <i class="fas fa-clock"></i>
+                                    <span>35 ore</span>
+                                </div>
+                                <div class="course-stat">
+                                    <i class="fas fa-user-graduate"></i>
+                                    <span>280 cursanți</span>
+                                </div>
+                            </div>
+                            <div class="course-meta">
+                                <div class="course-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <span>(4.2)</span>
+                                </div>
+                                <div class="course-price">80 RON</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dezvoltare Personală -->
+            <h2 class="section-title mb-4 mt-5">Dezvoltare Personală & Business</h2>
+            <div class="row">
+                <!-- Course Card 1 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="course-card" onclick="window.location.href='autentificare.html'">
+                        <img src="../images/courses/public-speaking.png" alt="Public Speaking" class="course-image">
+                        <div class="course-content">
+                            <span class="course-category">Dezvoltare Personală</span>
+                            <h3 class="course-title">Comunicare și Public Speaking</h3>
+                            <p class="course-description">Dezvoltă-ți abilitățile de comunicare și prezentare în public.</p>
+                            <div class="course-stats">
+                                <div class="course-stat">
+                                    <i class="fas fa-clock"></i>
+                                    <span>15 ore</span>
+                                </div>
+                                <div class="course-stat">
+                                    <i class="fas fa-user-graduate"></i>
+                                    <span>420 cursanți</span>
+                                </div>
+                            </div>
+                            <div class="course-meta">
+                                <div class="course-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span>(4.9)</span>
+                                </div>
+                                <div class="course-price">Gratuit</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Card 2 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="course-card" onclick="window.location.href='autentificare.html'">
+                        <img src="../images/courses/business.jpeg" alt="Afacere Online" class="course-image">
+                        <div class="course-content">
+                            <span class="course-category">Business</span>
+                            <h3 class="course-title">Cum să începi o afacere online</h3>
+                            <p class="course-description">Ghid complet pentru lansarea și dezvoltarea unui business online.</p>
+                            <div class="course-stats">
+                                <div class="course-stat">
+                                    <i class="fas fa-clock"></i>
+                                    <span>20 ore</span>
+                                </div>
+                                <div class="course-stat">
+                                    <i class="fas fa-user-graduate"></i>
+                                    <span>350 cursanți</span>
+                                </div>
+                            </div>
+                            <div class="course-meta">
+                                <div class="course-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <span>(4.7)</span>
+                                </div>
+                                <div class="course-price">Gratuit</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Limbi Străine -->
+            <h2 class="section-title mb-4 mt-5">Limbi Străine</h2>
+            <div class="row">
+                <!-- Course Card 1 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="course-card" onclick="window.location.href='autentificare.html'">
+                        <img src="../images/courses/english.jpg" alt="Engleză" class="course-image">
+                        <div class="course-content">
+                            <span class="course-category">Limbi Străine</span>
+                            <h3 class="course-title">Engleză pentru Începători</h3>
+                            <p class="course-description">De la nivel începător la conversații fluente în engleză.</p>
+                            <div class="course-stats">
+                                <div class="course-stat">
+                                    <i class="fas fa-clock"></i>
+                                    <span>30 ore</span>
+                                </div>
+                                <div class="course-stat">
+                                    <i class="fas fa-user-graduate"></i>
+                                    <span>520 cursanți</span>
+                                </div>
+                            </div>
+                            <div class="course-meta">
+                                <div class="course-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span>(4.9)</span>
+                                </div>
+                                <div class="course-price">Gratuit</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Card 2 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="course-card" onclick="window.location.href='autentificare.html'">
+                        <img src="../images/courses/french.jpg" alt="Franceză" class="course-image">
+                        <div class="course-content">
+                            <span class="course-category">Limbi Străine</span>
+                            <h3 class="course-title">Franceză de Bază</h3>
+                            <p class="course-description">Învață franceza de la zero cu metode interactive și practice.</p>
+                            <div class="course-stats">
+                                <div class="course-stat">
+                                    <i class="fas fa-clock"></i>
+                                    <span>25 ore</span>
+                                </div>
+                                <div class="course-stat">
+                                    <i class="fas fa-user-graduate"></i>
+                                    <span>280 cursanți</span>
+                                </div>
+                            </div>
+                            <div class="course-meta">
+                                <div class="course-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <span>(4.2)</span>
+                                </div>
+                                <div class="course-price">Gratuit</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cursuri Practice & Meserii -->
+            <h2 class="section-title mb-4 mt-5">Cursuri Practice & Meserii</h2>
+            <div class="row">
+                <!-- Course Card 1 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="course-card" onclick="window.location.href='autentificare.html'">
+                        <img src="../images/courses/cooking.jpg" alt="Curs Bucătar" class="course-image">
+                        <div class="course-content">
+                            <span class="course-category">Gastronomie</span>
+                            <h3 class="course-title">Bucătar Professional prin SavoryBliss</h3>
+                            <p class="course-description">Învață arta culinară de la profesioniști cu experiență în domeniu. În parteneriat cu firma de catering SAVORY BLISS. Curs complet de la baze până la tehnici avansate.</p>
+                            <div class="course-stats">
+                                <div class="course-stat">
+                                    <i class="fas fa-clock"></i>
+                                    <span>240 ore</span>
+                                </div>
+                                <div class="course-stat">
+                                    <i class="fas fa-user-graduate"></i>
+                                    <span>120 cursanți</span>
+                                </div>
+                            </div>
+                            <div class="course-meta">
+                                <div class="course-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span>(4.9)</span>
+                                </div>
+                                <div class="course-price">Gratuit</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Card 2 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="course-card" onclick="window.location.href='autentificare.html'">
+                        <img src="../images/courses/videography.jpeg" alt="Curs Videograf" class="course-image">
+                        <div class="course-content">
+                            <span class="course-category">Media</span>
+                            <h3 class="course-title">Videograf Professional</h3>
+                            <p class="course-description">Învață arta videografiei de la profesioniști. De la filmări de bază până la editare video avansată și efecte speciale.</p>
+                            <div class="course-stats">
+                                <div class="course-stat">
+                                    <i class="fas fa-clock"></i>
+                                    <span>180 ore</span>
+                                </div>
+                                <div class="course-stat">
+                                    <i class="fas fa-user-graduate"></i>
+                                    <span>85 cursanți</span>
+                                </div>
+                            </div>
+                            <div class="course-meta">
+                                <div class="course-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <span>(4.7)</span>
+                                </div>
+                                <div class="course-price">100 RON</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Card 3 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="course-card" onclick="window.location.href='autentificare.html'">
+                        <img src="../images/courses/photography.jpeg" alt="Curs Fotograf" class="course-image">
+                        <div class="course-content">
+                            <span class="course-category">Media</span>
+                            <h3 class="course-title">Fotograf Professional</h3>
+                            <p class="course-description">Descoperă secretele fotografiei profesionale. De la compoziție și lumină până la editare în Lightroom și Photoshop.</p>
+                            <div class="course-stats">
+                                <div class="course-stat">
+                                    <i class="fas fa-clock"></i>
+                                    <span>160 ore</span>
+                                </div>
+                                <div class="course-stat">
+                                    <i class="fas fa-user-graduate"></i>
+                                    <span>95 cursanți</span>
+                                </div>
+                            </div>
+                            <div class="course-meta">
+                                <div class="course-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span>(4.8)</span>
+                                </div>
+                                <div class="course-price">110 RON</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Verifică starea autentificării
+        function checkAuthStatus() {
+            const authState = JSON.parse(localStorage.getItem('authState') || sessionStorage.getItem('authState') || '{}');
+            const accountBtn = document.querySelector('.account-btn');
+            const authBtn = document.querySelector('.auth-btn');
+            const userName = document.getElementById('userName');
+            
+            console.log('Status autentificare:', authState.isAuthenticated);
+            console.log('Date utilizator:', authState.user);
+            
+            if (authState.isAuthenticated) {
+                if (accountBtn) {
+                    accountBtn.style.display = 'block';
+                    console.log('Buton cont vizibil');
+                }
+                if (authBtn) {
+                    authBtn.style.display = 'none';
+                    console.log('Buton autentificare ascuns');
+                }
+                
+                try {
+                    const displayName = authState.user?.name || authState.user?.numeComplet || 'Contul meu';
+                    if (userName) {
+                        userName.textContent = displayName;
+                        console.log('Nume utilizator setat:', displayName);
+                    }
+                } catch (error) {
+                    console.error('Eroare la setarea numelui utilizatorului:', error);
+                    if (userName) userName.textContent = 'Contul meu';
+                }
+            } else {
+                if (accountBtn) {
+                    accountBtn.style.display = 'none';
+                    console.log('Buton cont ascuns');
+                }
+                if (authBtn) {
+                    authBtn.style.display = 'block';
+                    console.log('Buton autentificare vizibil');
+                }
+            }
+        }
+
+        // Funcție pentru deconectare
+        function logout(e) {
+            if (e) e.preventDefault();
+            console.log('Deconectare inițiată...');
+            
+            localStorage.removeItem('authState');
+            sessionStorage.removeItem('authState');
+            
+            checkAuthStatus();
+            
+            console.log('Redirecționare către pagina de autentificare...');
+            window.location.href = 'autentificare.html';
+            
+            return false;
+        }
+
+        // Verifică starea de autentificare la încărcarea paginii
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuthStatus();
+        });
+
+        // Verifică periodic starea de autentificare
+        setInterval(checkAuthStatus, 1000);
+    </script>
+</body>
+</html> 

@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Despre Noi - VEG Media Network</title>
+    <link rel="icon" type="image/png" href="../images/logo.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #0f2649 0%, #1a3a6d 100%);
+            min-height: 100vh;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding-top: 60px;
+        }
+
+        .navbar {
+            background: rgba(15, 38, 73, 0.15) !important;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(15, 38, 73, 0.35) !important;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #ffffff !important;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 0.3rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand:hover {
+            transform: translateY(-2px);
+        }
+
+        .navbar-brand img {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand:hover img {
+            transform: rotate(360deg);
+        }
+
+        .navbar-brand div {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            white-space: nowrap;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8) !important;
+            font-weight: 500;
+            padding: 0.4rem 0.8rem !important;
+            margin: 0 0.2rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 0.9rem;
+            overflow: hidden;
+        }
+
+        .nav-link:hover {
+            color: #ffffff !important;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .nav-link.active {
+            color: #ffffff !important;
+            background: rgba(25, 118, 210, 0.2);
+            border: 1px solid rgba(25, 118, 210, 0.3);
+        }
+
+        @media (max-width: 991px) {
+            .navbar-brand {
+                font-size: 1rem;
+            }
+
+            .navbar-brand div {
+                white-space: normal;
+            }
+
+            .navbar-collapse {
+                background: rgba(15, 38, 73, 0.25);
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+                border-radius: 15px;
+                padding: 1rem;
+                margin-top: 1rem;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .nav-link {
+                padding: 0.8rem 1.2rem !important;
+                margin: 0.2rem 0;
+            }
+        }
+
+        .section {
+            padding: 80px 0;
+            position: relative;
+            background: linear-gradient(135deg, #0f2649 0%, #1a3a6d 100%);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 3rem;
+            text-align: left;
+            color: white;
+            padding-left: 20px;
+        }
+
+        .card-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 15px;
+            transition: all 0.3s ease;
+            height: 100%;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-container:hover {
+            transform: translateY(-10px);
+        }
+
+        .mission-card {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .mission-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+        }
+
+        .mission-card h3 {
+            color: #ffffff;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .mission-card p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 40px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            top: 0;
+        }
+
+        .timeline-item {
+            width: calc(50% - 30px);
+            margin-bottom: 50px;
+            position: relative;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-item:nth-child(odd) {
+            margin-left: auto;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ffffff;
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            top: 30px;
+        }
+
+        .timeline-item:nth-child(odd)::before {
+            left: -40px;
+        }
+
+        .timeline-item:nth-child(even)::before {
+            right: -40px;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.2);
+            top: 39px;
+        }
+
+        .timeline-item:nth-child(odd)::after {
+            left: -20px;
+        }
+
+        .timeline-item:nth-child(even)::after {
+            right: -20px;
+        }
+
+        .timeline-date {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            display: inline-block;
+            padding: 5px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+        }
+
+        .timeline-item h3 {
+            color: #ffffff;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-item p {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+
+        .team-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1.5rem;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .team-card {
+            text-align: center;
+        }
+
+        .team-name {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+        }
+
+        .team-role {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: #ffffff;
+            margin: 0 10px;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: rgba(255, 255, 255, 0.9);
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+                text-align: center;
+                padding-left: 0;
+            }
+
+            .card-container {
+                margin: 10px;
+                padding: 20px;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+            
+            .timeline-item {
+                width: calc(100% - 50px);
+                margin-left: 50px !important;
+            }
+            
+            .timeline-item::before {
+                left: -40px !important;
+            }
+            
+            .timeline-item::after {
+                left: -20px !important;
+            }
+        }
+
+        .team-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .hexagon-wrapper {
+            margin: 0 auto 2rem;
+            width: 200px;
+            height: 200px;
+            position: relative;
+            perspective: 1000px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .hexagon {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+            border-radius: 50%;
+        }
+
+        .team-card:hover .hexagon {
+            transform: scale(1.1);
+        }
+
+        .team-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+        }
+
+        .team-name {
+            color: #ffffff;
+            font-size: 1.5rem;
+            margin: 1rem 0 0.5rem;
+        }
+
+        .team-role {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .team-description {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .social-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            .hexagon-wrapper {
+                width: 150px;
+                height: 150px;
+            }
+
+            .team-card {
+                padding: 1.5rem;
+            }
+
+            .team-name {
+                font-size: 1.3rem;
+            }
+        }
+
+        .hero-section {
+            padding: 30px 0;
+            background: linear-gradient(135deg, #0f2649 0%, #1a3a6d 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            margin: 0 auto;
+            max-width: 800px;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-text {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1rem;
+            line-height: 1.4;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-outline-light {
+            padding: 0.5rem 1.5rem;
+            font-size: 0.9rem;
+            border-radius: 30px;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 20px 0;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-text {
+                font-size: 0.85rem;
+                padding: 0 20px;
+                margin-bottom: 0.8rem;
+            }
+        }
+
+        .dropdown-menu {
+            background: rgba(13, 25, 48, 0.95);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 0.5rem;
+            margin-top: 0.5rem;
+            min-width: 200px;
+        }
+
+        .dropdown-item {
+            color: rgba(255, 255, 255, 0.9);
+            padding: 0.7rem 1rem;
+            font-size: 0.9rem;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-item i {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+            width: 20px;
+            text-align: center;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        .dropdown-item:hover i {
+            color: #ffffff;
+        }
+
+        .dropdown-divider {
+            border-color: rgba(255, 255, 255, 0.1);
+            margin: 0.5rem 0;
+        }
+
+        .dropdown-item:last-child {
+            color: #ff4d4d;
+        }
+
+        .dropdown-item:last-child i {
+            color: #ff4d4d;
+        }
+
+        .dropdown-item:last-child:hover {
+            background: rgba(255, 77, 77, 0.1);
+        }
+
+        /* Logout Button Style */
+        .dropdown-menu .dropdown-item[onclick="logout(event)"] {
+            color: #ff4d4d;
+        }
+
+        .dropdown-menu .dropdown-item[onclick="logout(event)"] i {
+            color: #ff4d4d;
+        }
+
+        .dropdown-menu .dropdown-item[onclick="logout(event)"]:hover {
+            background: rgba(255, 77, 77, 0.1);
+        }
+
+        @keyframes dropdownFade {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">
+                <img src="../images/logo.png" alt="VEG Media Network Logo">
+                <div>
+                    VEG Media Network - Platformă Educațională
+                </div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Acasă</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cursuri.html">Cursuri</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="despre.html">Despre Noi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle account-btn" href="#" role="button" data-bs-toggle="dropdown" style="display: none;">
+                            <i class="fas fa-user-circle"></i>
+                            <span id="userName">Cont</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="profil.html"><i class="fas fa-user"></i> Profilul meu</a></li>
+                            <li><a class="dropdown-item" href="cursuri-mele.html"><i class="fas fa-book"></i> Cursurile mele</a></li>
+                            <li><a class="dropdown-item" href="certificate.html"><i class="fas fa-certificate"></i> Certificate</a></li>
+                            <li><a class="dropdown-item" href="setari.html"><i class="fas fa-cog"></i> Setări</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" onclick="logout(event)"><i class="fas fa-sign-out-alt"></i> Deconectare</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link auth-btn" href="autentificare.html">Autentificare</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 hero-content text-center">
+                    <h1 class="hero-title">Transformăm<br>Educația Digitală</h1>
+                    <p class="hero-text">VEG MEDIA NETWORK este o companie inovatoare din domeniul IT, dedicată dezvoltării de soluții digitale care facilitează accesul la educație.</p>
+                    <a href="#about" class="btn btn-outline-light">DESCOPERĂ POVESTEA NOASTRĂ</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section id="about" class="section" style="margin-top: 76px;">
+        <div class="container">
+            <h2 class="section-title">Misiunea Noastră</h2>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card-container mission-card">
+                        <div class="mission-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3>Educație Accesibilă</h3>
+                        <p>Oferim cursuri gratuite și subvenționate pentru a face educația accesibilă tuturor.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card-container mission-card">
+                        <div class="mission-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Comunitate Puternică</h3>
+                        <p>Construim o comunitate de învățare unde fiecare membru se poate dezvolta și poate contribui.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card-container mission-card">
+                        <div class="mission-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3>Inovație Continuă</h3>
+                        <p>Implementăm cele mai noi tehnologii pentru a oferi cea mai bună experiență de învățare.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- History Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Istoricul Nostru</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">Ianuarie 2023</div>
+                    <h3>Începutul Călătoriei</h3>
+                    <p>Fondată ca o firmă de exercițiu, VEG MEDIA NETWORK s-a remarcat rapid prin proiecte inovatoare în domeniul digital. Am început cu o echipă mică dar dedicată, concentrându-ne pe dezvoltarea de soluții educaționale accesibile.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Iunie 2023</div>
+                    <h3>Primele Proiecte</h3>
+                    <p>Am lansat primele noastre cursuri pilot, testând diferite metode de predare și învățare online. Feedback-ul pozitiv ne-a motivat să continuăm și să ne extindem oferta educațională.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Octombrie 2023</div>
+                    <h3>Creștere și Inovație</h3>
+                    <p>Am implementat noi tehnologii și am dezvoltat platforma noastră proprie de e-learning. Am început parteneriate cu experți din diverse domenii pentru a crea conținut educațional de calitate.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Ianuarie 2024</div>
+                    <h3>Dezvoltare și Expansiune</h3>
+                    <p>Am lansat platforma educațională completă și am început să oferim cursuri gratuite și subvenționate pentru comunitate. Focusul nostru rămâne pe accesibilitate și calitate în educație.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Echipa Noastră</h2>
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-4 col-md-6">
+                    <div class="card-container team-card">
+                        <div class="hexagon-wrapper">
+                            <div class="hexagon">
+                                <img src="../images/team/edoardo.png" alt="Edoardo Vrăjitoru" class="team-image">
+                            </div>
+                        </div>
+                        <h3 class="team-name">Edoardo Vrăjitoru</h3>
+                        <div class="team-role">Director General</div>
+                        <p class="team-description">Vizionar și lider, coordonează strategia și dezvoltarea companiei</p>
+                        <div class="social-links">
+                            <a href="#" class="social-btn"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-btn"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card-container team-card">
+                        <div class="hexagon-wrapper">
+                            <div class="hexagon">
+                                <img src="../images/team/leonard.png" alt="Rapolti Leonard" class="team-image">
+                            </div>
+                        </div>
+                        <h3 class="team-name">Rapolti Leonard</h3>
+                        <div class="team-role">Director Adjunct</div>
+                        <p class="team-description">Expert în managementul operațional și dezvoltarea echipei</p>
+                        <div class="social-links">
+                            <a href="#" class="social-btn"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-btn"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card-container team-card">
+                        <div class="hexagon-wrapper">
+                            <div class="hexagon">
+                                <img src="../images/team/maria.png" alt="Rusu Maria" class="team-image">
+                            </div>
+                        </div>
+                        <h3 class="team-name">Rusu Maria</h3>
+                        <div class="team-role">Manager Financiar</div>
+                        <p class="team-description">Specialistă în gestiunea resurselor și planificare financiară</p>
+                        <div class="social-links">
+                            <a href="#" class="social-btn"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-btn"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card-container team-card">
+                        <div class="hexagon-wrapper">
+                            <div class="hexagon">
+                                <img src="../images/team/marian.png" alt="Leontescu Marian" class="team-image">
+                            </div>
+                        </div>
+                        <h3 class="team-name">Leontescu Marian</h3>
+                        <div class="team-role">Designer UI/UX</div>
+                        <p class="team-description">Creator de experiențe digitale intuitive și atractive</p>
+                        <div class="social-links">
+                            <a href="#" class="social-btn"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-btn"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card-container team-card">
+                        <div class="hexagon-wrapper">
+                            <div class="hexagon">
+                                <img src="../images/team/cristi.png" alt="Ciobanu Ruben" class="team-image">
+                            </div>
+                        </div>
+                        <h3 class="team-name">Ciobanu Ruben</h3>
+                        <div class="team-role">Specialist Marketing</div>
+                        <p class="team-description">Expert în strategii digitale și comunicare online</p>
+                        <div class="social-links">
+                            <a href="#" class="social-btn"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-btn"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card-container team-card">
+                        <div class="hexagon-wrapper">
+                            <div class="hexagon">
+                                <img src="../images/team/ionut.png" alt="Cucu Ionuț" class="team-image">
+                            </div>
+                        </div>
+                        <h3 class="team-name">Cucu Ionuț</h3>
+                        <div class="team-role">Dezvoltator Software</div>
+                        <p class="team-description">Programator talentat și pasionat de inovație tehnologică</p>
+                        <div class="social-links">
+                            <a href="#" class="social-btn"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-btn"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card-container team-card">
+                        <div class="hexagon-wrapper">
+                            <div class="hexagon">
+                                <img src="../images/team/petronela.png" alt="Nacu Petronela" class="team-image">
+                            </div>
+                        </div>
+                        <h3 class="team-name">Nacu Petronela</h3>
+                        <div class="team-role">Manager de Proiect</div>
+                        <p class="team-description">Coordonator de proiecte cu experiență în livrare la timp</p>
+                        <div class="social-links">
+                            <a href="#" class="social-btn"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-btn"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Verifică starea autentificării
+        function checkAuthStatus() {
+            const authState = JSON.parse(localStorage.getItem('authState') || sessionStorage.getItem('authState') || '{}');
+            const accountBtn = document.querySelector('.account-btn');
+            const authBtn = document.querySelector('.auth-btn');
+            const userName = document.getElementById('userName');
+            
+            console.log('Status autentificare:', authState.isAuthenticated);
+            console.log('Date utilizator:', authState.user);
+            
+            if (authState.isAuthenticated) {
+                if (accountBtn) {
+                    accountBtn.style.display = 'block';
+                    console.log('Buton cont vizibil');
+                }
+                if (authBtn) {
+                    authBtn.style.display = 'none';
+                    console.log('Buton autentificare ascuns');
+                }
+                
+                try {
+                    const displayName = authState.user?.name || authState.user?.numeComplet || 'Contul meu';
+                    if (userName) {
+                        userName.textContent = displayName;
+                        console.log('Nume utilizator setat:', displayName);
+                    }
+                } catch (error) {
+                    console.error('Eroare la setarea numelui utilizatorului:', error);
+                    if (userName) userName.textContent = 'Contul meu';
+                }
+            } else {
+                if (accountBtn) {
+                    accountBtn.style.display = 'none';
+                    console.log('Buton cont ascuns');
+                }
+                if (authBtn) {
+                    authBtn.style.display = 'block';
+                    console.log('Buton autentificare vizibil');
+                }
+            }
+        }
+
+        // Funcție pentru deconectare
+        function logout(e) {
+            if (e) e.preventDefault();
+            console.log('Deconectare inițiată...');
+            
+            localStorage.removeItem('authState');
+            sessionStorage.removeItem('authState');
+            
+            checkAuthStatus();
+            
+            console.log('Redirecționare către pagina de autentificare...');
+            window.location.href = 'autentificare.html';
+            
+            return false;
+        }
+
+        // Verifică starea de autentificare la încărcarea paginii
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuthStatus();
+        });
+
+        // Verifică periodic starea de autentificare
+        setInterval(checkAuthStatus, 1000);
+    </script>
+</body>
+</html> 

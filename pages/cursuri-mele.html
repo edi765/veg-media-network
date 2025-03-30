@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursurile Mele - VEG Media Network</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #ffffff;
+            --secondary-color: #0f2649;
+            --accent-color: #1a3a6d;
+            --text-color: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.8);
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f2649 0%, #1a3a6d 100%);
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+
+        .navbar {
+            background: rgba(15, 38, 73, 0.15) !important;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #ffffff !important;
+        }
+
+        .navbar-brand img {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8) !important;
+            font-weight: 500;
+            padding: 0.4rem 0.8rem !important;
+            margin: 0 0.2rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #ffffff !important;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-link.active {
+            color: #ffffff !important;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .courses-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .courses-header {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .courses-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            opacity: 0.1;
+        }
+
+        .courses-title {
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.8) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .courses-stats {
+            display: flex;
+            gap: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-item {
+            text-align: center;
+            flex: 1;
+            position: relative;
+        }
+
+        .stat-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: -1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 40px;
+            width: 1px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.3rem;
+        }
+
+        .stat-label {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .course-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .course-image {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .course-content {
+            padding: 1.5rem;
+        }
+
+        .course-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+        }
+
+        .course-description {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .course-progress {
+            margin-bottom: 1rem;
+        }
+
+        .progress {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, #ffffff, rgba(255, 255, 255, 0.8));
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 0.3rem;
+        }
+
+        .course-details {
+            display: flex;
+            gap: 20px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .course-details span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .course-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-continue {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #ffffff;
+            padding: 0.8rem;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-continue:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .btn-certificate {
+            background: rgba(76, 175, 80, 0.2);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            color: #4CAF50;
+            padding: 0.8rem;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-certificate:hover {
+            background: rgba(76, 175, 80, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .btn-certificate.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            margin-top: 2rem;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            color: rgba(255, 255, 255, 0.2);
+            margin-bottom: 1rem;
+        }
+
+        .empty-state h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .empty-state p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-browse {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-browse:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 991px) {
+            .courses-stats {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .stat-item:not(:last-child)::after {
+                display: none;
+            }
+
+            .stat-item {
+                flex: 1 1 calc(50% - 1rem);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .courses-container {
+                padding: 1rem;
+            }
+
+            .courses-header {
+                padding: 1.5rem;
+            }
+
+            .courses-title {
+                font-size: 1.8rem;
+            }
+
+            .stat-item {
+                flex: 1 1 100%;
+            }
+        }
+
+        /* Account Button Styles */
+        .account-btn {
+            display: none;
+        }
+
+        .account-btn .btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.8);
+            padding: 0.4rem 1rem;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .account-btn .btn:hover {
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .account-btn .btn i {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .account-btn .btn:hover i {
+            transform: scale(1.1);
+            color: #ffffff;
+        }
+
+        #userName {
+            max-width: 150px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* Dropdown Styles */
+        .dropdown-menu {
+            background: rgba(15, 38, 73, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 0.5rem;
+            margin-top: 0.5rem;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+            animation: dropdownFade 0.3s ease;
+        }
+
+        .dropdown-menu .dropdown-item {
+            color: rgba(255, 255, 255, 0.8);
+            padding: 0.7rem 1.2rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .dropdown-menu .dropdown-item i {
+            width: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-menu .dropdown-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            transform: translateX(5px);
+        }
+
+        .dropdown-menu .dropdown-item:hover i {
+            transform: scale(1.1);
+        }
+
+        .dropdown-divider {
+            border-color: rgba(255, 255, 255, 0.1);
+            margin: 0.5rem 0;
+        }
+
+        /* Logout Button Style */
+        .dropdown-menu .dropdown-item[onclick="logout(event)"] {
+            color: #ff4d4d;
+        }
+
+        .dropdown-menu .dropdown-item[onclick="logout(event)"] i {
+            color: #ff4d4d;
+        }
+
+        .dropdown-menu .dropdown-item[onclick="logout(event)"]:hover {
+            background: rgba(255, 77, 77, 0.1);
+        }
+
+        @keyframes dropdownFade {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Stiluri pentru banner personalizat */
+        .personal-banner {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .banner-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .banner-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .banner-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.8) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .banner-subtitle {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+        }
+
+        .banner-stats {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .banner-stat {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .banner-stat i {
+            font-size: 1.2rem;
+            color: #ffffff;
+        }
+
+        .banner-stat span {
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        /* Stiluri pentru filtre și căutare */
+        .filters-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.8rem 1rem 0.8rem 2.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #ffffff;
+            font-size: 1rem;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .filter-options {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .filter-options select {
+            padding: 0.8rem 1.2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #ffffff;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .filter-options select option {
+            background: #1a3a6d;
+            color: #ffffff;
+        }
+
+        /* Stiluri pentru statistici detaliate */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stat-icon i {
+            font-size: 1.5rem;
+            color: #ffffff;
+        }
+
+        .stat-info {
+            flex: 1;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 0.3rem;
+        }
+
+        .stat-label {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+
+        /* Îmbunătățiri pentru cardurile de cursuri */
+        .course-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ffffff, rgba(255, 255, 255, 0.8));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .course-card:hover::before {
+            opacity: 1;
+        }
+
+        .course-image {
+            transition: transform 0.3s ease;
+        }
+
+        .course-card:hover .course-image {
+            transform: scale(1.05);
+        }
+
+        .course-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .course-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .course-description {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.2rem;
+        }
+
+        .progress {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, #ffffff, rgba(255, 255, 255, 0.8));
+            transition: width 0.5s ease;
+        }
+
+        .course-details {
+            margin: 1rem 0;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+        }
+
+        .course-actions {
+            margin-top: 1.2rem;
+        }
+
+        .btn-continue {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #ffffff;
+        }
+
+        .btn-continue:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .banner-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .banner-stats {
+                justify-content: center;
+            }
+
+            .filters-section {
+                flex-direction: column;
+            }
+
+            .filter-options {
+                width: 100%;
+                flex-direction: column;
+            }
+
+            .filter-options select {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">
+                <img src="../images/logo.png" alt="VEG Media Network Logo">
+                <div>VEG Media Network - Platformă Educațională</div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Acasă</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cursuri.html">Cursuri</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="despre.html">Despre Noi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle account-btn" href="#" role="button" data-bs-toggle="dropdown" style="display: none;">
+                            <i class="fas fa-user-circle"></i>
+                            <span id="userName">Cont</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="profil.html"><i class="fas fa-user"></i> Profilul meu</a></li>
+                            <li><a class="dropdown-item" href="cursuri-mele.html"><i class="fas fa-book"></i> Cursurile mele</a></li>
+                            <li><a class="dropdown-item" href="certificate.html"><i class="fas fa-certificate"></i> Certificate</a></li>
+                            <li><a class="dropdown-item" href="setari.html"><i class="fas fa-cog"></i> Setări</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" onclick="logout(event)"><i class="fas fa-sign-out-alt"></i> Deconectare</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link auth-btn" href="autentificare.html">Autentificare</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Courses Content -->
+    <div class="courses-container">
+        <!-- Banner Personalizat -->
+        <div class="personal-banner">
+            <div class="banner-content">
+                <div class="banner-text">
+                    <h1 class="banner-title">Bine ai venit în Dashboard-ul tău!</h1>
+                    <p class="banner-subtitle">Urmărește-ți progresul și continuă să înveți</p>
+                </div>
+                <div class="banner-stats">
+                    <div class="banner-stat">
+                        <i class="fas fa-star"></i>
+                        <span>Nivel 5</span>
+                    </div>
+                    <div class="banner-stat">
+                        <i class="fas fa-trophy"></i>
+                        <span>3 Certificate</span>
+                    </div>
+                    <div class="banner-stat">
+                        <i class="fas fa-clock"></i>
+                        <span>25 ore studiate</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filtre și Sortare -->
+        <div class="filters-section">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="courseSearch" placeholder="Caută în cursurile tale...">
+            </div>
+            <div class="filter-options">
+                <select id="progressFilter">
+                    <option value="all">Toate cursurile</option>
+                    <option value="in-progress">În curs</option>
+                    <option value="completed">Finalizate</option>
+                </select>
+                <select id="sortBy">
+                    <option value="recent">Cele mai recente</option>
+                    <option value="progress">Progres</option>
+                    <option value="name">Nume</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Statistici Detaliate -->
+        <div class="courses-header">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-book-reader"></i>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-value">5</div>
+                        <div class="stat-label">Cursuri Active</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-value">3</div>
+                        <div class="stat-label">Certificate Obținute</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-value">85%</div>
+                        <div class="stat-label">Progres Mediu</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-value">25h</div>
+                        <div class="stat-label">Timp Studiat</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="courses-grid" id="coursesGrid">
+            <!-- Cursurile vor fi adăugate dinamic aici -->
+        </div>
+
+        <div class="empty-state" id="emptyState" style="display: none;">
+            <i class="fas fa-book"></i>
+            <h3>Nu ai cursuri înscrise</h3>
+            <p>Explorează catalogul nostru de cursuri și începe călătoria ta în lumea educației!</p>
+            <a href="cursuri.html" class="btn-browse">
+                <i class="fas fa-search"></i>
+                Explorează Cursuri
+            </a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Verifică starea autentificării
+        function checkAuthStatus() {
+            const authState = JSON.parse(localStorage.getItem('authState') || sessionStorage.getItem('authState') || '{}');
+            const userDropdown = document.querySelector('.account-btn');
+            const authBtn = document.querySelector('.auth-btn');
+            const userName = document.getElementById('userName');
+            
+            if (authState.isAuthenticated) {
+                if (userDropdown) {
+                    userDropdown.style.display = 'block';
+                }
+                if (authBtn) {
+                    authBtn.style.display = 'none';
+                }
+                
+                try {
+                    const displayName = authState.user?.name || authState.user?.numeComplet || 'Contul meu';
+                    if (userName) {
+                        userName.textContent = displayName;
+                    }
+                } catch (error) {
+                    console.error('Eroare la setarea numelui utilizatorului:', error);
+                    if (userName) userName.textContent = 'Contul meu';
+                }
+            } else {
+                if (userDropdown) {
+                    userDropdown.style.display = 'none';
+                }
+                if (authBtn) {
+                    authBtn.style.display = 'block';
+                }
+                // Redirecționează către pagina de autentificare dacă utilizatorul nu este autentificat
+                window.location.href = 'autentificare.html';
+            }
+        }
+
+        // Funcție pentru deconectare
+        function logout(e) {
+            if (e) e.preventDefault();
+            localStorage.removeItem('authState');
+            sessionStorage.removeItem('authState');
+            window.location.href = 'autentificare.html';
+            return false;
+        }
+
+        // Funcție pentru încărcarea cursurilor
+        function loadCourses() {
+            const authState = JSON.parse(localStorage.getItem('authState') || sessionStorage.getItem('authState') || '{}');
+            const coursesGrid = document.getElementById('coursesGrid');
+            const emptyState = document.getElementById('emptyState');
+            
+            if (authState.user?.courses && authState.user.courses.length > 0) {
+                coursesGrid.style.display = 'grid';
+                emptyState.style.display = 'none';
+                
+                coursesGrid.innerHTML = authState.user.courses.map(course => `
+                    <div class="course-card">
+                        <img src="${course.image}" alt="${course.title}" class="course-image">
+                        <div class="course-content">
+                            <h3 class="course-title">${course.title}</h3>
+                            <p class="course-description">${course.description}</p>
+                            <div class="course-progress">
+                                <div class="progress-text">Progres: ${course.progress}%</div>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width: ${course.progress}%"></div>
+                                </div>
+                            </div>
+                            <div class="course-details">
+                                <span><i class="fas fa-clock"></i> ${course.duration}</span>
+                                <span><i class="fas fa-book"></i> ${course.lessons} lecții</span>
+                            </div>
+                            <div class="course-actions">
+                                <a href="${course.continueUrl}" class="btn-continue">
+                                    <i class="fas fa-play"></i>
+                                    Continuă
+                                </a>
+                                <a href="${course.certificateUrl}" class="btn-certificate ${course.progress < 100 ? 'disabled' : ''}">
+                                    <i class="fas fa-certificate"></i>
+                                    Certificat
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                coursesGrid.style.display = 'none';
+                emptyState.style.display = 'block';
+            }
+        }
+
+        // Verifică starea de autentificare și încarcă cursurile la încărcarea paginii
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuthStatus();
+            loadCourses();
+        });
+
+        // Funcție pentru filtrarea și sortarea cursurilor
+        function filterAndSortCourses() {
+            const searchTerm = document.getElementById('courseSearch').value.toLowerCase();
+            const progressFilter = document.getElementById('progressFilter').value;
+            const sortBy = document.getElementById('sortBy').value;
+            const authState = JSON.parse(localStorage.getItem('authState') || sessionStorage.getItem('authState') || '{}');
+            const courses = authState.user?.courses || [];
+            
+            let filteredCourses = courses.filter(course => {
+                const matchesSearch = course.title.toLowerCase().includes(searchTerm) ||
+                                    course.description.toLowerCase().includes(searchTerm);
+                const matchesProgress = progressFilter === 'all' ||
+                                      (progressFilter === 'in-progress' && course.progress < 100) ||
+                                      (progressFilter === 'completed' && course.progress === 100);
+                return matchesSearch && matchesProgress;
+            });
+
+            // Sortare
+            filteredCourses.sort((a, b) => {
+                switch(sortBy) {
+                    case 'recent':
+                        return new Date(b.lastAccessed) - new Date(a.lastAccessed);
+                    case 'progress':
+                        return b.progress - a.progress;
+                    case 'name':
+                        return a.title.localeCompare(b.title);
+                    default:
+                        return 0;
+                }
+            });
+
+            return filteredCourses;
+        }
+
+        // Funcție pentru actualizarea afișării cursurilor
+        function updateCoursesDisplay() {
+            const filteredCourses = filterAndSortCourses();
+            const coursesGrid = document.getElementById('coursesGrid');
+            const emptyState = document.getElementById('emptyState');
+            
+            if (filteredCourses.length > 0) {
+                coursesGrid.style.display = 'grid';
+                emptyState.style.display = 'none';
+                
+                coursesGrid.innerHTML = filteredCourses.map(course => `
+                    <div class="course-card">
+                        <img src="${course.image}" alt="${course.title}" class="course-image">
+                        <div class="course-content">
+                            <h3 class="course-title">${course.title}</h3>
+                            <p class="course-description">${course.description}</p>
+                            <div class="course-progress">
+                                <div class="progress-text">Progres: ${course.progress}%</div>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width: ${course.progress}%"></div>
+                                </div>
+                            </div>
+                            <div class="course-details">
+                                <span><i class="fas fa-clock"></i> ${course.duration}</span>
+                                <span><i class="fas fa-book"></i> ${course.lessons} lecții</span>
+                            </div>
+                            <div class="course-actions">
+                                <a href="${course.continueUrl}" class="btn-continue">
+                                    <i class="fas fa-play"></i>
+                                    Continuă
+                                </a>
+                                <a href="${course.certificateUrl}" class="btn-certificate ${course.progress < 100 ? 'disabled' : ''}">
+                                    <i class="fas fa-certificate"></i>
+                                    Certificat
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                coursesGrid.style.display = 'none';
+                emptyState.style.display = 'block';
+            }
+        }
+
+        // Adăugare event listeners pentru filtre și căutare
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuthStatus();
+            loadCourses();
+            
+            // Adăugare event listeners pentru filtre și căutare
+            document.getElementById('courseSearch').addEventListener('input', updateCoursesDisplay);
+            document.getElementById('progressFilter').addEventListener('change', updateCoursesDisplay);
+            document.getElementById('sortBy').addEventListener('change', updateCoursesDisplay);
+        });
+    </script>
+</body>
+</html> 
