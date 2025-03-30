@@ -115,6 +115,7 @@
             margin-bottom: 1.5rem;
             background: linear-gradient(45deg, #ffffff, #f0f0f0);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
@@ -176,6 +177,7 @@
             margin-bottom: 15px;
             background: linear-gradient(45deg, #ffffff, #f0f0f0);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
@@ -238,10 +240,23 @@
         }
 
         .certificate-title {
-            font-size: 1.5rem;
+            font-size: 2.5rem;
             font-weight: 700;
-            margin-bottom: 15px;
-            color: #ffffff;
+            background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.8) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+        }
+
+        .certificate-number {
+            font-size: 1.8rem;
+            font-weight: 600;
+            background: linear-gradient(45deg, var(--text-color), var(--primary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
         }
 
         .certificate-description {

@@ -148,12 +148,14 @@
         }
 
         .profile-name {
-            font-size: 2.2rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
             background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.8) 100%);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-align: center;
         }
 
         .profile-email {
@@ -223,13 +225,13 @@
         }
 
         .section-title {
-            font-size: 1.5rem;
+            font-size: 2rem;
             font-weight: 600;
             margin-bottom: 1.5rem;
-            color: #ffffff;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.8) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .section-title i {
@@ -697,23 +699,34 @@
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    const avatarImg = document.createElement('img');
+                    const avatarContainer = document.querySelector('.profile-avatar');
+                    const avatarUpload = document.querySelector('.avatar-upload');
+                    
+                    // Creează sau actualizează imaginea
+                    let avatarImg = avatarContainer.querySelector('img');
+                    if (!avatarImg) {
+                        avatarImg = document.createElement('img');
+                        avatarContainer.innerHTML = '';
+                        avatarContainer.appendChild(avatarImg);
+                        avatarContainer.appendChild(avatarUpload);
+                    }
+                    
                     avatarImg.src = e.target.result;
                     avatarImg.alt = 'Profil';
-                    const avatarContainer = document.querySelector('.profile-avatar');
-                    avatarContainer.innerHTML = '';
                     avatarImg.style.width = '100%';
                     avatarImg.style.height = '100%';
                     avatarImg.style.objectFit = 'cover';
-                    avatarContainer.appendChild(avatarImg);
-                    avatarContainer.appendChild(document.querySelector('.avatar-upload'));
 
                     // Salvează imaginea în starea de autentificare
-                    const authState = JSON.parse(localStorage.getItem('authState') || sessionStorage.getItem('authState') || '{}');
-                    if (authState.user) {
-                        authState.user.avatar = e.target.result;
-                        localStorage.setItem('authState', JSON.stringify(authState));
-                        sessionStorage.setItem('authState', JSON.stringify(authState));
+                    try {
+                        const authState = JSON.parse(localStorage.getItem('authState') || sessionStorage.getItem('authState') || '{}');
+                        if (authState.user) {
+                            authState.user.avatar = e.target.result;
+                            localStorage.setItem('authState', JSON.stringify(authState));
+                            sessionStorage.setItem('authState', JSON.stringify(authState));
+                        }
+                    } catch (error) {
+                        console.error('Eroare la salvarea imaginii:', error);
                     }
                 };
                 reader.readAsDataURL(file);
@@ -722,18 +735,33 @@
 
         // Funcție pentru încărcarea imaginii de profil
         function loadProfileImage() {
-            const authState = JSON.parse(localStorage.getItem('authState') || sessionStorage.getItem('authState') || '{}');
-            if (authState.user?.avatar) {
-                const avatarImg = document.createElement('img');
-                avatarImg.src = authState.user.avatar;
-                avatarImg.alt = 'Profil';
+            try {
+                const authState = JSON.parse(localStorage.getItem('authState') || sessionStorage.getItem('authState') || '{}');
                 const avatarContainer = document.querySelector('.profile-avatar');
-                avatarContainer.innerHTML = '';
-                avatarImg.style.width = '100%';
-                avatarImg.style.height = '100%';
-                avatarImg.style.objectFit = 'cover';
-                avatarContainer.appendChild(avatarImg);
-                avatarContainer.appendChild(document.querySelector('.avatar-upload'));
+                const avatarUpload = document.querySelector('.avatar-upload');
+                
+                if (authState.user?.avatar) {
+                    // Creează sau actualizează imaginea
+                    let avatarImg = avatarContainer.querySelector('img');
+                    if (!avatarImg) {
+                        avatarImg = document.createElement('img');
+                        avatarContainer.innerHTML = '';
+                        avatarContainer.appendChild(avatarImg);
+                        avatarContainer.appendChild(avatarUpload);
+                    }
+                    
+                    avatarImg.src = authState.user.avatar;
+                    avatarImg.alt = 'Profil';
+                    avatarImg.style.width = '100%';
+                    avatarImg.style.height = '100%';
+                    avatarImg.style.objectFit = 'cover';
+                } else {
+                    // Resetează la iconița default dacă nu există avatar
+                    avatarContainer.innerHTML = '<i class="fas fa-user"></i>';
+                    avatarContainer.appendChild(avatarUpload);
+                }
+            } catch (error) {
+                console.error('Eroare la încărcarea imaginii:', error);
             }
         }
 
@@ -746,57 +774,35 @@
             const profileName = document.getElementById('profileName');
             const profileEmail = document.getElementById('profileEmail');
             
-            if (authState.isAuthenticated) {
-                if (userDropdown) {
-                    userDropdown.style.display = 'block';
-                }
-                if (authBtn) {
-                    authBtn.style.display = 'none';
-                }
+            if (authState.isAuthenticated && authState.user) {
+                if (userDropdown) userDropdown.style.display = 'block';
+                if (authBtn) authBtn.style.display = 'none';
                 
                 try {
                     const user = authState.user;
-                    const displayName = user?.name || user?.numeComplet || 'Contul meu';
+                    const displayName = user.name || user.numeComplet || 'Contul meu';
                     
                     // Actualizează numele în navbar și header
-                    if (userName) {
-                        userName.textContent = displayName;
-                    }
-                    if (profileName) {
-                        profileName.textContent = displayName;
-                    }
-                    if (profileEmail) {
-                        profileEmail.textContent = user?.email || 'email@example.com';
-                    }
+                    if (userName) userName.textContent = displayName;
+                    if (profileName) profileName.textContent = displayName;
+                    if (profileEmail) profileEmail.textContent = user.email || 'email@example.com';
 
                     // Încarcă imaginea de profil
                     loadProfileImage();
 
                     // Completează formularul cu datele utilizatorului
-                    if (user) {
-                        // Separă numele complet în nume și prenume
-                        const fullName = displayName.split(' ');
-                        const firstName = fullName[0] || '';
-                        const lastName = fullName.slice(1).join(' ') || '';
-
-                        // Completează câmpurile formularului
-                        document.getElementById('firstName').value = firstName;
-                        document.getElementById('lastName').value = lastName;
-                        document.getElementById('email').value = user.email || '';
-                        document.getElementById('phone').value = user.phone || user.telefon || '';
-                        document.getElementById('address').value = user.address || 'Adresa nu este specificată';
-                    }
+                    const fullName = displayName.split(' ');
+                    document.getElementById('firstName').value = fullName[0] || '';
+                    document.getElementById('lastName').value = fullName.slice(1).join(' ') || '';
+                    document.getElementById('email').value = user.email || '';
+                    document.getElementById('phone').value = user.phone || user.telefon || '';
+                    document.getElementById('address').value = user.address || 'Adresa nu este specificată';
                 } catch (error) {
                     console.error('Eroare la setarea datelor utilizatorului:', error);
                 }
             } else {
-                if (userDropdown) {
-                    userDropdown.style.display = 'none';
-                }
-                if (authBtn) {
-                    authBtn.style.display = 'block';
-                }
-                // Redirecționează către pagina de autentificare dacă utilizatorul nu este autentificat
+                if (userDropdown) userDropdown.style.display = 'none';
+                if (authBtn) authBtn.style.display = 'block';
                 window.location.href = 'autentificare.html';
             }
         }
