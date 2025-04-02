@@ -1,0 +1,31 @@
+<!-- Adaugă în head, după celelalte link-uri CSS -->
+<link rel="stylesheet" href="../css/chatbot.css">
+
+<!-- Adaugă înainte de închiderea body -->
+<div class="chatbot-container">
+    <div class="chatbot-button" onclick="toggleChat()">
+        <i class="fas fa-robot"></i>
+    </div>
+    <div class="chatbot-window">
+        <div class="chatbot-header">
+            <h3>Asistent Virtual</h3>
+            <button class="chatbot-close" onclick="toggleChat()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="chatbot-messages" id="chatMessages">
+            <div class="message bot">
+                Bună! Sunt asistentul virtual al VEG Media Network. Cum te pot ajuta astăzi?
+            </div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="userInput" placeholder="Scrie un mesaj..." onkeypress="handleKeyPress(event)">
+            <button onclick="sendMessage()">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Adaugă înainte de închiderea body, după celelalte script-uri -->
+<script src="../js/chatbot.js"></script> 
