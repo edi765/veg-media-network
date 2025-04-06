@@ -778,316 +778,177 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* Stiluri pentru dispozitive mobile */
-        @media (max-width: 768px) {
-            .navbar-brand {
-                font-size: 1rem;
-            }
-
-            .navbar-brand img {
-                width: 28px;
-                height: 28px;
-            }
-
-            .hero-title {
-                font-size: 2.5rem;
-                text-align: center;
-            }
-
-            .hero-subtitle {
-                font-size: 1.1rem;
-                text-align: center;
-                padding: 0 1rem;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-                gap: 1rem;
-                width: 100%;
-                padding: 0 1rem;
-            }
-
-            .hero-buttons .btn {
-                width: 100%;
-                text-align: center;
-            }
-
-            .stats-section {
-                padding: 2rem 1rem;
-            }
-
-            .stat-item {
-                padding: 1rem;
-            }
-
-            .stat-number {
-                font-size: 2.5rem;
-            }
-
-            .stat-label {
-                font-size: 0.9rem;
-            }
-
-            .section-title {
-                font-size: 2rem;
-                text-align: center;
-            }
-
-            .section-subtitle {
-                font-size: 1rem;
-                text-align: center;
-                padding: 0 1rem;
-            }
-
-            .course-card {
-                margin-bottom: 1.5rem;
-            }
-
-            .course-card img {
-                height: 200px;
-            }
-
-            .course-card .card-body {
-                padding: 1rem;
-            }
-
-            .course-card .card-title {
-                font-size: 1.2rem;
-            }
-
-            .course-card .card-text {
-                font-size: 0.9rem;
-            }
-
-            .course-card .btn {
-                width: 100%;
-                text-align: center;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-                padding: 0 1rem;
-            }
-
-            .feature-card {
-                padding: 1.5rem;
-            }
-
-            .feature-card i {
-                font-size: 2rem;
-            }
-
-            .feature-card h3 {
-                font-size: 1.3rem;
-            }
-
-            .feature-card p {
-                font-size: 0.95rem;
-            }
-
-            .testimonial-card {
-                padding: 1.5rem;
-                margin: 0 1rem;
-            }
-
-            .testimonial-text {
-                font-size: 1rem;
-            }
-
-            .testimonial-author {
-                font-size: 0.9rem;
-            }
-
-            .testimonial-role {
-                font-size: 0.8rem;
-            }
-
-            .cta-section {
-                padding: 3rem 1rem;
-                text-align: center;
-            }
-
-            .cta-title {
-                font-size: 2rem;
-            }
-
-            .cta-subtitle {
-                font-size: 1rem;
-                margin-bottom: 2rem;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .cta-buttons .btn {
-                width: 100%;
-                text-align: center;
-            }
-
-            .footer {
-                padding: 3rem 1rem;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-                text-align: center;
-            }
-
-            .footer-section h3 {
-                font-size: 1.3rem;
-            }
-
-            .footer-section ul {
-                padding: 0;
-            }
-
-            .footer-section ul li {
-                margin-bottom: 0.8rem;
-            }
-
-            .social-links {
-                justify-content: center;
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-                text-align: center;
-                gap: 1rem;
-            }
-
-            /* Ajustări pentru dropdown menu pe mobile */
-            .dropdown-menu {
-                background: rgba(15, 38, 73, 0.98);
-                border: none;
-                border-radius: 0;
-                margin-top: 0;
-                padding: 0.5rem;
-            }
-
-            .dropdown-menu .dropdown-item {
-                padding: 0.8rem 1rem;
-                text-align: center;
-            }
-
-            /* Ajustări pentru butoane pe mobile */
-            .btn {
-                padding: 0.8rem 1.5rem;
-                font-size: 0.95rem;
-            }
-
-            /* Ajustări pentru container pe mobile */
-            .container {
-                padding-left: 1rem;
-                padding-right: 1rem;
-            }
-
-            /* Ajustări pentru navbar pe mobile */
-            .navbar {
-                padding: 0.5rem 0;
-            }
-
-            .navbar-toggler {
-                padding: 0.4rem;
-            }
-
-            .navbar-toggler-icon {
-                width: 1.5rem;
-                height: 1.5rem;
-            }
-
-            .navbar-collapse {
-                background: rgba(15, 38, 73, 0.98);
-                padding: 1rem;
-                border-radius: 8px;
-                margin-top: 0.5rem;
-            }
-
-            .nav-link {
-                padding: 0.8rem 1rem !important;
-                text-align: center;
-            }
-
-            /* Ajustări pentru carduri pe mobile */
-            .card {
-                margin-bottom: 1.5rem;
-            }
-
-            .card-body {
-                padding: 1rem;
-            }
-
-            .card-title {
-                font-size: 1.2rem;
-            }
-
-            .card-text {
-                font-size: 0.9rem;
-            }
-
-            /* Ajustări pentru imagini pe mobile */
-            img {
-                max-width: 100%;
-                height: auto;
-            }
-
-            /* Ajustări pentru spațiere pe mobile */
-            section {
-                padding: 3rem 0;
-            }
-
-            .section-title {
-                margin-bottom: 1.5rem;
-            }
-
-            /* Ajustări pentru grid pe mobile */
-            .row {
-                margin-left: -0.5rem;
-                margin-right: -0.5rem;
-            }
-
-            .col-md-4, .col-md-6 {
-                padding-left: 0.5rem;
-                padding-right: 0.5rem;
-            }
+        /* Chatbot Styles */
+        .chatbot-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+            border: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
         }
 
-        /* Stiluri pentru dispozitive foarte mici */
-        @media (max-width: 576px) {
-            .hero-title {
-                font-size: 2rem;
-            }
+        .chatbot-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
 
-            .hero-subtitle {
-                font-size: 1rem;
-            }
+        .chatbot-button i {
+            font-size: 24px;
+            color: #0f2649;
+        }
 
-            .stat-number {
-                font-size: 2rem;
-            }
+        .chatbot-container {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 350px;
+            height: 500px;
+            background: rgba(15, 38, 73, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
 
-            .section-title {
-                font-size: 1.8rem;
-            }
+        .chatbot-header {
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px 15px 0 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
 
-            .feature-card {
-                padding: 1.2rem;
-            }
+        .chatbot-header h4 {
+            color: #ffffff;
+            margin: 0;
+            font-size: 1.1rem;
+        }
 
-            .testimonial-card {
-                padding: 1.2rem;
-            }
+        .chatbot-close {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.8);
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0;
+            transition: all 0.3s ease;
+        }
 
-            .cta-title {
-                font-size: 1.8rem;
-            }
+        .chatbot-close:hover {
+            color: #ffffff;
+            transform: scale(1.1);
+        }
 
-            .footer-section h3 {
-                font-size: 1.2rem;
-            }
+        .chatbot-messages {
+            flex-grow: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 10px 15px;
+            border-radius: 15px;
+            margin-bottom: 5px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .bot-message {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+        }
+
+        .user-message {
+            background: rgba(255, 255, 255, 0.9);
+            color: #0f2649;
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+        }
+
+        .chatbot-input {
+            padding: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            gap: 10px;
+        }
+
+        .chatbot-input input {
+            flex-grow: 1;
+            padding: 10px 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            outline: none;
+        }
+
+        .chatbot-input input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .chatbot-input button {
+            background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .chatbot-input button:hover {
+            transform: scale(1.1);
+        }
+
+        .chatbot-input button i {
+            color: #0f2649;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Scrollbar Styles for Chat Messages */
+        .chatbot-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chatbot-messages::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+
+        .chatbot-messages::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+        }
+
+        .chatbot-messages::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.3);
         }
     </style>
 </head>
@@ -1105,16 +966,19 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">Acasă</a>
+                        <a class="nav-link active" href="index.html">Acasă</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="pages/cursuri.html">Cursuri</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="pages/despre.html">Despre</a>
+                        <a class="nav-link" href="pages/certificate.html">Certificate</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="pages/contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pages/despre.html">Despre</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle account-btn" href="#" role="button" data-bs-toggle="dropdown" style="display: none;">
@@ -1125,6 +989,7 @@
                             <li><a class="dropdown-item" href="pages/profil.html"><i class="fas fa-user"></i> Profilul meu</a></li>
                             <li><a class="dropdown-item" href="pages/cursuri-mele.html"><i class="fas fa-book"></i> Cursurile mele</a></li>
                             <li><a class="dropdown-item" href="pages/certificate.html"><i class="fas fa-certificate"></i> Certificate</a></li>
+                            <li><a class="dropdown-item" href="pages/conținut-interactiv.html"><i class="fas fa-gamepad"></i> Conținut Interactiv</a></li>
                             <li><a class="dropdown-item" href="pages/setari.html"><i class="fas fa-cog"></i> Setări</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="#" onclick="logout(event)"><i class="fas fa-sign-out-alt"></i> Deconectare</a></li>
@@ -1290,28 +1155,28 @@
         </div>
     </footer>
 
+    <!-- Chatbot -->
+    <button class="chatbot-button" onclick="toggleChat()">
+        <i class="fas fa-comments"></i>
+    </button>
+
     <div class="chatbot-container">
-        <div class="chatbot-button" onclick="toggleChat()">
-            <i class="fas fa-robot"></i>
+        <div class="chatbot-header">
+            <h4><i class="fas fa-robot me-2"></i>Asistent Virtual</h4>
+            <button class="chatbot-close" onclick="toggleChat()">
+                <i class="fas fa-times"></i>
+            </button>
         </div>
-        <div class="chatbot-window">
-            <div class="chatbot-header">
-                <h3>Asistent Virtual</h3>
-                <button class="chatbot-close" onclick="toggleChat()">
-                    <i class="fas fa-times"></i>
-                </button>
+        <div class="chatbot-messages">
+            <div class="message bot-message">
+                Bună! Sunt asistentul virtual al platformei VEG Media Network. Cu ce te pot ajuta?
             </div>
-            <div class="chatbot-messages" id="chatMessages">
-                <div class="message bot">
-                    Bună! Sunt asistentul virtual al VEG Media Network. Cum te pot ajuta astăzi?
-                </div>
-            </div>
-            <div class="chatbot-input">
-                <input type="text" id="userInput" placeholder="Scrie un mesaj..." onkeypress="handleKeyPress(event)">
-                <button onclick="sendMessage()">
-                    <i class="fas fa-paper-plane"></i>
-                </button>
-            </div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" placeholder="Scrie un mesaj..." id="chatInput" onkeypress="handleKeyPress(event)">
+            <button onclick="sendMessage()">
+                <i class="fas fa-paper-plane"></i>
+            </button>
         </div>
     </div>
 
@@ -1325,37 +1190,31 @@
             const authBtn = document.querySelector('.auth-btn');
             const userName = document.getElementById('userName');
             
-            console.log('Status autentificare:', authState.isAuthenticated);
-            console.log('Date utilizator:', authState.user);
+            console.log('Verificare status autentificare:', authState);
             
             if (authState.isAuthenticated) {
                 if (userDropdown) {
                     userDropdown.style.display = 'block';
-                    console.log('Buton cont vizibil');
+                    console.log('Afișare buton cont');
                 }
                 if (authBtn) {
                     authBtn.style.display = 'none';
-                    console.log('Buton autentificare ascuns');
+                    console.log('Ascundere buton autentificare');
                 }
                 
-                try {
-                    const displayName = authState.user?.name || authState.user?.numeComplet || 'Contul meu';
-                    if (userName) {
-                        userName.textContent = displayName;
-                        console.log('Nume utilizator setat:', displayName);
-                    }
-                } catch (error) {
-                    console.error('Eroare la setarea numelui utilizatorului:', error);
-                    if (userName) userName.textContent = 'Contul meu';
+                if (userName && authState.user) {
+                    const displayName = authState.user.name || authState.user.numeComplet || 'Contul meu';
+                    userName.textContent = displayName;
+                    console.log('Nume utilizator setat:', displayName);
                 }
             } else {
                 if (userDropdown) {
                     userDropdown.style.display = 'none';
-                    console.log('Buton cont ascuns');
+                    console.log('Ascundere buton cont');
                 }
                 if (authBtn) {
                     authBtn.style.display = 'block';
-                    console.log('Buton autentificare vizibil');
+                    console.log('Afișare buton autentificare');
                 }
             }
         }
@@ -1363,34 +1222,21 @@
         // Funcție pentru deconectare
         function logout(e) {
             if (e) e.preventDefault();
-            console.log('Deconectare inițiată...');
-            
+            console.log('Deconectare...');
             localStorage.removeItem('authState');
             sessionStorage.removeItem('authState');
-            
             checkAuthStatus();
-            
-            console.log('Redirecționare către pagina de autentificare...');
             window.location.href = 'pages/autentificare.html';
-            
             return false;
         }
 
-        // Verifică starea de autentificare la încărcarea paginii
+        // Inițializare la încărcarea paginii
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('DOM încărcat, verificare status...');
-            
-            // Verifică starea inițială
+            console.log('DOM încărcat, verificare autentificare...');
             checkAuthStatus();
-            
-            // Adaugă event listener pentru butonul de deconectare
-            const logoutBtn = document.querySelector('.dropdown-item[href="#"]:not([onclick])');
-            if (logoutBtn) {
-                logoutBtn.onclick = logout;
-            }
         });
 
-        // Verifică periodic starea de autentificare
+        // Verificare periodică
         setInterval(checkAuthStatus, 1000);
     </script>
 </body>

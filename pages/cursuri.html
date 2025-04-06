@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/feedback.css">
     <link rel="stylesheet" href="../css/chatbot.css">
     <style>
         body {
@@ -496,118 +497,6 @@
                 transform: translateY(0);
             }
         }
-
-        /* Stiluri pentru dispozitive mobile */
-        @media (max-width: 768px) {
-            .courses-hero {
-                padding: 4rem 1rem 2rem;
-            }
-
-            .courses-hero h1 {
-                font-size: 2rem;
-                text-align: center;
-            }
-
-            .courses-hero p {
-                font-size: 1rem;
-                text-align: center;
-                padding: 0 1rem;
-            }
-
-            .courses-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-                padding: 0 1rem;
-            }
-
-            .course-card {
-                margin-bottom: 1.5rem;
-            }
-
-            .course-card img {
-                height: 200px;
-            }
-
-            .course-card .card-body {
-                padding: 1rem;
-            }
-
-            .course-card .card-title {
-                font-size: 1.2rem;
-            }
-
-            .course-card .card-text {
-                font-size: 0.9rem;
-            }
-
-            .course-card .btn {
-                width: 100%;
-                text-align: center;
-            }
-
-            .course-filters {
-                flex-direction: column;
-                gap: 1rem;
-                padding: 1rem;
-            }
-
-            .search-box {
-                width: 100%;
-            }
-
-            .filter-group {
-                width: 100%;
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-
-            .filter-group select {
-                width: 100%;
-            }
-
-            .section-title {
-                font-size: 1.8rem;
-                text-align: center;
-                margin-bottom: 1.5rem;
-            }
-
-            .section-subtitle {
-                font-size: 1rem;
-                text-align: center;
-                padding: 0 1rem;
-            }
-        }
-
-        /* Stiluri pentru dispozitive foarte mici */
-        @media (max-width: 576px) {
-            .courses-hero h1 {
-                font-size: 1.8rem;
-            }
-
-            .courses-hero p {
-                font-size: 0.9rem;
-            }
-
-            .course-card img {
-                height: 180px;
-            }
-
-            .course-card .card-title {
-                font-size: 1.1rem;
-            }
-
-            .course-card .card-text {
-                font-size: 0.85rem;
-            }
-
-            .section-title {
-                font-size: 1.5rem;
-            }
-
-            .section-subtitle {
-                font-size: 0.9rem;
-            }
-        }
     </style>
 </head>
 <body>
@@ -646,6 +535,7 @@
                             <li><a class="dropdown-item" href="profil.html"><i class="fas fa-user"></i> Profilul meu</a></li>
                             <li><a class="dropdown-item" href="cursuri-mele.html"><i class="fas fa-book"></i> Cursurile mele</a></li>
                             <li><a class="dropdown-item" href="certificate.html"><i class="fas fa-certificate"></i> Certificate</a></li>
+                            <li><a class="dropdown-item" href="conținut-interactiv.html"><i class="fas fa-gamepad"></i> Conținut Interactiv</a></li>
                             <li><a class="dropdown-item" href="setari.html"><i class="fas fa-cog"></i> Setări</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="#" onclick="logout(event)"><i class="fas fa-sign-out-alt"></i> Deconectare</a></li>
@@ -687,7 +577,7 @@
             <div class="row">
                 <!-- Course Card 1 -->
                 <div class="col-lg-4 col-md-6">
-                    <div class="course-card" onclick="window.location.href='autentificare.html'">
+                    <div class="course-card" data-course-id="curs-1" onclick="window.location.href='autentificare.html'">
                         <img src="../images/courses/programming.jpeg" alt="Introducere în Programare" class="course-image">
                         <div class="course-content">
                             <span class="course-category">Tehnologie & IT</span>
@@ -720,7 +610,7 @@
 
                 <!-- Course Card 2 -->
                 <div class="col-lg-4 col-md-6">
-                    <div class="course-card" onclick="window.location.href='autentificare.html'">
+                    <div class="course-card" data-course-id="curs-2" onclick="window.location.href='autentificare.html'">
                         <img src="../images/courses/cybersecurity.jpeg" alt="Securitate Cibernetică" class="course-image">
                         <div class="course-content">
                             <span class="course-category">Tehnologie & IT</span>
@@ -753,7 +643,7 @@
 
                 <!-- Course Card 3 -->
                 <div class="col-lg-4 col-md-6">
-                    <div class="course-card" onclick="window.location.href='autentificare.html'">
+                    <div class="course-card" data-course-id="curs-3" onclick="window.location.href='autentificare.html'">
                         <img src="../images/courses/mobile-dev.jpeg" alt="Dezvoltare Mobile" class="course-image">
                         <div class="course-content">
                             <span class="course-category">Tehnologie & IT</span>
@@ -790,7 +680,7 @@
             <div class="row">
                 <!-- Course Card 1 -->
                 <div class="col-lg-4 col-md-6">
-                    <div class="course-card" onclick="window.location.href='autentificare.html'">
+                    <div class="course-card" data-course-id="curs-4" onclick="window.location.href='autentificare.html'">
                         <img src="../images/courses/public-speaking.png" alt="Public Speaking" class="course-image">
                         <div class="course-content">
                             <span class="course-category">Dezvoltare Personală</span>
@@ -823,7 +713,7 @@
 
                 <!-- Course Card 2 -->
                 <div class="col-lg-4 col-md-6">
-                    <div class="course-card" onclick="window.location.href='autentificare.html'">
+                    <div class="course-card" data-course-id="curs-5" onclick="window.location.href='autentificare.html'">
                         <img src="../images/courses/business.jpeg" alt="Afacere Online" class="course-image">
                         <div class="course-content">
                             <span class="course-category">Business</span>
@@ -860,7 +750,7 @@
             <div class="row">
                 <!-- Course Card 1 -->
                 <div class="col-lg-4 col-md-6">
-                    <div class="course-card" onclick="window.location.href='autentificare.html'">
+                    <div class="course-card" data-course-id="curs-6" onclick="window.location.href='autentificare.html'">
                         <img src="../images/courses/english.jpg" alt="Engleză" class="course-image">
                         <div class="course-content">
                             <span class="course-category">Limbi Străine</span>
@@ -893,7 +783,7 @@
 
                 <!-- Course Card 2 -->
                 <div class="col-lg-4 col-md-6">
-                    <div class="course-card" onclick="window.location.href='autentificare.html'">
+                    <div class="course-card" data-course-id="curs-7" onclick="window.location.href='autentificare.html'">
                         <img src="../images/courses/french.jpg" alt="Franceză" class="course-image">
                         <div class="course-content">
                             <span class="course-category">Limbi Străine</span>
@@ -930,7 +820,7 @@
             <div class="row">
                 <!-- Course Card 1 -->
                 <div class="col-lg-4 col-md-6">
-                    <div class="course-card" onclick="window.location.href='autentificare.html'">
+                    <div class="course-card" data-course-id="curs-8" onclick="window.location.href='autentificare.html'">
                         <img src="../images/courses/cooking.jpg" alt="Curs Bucătar" class="course-image">
                         <div class="course-content">
                             <span class="course-category">Gastronomie</span>
@@ -963,7 +853,7 @@
 
                 <!-- Course Card 2 -->
                 <div class="col-lg-4 col-md-6">
-                    <div class="course-card" onclick="window.location.href='autentificare.html'">
+                    <div class="course-card" data-course-id="curs-9" onclick="window.location.href='autentificare.html'">
                         <img src="../images/courses/videography.jpeg" alt="Curs Videograf" class="course-image">
                         <div class="course-content">
                             <span class="course-category">Media</span>
@@ -996,7 +886,7 @@
 
                 <!-- Course Card 3 -->
                 <div class="col-lg-4 col-md-6">
-                    <div class="course-card" onclick="window.location.href='autentificare.html'">
+                    <div class="course-card" data-course-id="curs-10" onclick="window.location.href='autentificare.html'">
                         <img src="../images/courses/photography.jpeg" alt="Curs Fotograf" class="course-image">
                         <div class="course-content">
                             <span class="course-category">Media</span>
@@ -1030,7 +920,33 @@
         </div>
     </section>
 
+    <!-- Chatbot -->
+    <button class="chatbot-button" onclick="toggleChat()">
+        <i class="fas fa-comments"></i>
+    </button>
+
+    <div class="chatbot-container">
+        <div class="chatbot-header">
+            <h4><i class="fas fa-robot me-2"></i>Asistent Virtual</h4>
+            <button class="chatbot-close" onclick="toggleChat()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="chatbot-messages">
+            <div class="message bot-message">
+                Bună! Sunt asistentul virtual al platformei VEG Media Network. Cu ce te pot ajuta?
+            </div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" placeholder="Scrie un mesaj..." id="chatInput" onkeypress="handleKeyPress(event)">
+            <button onclick="sendMessage()">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/chatbot.js"></script>
     <script>
         // Verifică starea autentificării
         function checkAuthStatus() {

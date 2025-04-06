@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Interactiv - VEG Media Network</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #13305c 0%, #1f4280 100%);
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background: rgba(15, 38, 73, 0.15) !important;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(15, 38, 73, 0.35) !important;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem !important;
+            font-weight: 600;
+            color: #ffffff !important;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 0.3rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand img {
+            width: 35px !important;
+            height: 35px !important;
+            object-fit: contain;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand:hover {
+            transform: translateY(-2px);
+        }
+
+        .navbar-brand:hover img {
+            transform: rotate(360deg);
+        }
+
+        .navbar-brand div {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            white-space: nowrap;
+            font-size: 1rem !important;
+        }
+
+        .navbar-brand div small {
+            font-size: 0.9rem !important;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8) !important;
+            font-weight: 500;
+            padding: 0.4rem 0.8rem !important;
+            margin: 0 0.2rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 0.9rem;
+            overflow: hidden;
+        }
+
+        .nav-link:hover {
+            color: #ffffff !important;
+            background: rgba(25, 118, 210, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .nav-link.active {
+            color: #ffffff !important;
+            background: rgba(25, 118, 210, 0.2);
+            border: 1px solid rgba(25, 118, 210, 0.3);
+        }
+
+        /* Quiz Container */
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.5s ease-out;
+            display: none;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Quiz Header */
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .quiz-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #ffffff, #64b5f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .quiz-description {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        /* Quiz Progress */
+        .quiz-progress {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            animation: slideIn 0.5s ease-out 0.2s backwards;
+        }
+
+        .progress {
+            flex: 1;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, #64b5f6, #1976d2);
+            transition: width 0.5s ease;
+            height: 100%;
+        }
+
+        .progress-text {
+            font-size: 1rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+            min-width: 60px;
+            text-align: center;
+        }
+
+        /* Timer */
+        .timer {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .timer i {
+            color: #64b5f6;
+            font-size: 1.1rem;
+        }
+
+        /* Question Container */
+        .question-container {
+            margin-bottom: 2rem;
+            animation: slideIn 0.5s ease-out 0.4s backwards;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: #ffffff;
+            line-height: 1.5;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Answer Options */
+        .answer-options {
+            display: grid;
+            gap: 1.2rem;
+        }
+
+        .answer-option {
+            padding: 1.2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .answer-option:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .answer-option.selected {
+            background: rgba(25, 118, 210, 0.2);
+            border-color: rgba(25, 118, 210, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .answer-option.correct {
+            background: rgba(76, 175, 80, 0.2);
+            border-color: rgba(76, 175, 80, 0.3);
+            animation: correctAnswer 0.5s ease;
+        }
+
+        .answer-option.incorrect {
+            background: rgba(244, 67, 54, 0.2);
+            border-color: rgba(244, 67, 54, 0.3);
+            animation: incorrectAnswer 0.5s ease;
+        }
+
+        @keyframes correctAnswer {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes incorrectAnswer {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+
+        .option-letter {
+            width: 35px;
+            height: 35px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Navigation Buttons */
+        .quiz-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+
+        .quiz-btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-prev {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .btn-next {
+            background: rgba(25, 118, 210, 0.2);
+            border: 1px solid rgba(25, 118, 210, 0.3);
+            color: #ffffff;
+        }
+
+        .btn-submit {
+            background: rgba(76, 175, 80, 0.2);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            color: #ffffff;
+        }
+
+        .quiz-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Results Section */
+        .results-container {
+            text-align: center;
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .score-circle {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            animation: scaleIn 0.5s ease-out;
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0); }
+            to { transform: scale(1); }
+        }
+
+        .score-text {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, #ffffff, #64b5f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .score-description {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .results-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .btn-retry {
+            background: rgba(255, 152, 0, 0.2);
+            border: 1px solid rgba(255, 152, 0, 0.3);
+            color: #ffffff;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+        }
+
+        .btn-certificate {
+            background: rgba(25, 118, 210, 0.2);
+            border: 1px solid rgba(25, 118, 210, 0.3);
+            color: #ffffff;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+        }
+
+        /* Intro Section */
+        .intro-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            text-align: center;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .intro-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, #ffffff, #64b5f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .intro-description {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #64b5f6;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .feature-description {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .start-quiz-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.2rem 2.5rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #ffffff;
+            background: linear-gradient(135deg, #1976d2, #64b5f6);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .start-quiz-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, #1565c0, #42a5f5);
+        }
+
+        .start-quiz-btn i {
+            font-size: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .quiz-container {
+                padding: 1.5rem;
+            }
+
+            .quiz-title {
+                font-size: 1.8rem;
+            }
+
+            .quiz-description {
+                font-size: 1rem;
+            }
+
+            .question-text {
+                font-size: 1.1rem;
+            }
+
+            .answer-option {
+                padding: 1rem;
+            }
+
+            .quiz-navigation {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .quiz-btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .score-circle {
+                width: 150px;
+                height: 150px;
+            }
+
+            .score-text {
+                font-size: 2.5rem;
+            }
+
+            .intro-section {
+                padding: 2rem 1rem;
+            }
+
+            .intro-title {
+                font-size: 2rem;
+            }
+
+            .intro-description {
+                font-size: 1.1rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .feature-card {
+                padding: 1.5rem;
+            }
+
+            .start-quiz-btn {
+                padding: 1rem 2rem;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">
+                <img src="../images/logo.png" alt="VEG Media Network Logo">
+                <div>
+                    <span>VEG Media Network</span>
+                    <small class="d-block">Platformă Educațională</small>
+                </div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Acasă</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cursuri.html">Cursuri</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="certificate.html">Certificate</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="despre.html">Despre</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle account-btn" href="#" role="button" data-bs-toggle="dropdown" style="display: none;">
+                            <i class="fas fa-user-circle"></i>
+                            <span id="userName">Cont</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="profil.html"><i class="fas fa-user"></i> Profilul meu</a></li>
+                            <li><a class="dropdown-item" href="cursuri-mele.html"><i class="fas fa-book"></i> Cursurile mele</a></li>
+                            <li><a class="dropdown-item" href="certificate.html"><i class="fas fa-certificate"></i> Certificate</a></li>
+                            <li><a class="dropdown-item" href="conținut-interactiv.html"><i class="fas fa-gamepad"></i> Conținut Interactiv</a></li>
+                            <li><a class="dropdown-item" href="setari.html"><i class="fas fa-cog"></i> Setări</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" onclick="logout(event)"><i class="fas fa-sign-out-alt"></i> Deconectare</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link auth-btn" href="autentificare.html">Autentificare</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Intro Section -->
+    <div class="container mt-5">
+        <div class="intro-section">
+            <h1 class="intro-title">Quiz Interactiv</h1>
+            <p class="intro-description">Testează-ți cunoștințele despre România într-un mod distractiv și educativ. Completează quiz-ul pentru a obține un certificat de participare!</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-clock feature-icon"></i>
+                    <h3 class="feature-title">Timp Limitat</h3>
+                    <p class="feature-description">10 minute pentru a răspunde la toate întrebările</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-trophy feature-icon"></i>
+                    <h3 class="feature-title">Certificat</h3>
+                    <p class="feature-description">Obține un certificat personalizat după finalizare</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-redo feature-icon"></i>
+                    <h3 class="feature-title">Reîncercare</h3>
+                    <p class="feature-description">Poți încerca de mai multe ori pentru a îmbunătăți scorul</p>
+                </div>
+            </div>
+
+            <button class="start-quiz-btn" onclick="startQuiz()">
+                <i class="fas fa-play"></i>
+                Începe Quiz-ul
+            </button>
+        </div>
+    </div>
+
+    <!-- Quiz Container -->
+    <div class="container mt-5">
+        <div class="quiz-container">
+            <!-- Quiz Header -->
+            <div class="quiz-header">
+                <h1 class="quiz-title">Quiz Interactiv</h1>
+                <p class="quiz-description">Testează-ți cunoștințele și obține un certificat de participare!</p>
+            </div>
+
+            <!-- Quiz Progress -->
+            <div class="quiz-progress">
+                <div class="progress">
+                    <div class="progress-bar" style="width: 0%"></div>
+                </div>
+                <span class="progress-text">0/10</span>
+                <div class="timer">
+                    <i class="fas fa-clock"></i>
+                    <span id="timer">10:00</span>
+                </div>
+            </div>
+
+            <!-- Question Container -->
+            <div class="question-container">
+                <h2 class="question-text">Întrebarea 1: Care este capitala României?</h2>
+                <div class="answer-options">
+                    <div class="answer-option">
+                        <div class="option-letter">A</div>
+                        <span>București</span>
+                    </div>
+                    <div class="answer-option">
+                        <div class="option-letter">B</div>
+                        <span>Cluj-Napoca</span>
+                    </div>
+                    <div class="answer-option">
+                        <div class="option-letter">C</div>
+                        <span>Iași</span>
+                    </div>
+                    <div class="answer-option">
+                        <div class="option-letter">D</div>
+                        <span>Timișoara</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="quiz-navigation">
+                <button class="quiz-btn btn-prev" disabled>
+                    <i class="fas fa-arrow-left"></i>
+                    Înapoi
+                </button>
+                <button class="quiz-btn btn-next">
+                    Următoarea
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <!-- Results Section -->
+            <div class="results-container">
+                <div class="score-circle">
+                    <span class="score-text">0%</span>
+                </div>
+                <h2 class="score-description">Felicitări! Ai completat quiz-ul cu succes!</h2>
+                <div class="results-actions">
+                    <button class="quiz-btn btn-retry">
+                        <i class="fas fa-redo"></i>
+                        Reîncepe
+                    </button>
+                    <button class="quiz-btn btn-certificate">
+                        <i class="fas fa-certificate"></i>
+                        Descarcă Certificatul
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+        // Verifică starea autentificării
+        function checkAuthStatus() {
+            const authState = JSON.parse(localStorage.getItem('authState') || sessionStorage.getItem('authState') || '{}');
+            const userDropdown = document.querySelector('.account-btn');
+            const authBtn = document.querySelector('.auth-btn');
+            const userName = document.getElementById('userName');
+            
+            if (authState.isAuthenticated) {
+                if (userDropdown) {
+                    userDropdown.style.display = 'block';
+                }
+                if (authBtn) {
+                    authBtn.style.display = 'none';
+                }
+                
+                try {
+                    const displayName = authState.user?.name || authState.user?.numeComplet || 'Contul meu';
+                    if (userName) {
+                        userName.textContent = displayName;
+                    }
+                } catch (error) {
+                    console.error('Eroare la setarea numelui utilizatorului:', error);
+                    if (userName) userName.textContent = 'Contul meu';
+                }
+            } else {
+                if (userDropdown) {
+                    userDropdown.style.display = 'none';
+                }
+                if (authBtn) {
+                    authBtn.style.display = 'block';
+                }
+            }
+        }
+
+        // Funcție pentru deconectare
+        function logout(e) {
+            if (e) e.preventDefault();
+            localStorage.removeItem('authState');
+            sessionStorage.removeItem('authState');
+            window.location.href = 'autentificare.html';
+            return false;
+        }
+
+        // Verifică starea de autentificare la încărcarea paginii
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuthStatus();
+            document.querySelector('.quiz-container').style.display = 'none';
+        });
+
+        // Timer
+        let timeLeft = 600; // 10 minute în secunde
+        const timerElement = document.getElementById('timer');
+
+        function updateTimer() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            if (timeLeft > 0) {
+                timeLeft--;
+                setTimeout(updateTimer, 1000);
+            } else {
+                // Timpul a expirat
+                submitQuiz();
+            }
+        }
+
+        // Start timer
+        updateTimer();
+
+        // Quiz Logic
+        let currentQuestion = 0;
+        let score = 0;
+        const questions = [
+            {
+                question: "Care este limbajul de programare folosit pentru dezvoltarea frontend-ului web?",
+                options: ["JavaScript", "Python", "Java", "C++"],
+                correct: 0,
+                explanation: "JavaScript este limbajul principal pentru dezvoltarea frontend-ului web, permițând crearea de interfețe interactive."
+            },
+            {
+                question: "Ce framework JavaScript este folosit pentru construirea de interfețe de utilizator?",
+                options: ["React", "Angular", "Vue", "Toate cele de mai sus"],
+                correct: 3,
+                explanation: "Toate aceste framework-uri sunt populare pentru dezvoltarea UI, fiecare având avantajele sale specifice."
+            },
+            {
+                question: "Care este principala diferență între HTML și CSS?",
+                options: [
+                    "HTML definește structura, CSS definește stilul",
+                    "HTML este un limbaj de programare, CSS nu",
+                    "CSS este folosit pentru backend, HTML pentru frontend",
+                    "Nu există diferențe"
+                ],
+                correct: 0,
+                explanation: "HTML (HyperText Markup Language) definește structura conținutului, în timp ce CSS (Cascading Style Sheets) controlează aspectul și stilul."
+            },
+            {
+                question: "Ce înseamnă SEO în marketingul digital?",
+                options: [
+                    "Search Engine Optimization",
+                    "Social Engagement Optimization",
+                    "System Error Operation",
+                    "Search Engine Operation"
+                ],
+                correct: 0,
+                explanation: "SEO (Search Engine Optimization) se referă la procesul de optimizare a unui site web pentru a îmbunătăți vizibilitatea în rezultatele motoarelor de căutare."
+            },
+            {
+                question: "Care dintre următoarele este un principiu important în designul UI/UX?",
+                options: [
+                    "Consistența",
+                    "Complexitatea",
+                    "Ambiguitatea",
+                    "Aleatorismul"
+                ],
+                correct: 0,
+                explanation: "Consistența este crucială în designul UI/UX, ajutând utilizatorii să înțeleagă și să navigheze mai ușor prin interfață."
+            },
+            {
+                question: "Ce înseamnă API în dezvoltarea web?",
+                options: [
+                    "Application Programming Interface",
+                    "Advanced Programming Interface",
+                    "Application Process Integration",
+                    "Advanced Process Integration"
+                ],
+                correct: 0,
+                explanation: "API (Application Programming Interface) permite diferitelor aplicații să comunice între ele și să împărtășească date."
+            },
+            {
+                question: "Care este rolul unui framework în dezvoltarea web?",
+                options: [
+                    "Oferă o structură și unelte pentru dezvoltare mai rapidă",
+                    "Înlocuiește complet necesitatea de a scrie cod",
+                    "Este folosit doar pentru testare",
+                    "Este necesar doar pentru aplicații complexe"
+                ],
+                correct: 0,
+                explanation: "Framework-urile oferă o structură organizată și unelte care accelerează procesul de dezvoltare și mențin a codului organizat."
+            },
+            {
+                question: "Ce înseamnă responsive design în web development?",
+                options: [
+                    "Design care se adaptează la diferite dimensiuni de ecran",
+                    "Design care răspunde rapid la acțiunile utilizatorului",
+                    "Design care folosește multe animații",
+                    "Design care necesită putere de procesare mare"
+                ],
+                correct: 0,
+                explanation: "Responsive design înseamnă crearea de site-uri web care se adaptează și arată bine pe toate dispozitivele, de la desktop la mobile."
+            },
+            {
+                question: "Care este diferența principală între HTTP și HTTPS?",
+                options: [
+                    "HTTPS este securizat, HTTP nu",
+                    "HTTP este mai rapid decât HTTPS",
+                    "HTTPS este folosit doar pentru site-uri mari",
+                    "Nu există diferențe semnificative"
+                ],
+                correct: 0,
+                explanation: "HTTPS (HyperText Transfer Protocol Secure) oferă securitate suplimentară prin criptarea datelor, spre deosebire de HTTP."
+            },
+            {
+                question: "Ce înseamnă CMS în dezvoltarea web?",
+                options: [
+                    "Content Management System",
+                    "Code Management System",
+                    "Content Marketing System",
+                    "Code Marketing System"
+                ],
+                correct: 0,
+                explanation: "CMS (Content Management System) este o platformă care permite gestionarea și publicarea conținutului web fără cunoștințe avansate de programare."
+            }
+        ];
+
+        function updateQuestion() {
+            const question = questions[currentQuestion];
+            document.querySelector('.question-text').textContent = `Întrebarea ${currentQuestion + 1}: ${question.question}`;
+            
+            const options = document.querySelectorAll('.answer-option');
+            options.forEach((option, index) => {
+                option.querySelector('span').textContent = question.options[index];
+                option.classList.remove('selected', 'correct', 'incorrect');
+            });
+
+            // Update progress
+            const progress = (currentQuestion / questions.length) * 100;
+            document.querySelector('.progress-bar').style.width = `${progress}%`;
+            document.querySelector('.progress-text').textContent = `${currentQuestion}/${questions.length}`;
+
+            // Update navigation buttons
+            document.querySelector('.btn-prev').disabled = currentQuestion === 0;
+            document.querySelector('.btn-next').textContent = currentQuestion === questions.length - 1 ? 'Finalizează' : 'Următoarea';
+        }
+
+        function checkAnswer(selectedOption) {
+            const question = questions[currentQuestion];
+            const options = document.querySelectorAll('.answer-option');
+            
+            options.forEach((option, index) => {
+                if (index === question.correct) {
+                    option.classList.add('correct');
+                } else if (index === selectedOption) {
+                    option.classList.add('incorrect');
+                }
+            });
+
+            if (selectedOption === question.correct) {
+                score++;
+            }
+
+            // Disable all options after selection
+            options.forEach(option => {
+                option.style.pointerEvents = 'none';
+            });
+
+            // Enable next button after a short delay
+            setTimeout(() => {
+                document.querySelector('.btn-next').disabled = false;
+            }, 1000);
+        }
+
+        function submitQuiz() {
+            const finalScore = Math.round((score / questions.length) * 100);
+            document.querySelector('.score-text').textContent = `${finalScore}%`;
+            
+            let message = '';
+            if (finalScore >= 90) {
+                message = 'Excelent! Ai obținut un rezultat remarcabil!';
+            } else if (finalScore >= 70) {
+                message = 'Foarte bine! Ai demonstrat cunoștințe solide!';
+            } else if (finalScore >= 50) {
+                message = 'Bun! Poți încerca din nou pentru a îmbunătăți rezultatul!';
+            } else {
+                message = 'Poți încerca din nou pentru a obține un rezultat mai bun!';
+            }
+            
+            document.querySelector('.score-description').textContent = message;
+
+            // Show results
+            document.querySelector('.question-container').style.display = 'none';
+            document.querySelector('.quiz-navigation').style.display = 'none';
+            document.querySelector('.results-container').style.display = 'block';
+        }
+
+        // Event Listeners
+        document.querySelectorAll('.answer-option').forEach((option, index) => {
+            option.addEventListener('click', function() {
+                if (!this.classList.contains('selected')) {
+                    document.querySelectorAll('.answer-option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    this.classList.add('selected');
+                    checkAnswer(index);
+                }
+            });
+        });
+
+        document.querySelector('.btn-next').addEventListener('click', function() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                updateQuestion();
+                this.disabled = true;
+            } else {
+                submitQuiz();
+            }
+        });
+
+        document.querySelector('.btn-prev').addEventListener('click', function() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                updateQuestion();
+            }
+        });
+
+        document.querySelector('.btn-retry').addEventListener('click', function() {
+            currentQuestion = 0;
+            score = 0;
+            timeLeft = 600;
+            updateQuestion();
+            updateTimer();
+            document.querySelector('.question-container').style.display = 'block';
+            document.querySelector('.quiz-navigation').style.display = 'flex';
+            document.querySelector('.results-container').style.display = 'none';
+            
+            // Re-enable answer options
+            document.querySelectorAll('.answer-option').forEach(option => {
+                option.style.pointerEvents = 'auto';
+            });
+        });
+
+        // Initialize quiz
+        function startQuiz() {
+            document.querySelector('.intro-section').style.display = 'none';
+            document.querySelector('.quiz-container').style.display = 'block';
+            updateQuestion();
+            updateTimer();
+        }
+    </script>
+</body>
+</html> 

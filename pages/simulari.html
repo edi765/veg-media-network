@@ -1,0 +1,1386 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulări Practice - VEG Media Network</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/chatbot.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #0f2649 0%, #1a3a6d 100%);
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background: rgba(15, 38, 73, 0.15) !important;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(15, 38, 73, 0.35) !important;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #ffffff !important;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 0.3rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand img {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand:hover {
+            transform: translateY(-2px);
+        }
+
+        .navbar-brand:hover img {
+            transform: rotate(360deg);
+        }
+
+        .navbar-brand div {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            white-space: nowrap;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8) !important;
+            font-weight: 500;
+            padding: 0.4rem 0.8rem !important;
+            margin: 0 0.2rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 0.9rem;
+            overflow: hidden;
+        }
+
+        .nav-link:hover {
+            color: #ffffff !important;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .nav-link.active {
+            color: #ffffff !important;
+            background: rgba(25, 118, 210, 0.2);
+            border: 1px solid rgba(25, 118, 210, 0.3);
+        }
+
+        /* Account Button Styles */
+        .account-btn {
+            display: none;
+        }
+
+        .account-btn .btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.8);
+            padding: 0.4rem 1rem;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .account-btn .btn:hover {
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .account-btn .btn i {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .account-btn .btn:hover i {
+            transform: scale(1.1);
+            color: #ffffff;
+        }
+
+        #userName {
+            max-width: 150px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* Dropdown Styles */
+        .dropdown-menu {
+            background: rgba(15, 38, 73, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 0.5rem;
+            margin-top: 0.5rem;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+            animation: dropdownFade 0.3s ease;
+        }
+
+        .dropdown-menu .dropdown-item {
+            color: rgba(255, 255, 255, 0.8);
+            padding: 0.7rem 1.2rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .dropdown-menu .dropdown-item i {
+            width: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-menu .dropdown-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            transform: translateX(5px);
+        }
+
+        .dropdown-menu .dropdown-item:hover i {
+            transform: scale(1.1);
+        }
+
+        .dropdown-divider {
+            border-color: rgba(255, 255, 255, 0.1);
+            margin: 0.5rem 0;
+        }
+
+        /* Logout Button Style */
+        .dropdown-menu .dropdown-item[onclick="logout(event)"] {
+            color: #ff4d4d;
+        }
+
+        .dropdown-menu .dropdown-item[onclick="logout(event)"] i {
+            color: #ff4d4d;
+        }
+
+        .dropdown-menu .dropdown-item[onclick="logout(event)"]:hover {
+            background: rgba(255, 77, 77, 0.1);
+        }
+
+        @keyframes dropdownFade {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Auth Button Styles */
+        .auth-btn {
+            display: block;
+        }
+
+        .auth-btn.hidden {
+            display: none;
+        }
+
+        .auth-btn .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(25, 118, 210, 0.2);
+            border: 1px solid rgba(25, 118, 210, 0.3);
+        }
+
+        .auth-btn .nav-link:hover {
+            background: rgba(25, 118, 210, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .auth-btn .nav-link i {
+            transition: all 0.3s ease;
+        }
+
+        .auth-btn .nav-link:hover i {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 991px) {
+            .navbar-brand {
+                font-size: 0.9rem;
+                padding: 0.5rem 0;
+            }
+
+            .navbar-brand div {
+                white-space: normal;
+                font-size: 0.85rem;
+            }
+
+            .navbar-brand img {
+                width: 25px;
+                height: 25px;
+            }
+
+            .navbar-collapse {
+                background: rgba(15, 38, 73, 0.98) !important;
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                border-radius: 10px;
+                padding: 0.8rem;
+                margin-top: 0.5rem;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .nav-link {
+                color: #ffffff !important;
+                padding: 0.6rem 1rem !important;
+                margin: 0.1rem 0;
+                font-size: 0.85rem;
+                font-weight: 500;
+                border-radius: 6px;
+            }
+
+            .nav-link:hover {
+                background: rgba(255, 255, 255, 0.1);
+                color: #ffffff !important;
+            }
+
+            .nav-link.active {
+                background: rgba(25, 118, 210, 0.3);
+                color: #ffffff !important;
+                border: 1px solid rgba(25, 118, 210, 0.4);
+            }
+
+            #userDropdown .nav-link {
+                background: rgba(25, 118, 210, 0.2);
+                border: 1px solid rgba(25, 118, 210, 0.3);
+                padding: 0.6rem 1rem !important;
+            }
+
+            .navbar-toggler {
+                padding: 0.4rem;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar-brand {
+                font-size: 0.8rem;
+            }
+
+            .navbar-brand div {
+                font-size: 0.75rem;
+            }
+
+            .navbar-brand img {
+                width: 22px;
+                height: 22px;
+            }
+
+            .nav-link {
+                font-size: 0.8rem;
+                padding: 0.5rem 0.8rem !important;
+            }
+        }
+
+        .hero-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            margin-bottom: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(25, 118, 210, 0.15), transparent 70%),
+                radial-gradient(circle at 80% 70%, rgba(25, 118, 210, 0.15), transparent 70%);
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-section h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.8) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: titlePop 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hero-section p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .simulation-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            height: 100%;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .simulation-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 0%, rgba(25, 118, 210, 0.2), transparent 70%);
+            opacity: 0;
+            transition: 0.5s;
+        }
+
+        .simulation-card:hover::before {
+            opacity: 1;
+        }
+
+        .simulation-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .simulation-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(25, 118, 210, 0.2);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: #ffffff;
+            transition: all 0.4s ease;
+        }
+
+        .simulation-card:hover .simulation-icon {
+            transform: scale(1.1) rotate(10deg);
+            background: rgba(25, 118, 210, 0.3);
+        }
+
+        .simulation-info h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .simulation-meta {
+            display: flex;
+            gap: 1.5rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        .simulation-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .simulation-description {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .simulation-tags {
+            display: flex;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .simulation-tag {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            transition: all 0.3s ease;
+        }
+
+        .simulation-tag:hover {
+            background: rgba(25, 118, 210, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .simulation-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-simulation {
+            padding: 0.8rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary-simulation {
+            background: rgba(25, 118, 210, 0.2);
+            border: 1px solid rgba(25, 118, 210, 0.3);
+            color: #ffffff;
+        }
+
+        .btn-secondary-simulation {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .btn-simulation::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: translateX(-100%);
+            transition: 0.6s;
+        }
+
+        .btn-simulation:hover {
+            transform: translateY(-3px);
+        }
+
+        .btn-simulation:hover::before {
+            transform: translateX(100%);
+        }
+
+        .btn-primary-simulation:hover {
+            background: rgba(25, 118, 210, 0.3);
+        }
+
+        .btn-secondary-simulation:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .progress-section {
+            margin-top: 4rem;
+            padding: 2.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 30%, rgba(25, 118, 210, 0.1), transparent 70%);
+            z-index: 0;
+        }
+
+        .progress-title {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+
+        .progress {
+            height: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, #ffffff 0%, #f0f0f0 100%) !important;
+            animation: progressAnimation 1.5s ease-out;
+        }
+
+        .progress-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .progress-stat-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .progress-stat-item h5 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .progress-stat-item .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1976D2;
+        }
+
+        .filters-section {
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: rgba(25, 118, 210, 0.2);
+            border-color: rgba(25, 118, 210, 0.3);
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        @keyframes progressAnimation {
+            from { width: 0; }
+        }
+
+        @keyframes titlePop {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .simulation-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .simulation-actions {
+                flex-direction: column;
+            }
+
+            .btn-simulation {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            color: #000000 !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #f0f0f0 0%, #ffffff 100%) !important;
+            transform: translateY(-3px) !important;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        .btn-outline-primary {
+            background: transparent !important;
+            border: 1px solid rgba(255, 255, 255, 0.5) !important;
+            color: #ffffff !important;
+        }
+
+        .btn-outline-primary:hover {
+            background: rgba(255, 255, 255, 0.1) !important;
+            border-color: #ffffff !important;
+            color: #ffffff !important;
+        }
+
+        .number-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%) !important;
+            color: #000000 !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .number-circle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .badge {
+            background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%) !important;
+            color: #000000 !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.08) !important;
+        }
+
+        .card-title {
+            color: #ffffff !important;
+        }
+
+        .card-text {
+            color: rgba(255, 255, 255, 0.8) !important;
+        }
+
+        .list-group-item {
+            background: rgba(255, 255, 255, 0.05) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            color: rgba(255, 255, 255, 0.9) !important;
+        }
+
+        .list-group-item:hover {
+            background: rgba(255, 255, 255, 0.1) !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">
+                <img src="../images/logo.png" alt="VEG Media Network Logo">
+                <div>
+                    <span>VEG Media Network</span>
+                    <small class="d-block">Platformă Educațională</small>
+                </div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Acasă</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cursuri.html">Cursuri</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="certificate.html">Certificate</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="despre.html">Despre</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle account-btn" href="#" role="button" data-bs-toggle="dropdown" style="display: none;">
+                            <i class="fas fa-user-circle"></i>
+                            <span id="userName">Cont</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="profil.html"><i class="fas fa-user"></i> Profilul meu</a></li>
+                            <li><a class="dropdown-item" href="cursuri-mele.html"><i class="fas fa-book"></i> Cursurile mele</a></li>
+                            <li><a class="dropdown-item" href="certificate.html"><i class="fas fa-certificate"></i> Certificate</a></li>
+                            <li><a class="dropdown-item" href="conținut-interactiv.html"><i class="fas fa-gamepad"></i> Conținut Interactiv</a></li>
+                            <li><a class="dropdown-item" href="setari.html"><i class="fas fa-cog"></i> Setări</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" onclick="logout(event)"><i class="fas fa-sign-out-alt"></i> Deconectare</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link auth-btn" href="autentificare.html">Autentificare</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container py-5">
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <div class="hero-content">
+                <h1>Simulări Practice</h1>
+                <p>Experimentează și învață prin simulări interactive care reproduc scenarii din lumea reală. Dezvoltă-ți abilitățile practice într-un mediu sigur și controlat.</p>
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="filters-section">
+            <button class="filter-btn active">Toate</button>
+            <button class="filter-btn">Front-End</button>
+            <button class="filter-btn">Back-End</button>
+            <button class="filter-btn">Baze de Date</button>
+            <button class="filter-btn">UI/UX Design</button>
+            <button class="filter-btn">Mobile Dev</button>
+            <button class="filter-btn">DevOps</button>
+            <button class="filter-btn">Culinar</button>
+            <button class="filter-btn">Foto/Video</button>
+            <button class="filter-btn">Limbi Străine</button>
+        </div>
+
+        <!-- Simulation Cards -->
+        <div class="row">
+            <!-- Front-End Development -->
+            <div class="col-12">
+                <div class="simulation-card">
+                    <div class="simulation-header">
+                        <div class="simulation-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <div class="simulation-info">
+                            <h3>HTML & CSS Fundamentals</h3>
+                            <div class="simulation-meta">
+                                <span><i class="fas fa-clock"></i> 30 minute</span>
+                                <span><i class="fas fa-signal"></i> Începător</span>
+                                <span><i class="fas fa-trophy"></i> 50 puncte</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="simulation-description">
+                        Creează layout-uri responsive și stilizează elemente HTML folosind CSS modern. Învață prin practică directă cum să construiești interfețe web atractive.
+                    </p>
+                    <div class="simulation-tags">
+                        <span class="simulation-tag">HTML5</span>
+                        <span class="simulation-tag">CSS3</span>
+                        <span class="simulation-tag">Flexbox</span>
+                        <span class="simulation-tag">Grid</span>
+                    </div>
+                    <div class="simulation-actions">
+                        <button class="btn btn-simulation btn-primary-simulation">
+                            <i class="fas fa-play"></i>
+                            Începe Simularea
+                        </button>
+                        <button class="btn btn-simulation btn-secondary-simulation">
+                            <i class="fas fa-info-circle"></i>
+                            Detalii
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="simulation-card">
+                    <div class="simulation-header">
+                        <div class="simulation-icon">
+                            <i class="fab fa-js"></i>
+                        </div>
+                        <div class="simulation-info">
+                            <h3>JavaScript Interactive</h3>
+                            <div class="simulation-meta">
+                                <span><i class="fas fa-clock"></i> 45 minute</span>
+                                <span><i class="fas fa-signal"></i> Intermediar</span>
+                                <span><i class="fas fa-trophy"></i> 100 puncte</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="simulation-description">
+                        Dezvoltă aplicații web interactive folosind JavaScript modern. Practică manipularea DOM-ului, gestionarea evenimentelor și lucrul cu API-uri.
+                    </p>
+                    <div class="simulation-tags">
+                        <span class="simulation-tag">JavaScript ES6+</span>
+                        <span class="simulation-tag">DOM</span>
+                        <span class="simulation-tag">Events</span>
+                        <span class="simulation-tag">APIs</span>
+                    </div>
+                    <div class="simulation-actions">
+                        <button class="btn btn-simulation btn-primary-simulation">
+                            <i class="fas fa-play"></i>
+                            Începe Simularea
+                        </button>
+                        <button class="btn btn-simulation btn-secondary-simulation">
+                            <i class="fas fa-info-circle"></i>
+                            Detalii
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Back-End Development -->
+            <div class="col-12">
+                <div class="simulation-card">
+                    <div class="simulation-header">
+                        <div class="simulation-icon">
+                            <i class="fab fa-node-js"></i>
+                        </div>
+                        <div class="simulation-info">
+                            <h3>Node.js & Express</h3>
+                            <div class="simulation-meta">
+                                <span><i class="fas fa-clock"></i> 60 minute</span>
+                                <span><i class="fas fa-signal"></i> Intermediar</span>
+                                <span><i class="fas fa-trophy"></i> 150 puncte</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="simulation-description">
+                        Construiește și testează API-uri RESTful folosind Node.js și Express. Implementează rutare, middleware și integrare cu baze de date.
+                    </p>
+                    <div class="simulation-tags">
+                        <span class="simulation-tag">Node.js</span>
+                        <span class="simulation-tag">Express</span>
+                        <span class="simulation-tag">REST API</span>
+                        <span class="simulation-tag">Middleware</span>
+                    </div>
+                    <div class="simulation-actions">
+                        <button class="btn btn-simulation btn-primary-simulation">
+                            <i class="fas fa-play"></i>
+                            Începe Simularea
+                        </button>
+                        <button class="btn btn-simulation btn-secondary-simulation">
+                            <i class="fas fa-info-circle"></i>
+                            Detalii
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Database Management -->
+            <div class="col-12">
+                <div class="simulation-card">
+                    <div class="simulation-header">
+                        <div class="simulation-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <div class="simulation-info">
+                            <h3>SQL & Database Design</h3>
+                            <div class="simulation-meta">
+                                <span><i class="fas fa-clock"></i> 45 minute</span>
+                                <span><i class="fas fa-signal"></i> Intermediar</span>
+                                <span><i class="fas fa-trophy"></i> 120 puncte</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="simulation-description">
+                        Proiectează și optimizează baze de date relaționale. Practică queries complexe, normalizare și indexare pentru performanță optimă.
+                    </p>
+                    <div class="simulation-tags">
+                        <span class="simulation-tag">SQL</span>
+                        <span class="simulation-tag">Database Design</span>
+                        <span class="simulation-tag">Optimization</span>
+                        <span class="simulation-tag">Indexing</span>
+                    </div>
+                    <div class="simulation-actions">
+                        <button class="btn btn-simulation btn-primary-simulation">
+                            <i class="fas fa-play"></i>
+                            Începe Simularea
+                        </button>
+                        <button class="btn btn-simulation btn-secondary-simulation">
+                            <i class="fas fa-info-circle"></i>
+                            Detalii
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- UI/UX Design -->
+            <div class="col-12">
+                <div class="simulation-card">
+                    <div class="simulation-header">
+                        <div class="simulation-icon">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <div class="simulation-info">
+                            <h3>UI/UX Design Workshop</h3>
+                            <div class="simulation-meta">
+                                <span><i class="fas fa-clock"></i> 75 minute</span>
+                                <span><i class="fas fa-signal"></i> Intermediar</span>
+                                <span><i class="fas fa-trophy"></i> 180 puncte</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="simulation-description">
+                        Creează interfețe intuitive și experiențe de utilizator memorabile. Aplică principii de design și realizează prototipuri interactive.
+                    </p>
+                    <div class="simulation-tags">
+                        <span class="simulation-tag">UI Design</span>
+                        <span class="simulation-tag">UX Research</span>
+                        <span class="simulation-tag">Prototyping</span>
+                        <span class="simulation-tag">User Testing</span>
+                    </div>
+                    <div class="simulation-actions">
+                        <button class="btn btn-simulation btn-primary-simulation">
+                            <i class="fas fa-play"></i>
+                            Începe Simularea
+                        </button>
+                        <button class="btn btn-simulation btn-secondary-simulation">
+                            <i class="fas fa-info-circle"></i>
+                            Detalii
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Development -->
+            <div class="col-12">
+                <div class="simulation-card">
+                    <div class="simulation-header">
+                        <div class="simulation-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <div class="simulation-info">
+                            <h3>React Native Development</h3>
+                            <div class="simulation-meta">
+                                <span><i class="fas fa-clock"></i> 90 minute</span>
+                                <span><i class="fas fa-signal"></i> Avansat</span>
+                                <span><i class="fas fa-trophy"></i> 200 puncte</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="simulation-description">
+                        Dezvoltă aplicații mobile cross-platform folosind React Native. Implementează funcționalități native și optimizează performanța.
+                    </p>
+                    <div class="simulation-tags">
+                        <span class="simulation-tag">React Native</span>
+                        <span class="simulation-tag">Mobile UI</span>
+                        <span class="simulation-tag">Native APIs</span>
+                        <span class="simulation-tag">Performance</span>
+                    </div>
+                    <div class="simulation-actions">
+                        <button class="btn btn-simulation btn-primary-simulation">
+                            <i class="fas fa-play"></i>
+                            Începe Simularea
+                        </button>
+                        <button class="btn btn-simulation btn-secondary-simulation">
+                            <i class="fas fa-info-circle"></i>
+                            Detalii
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DevOps -->
+            <div class="col-12">
+                <div class="simulation-card">
+                    <div class="simulation-header">
+                        <div class="simulation-icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <div class="simulation-info">
+                            <h3>DevOps & CI/CD</h3>
+                            <div class="simulation-meta">
+                                <span><i class="fas fa-clock"></i> 120 minute</span>
+                                <span><i class="fas fa-signal"></i> Expert</span>
+                                <span><i class="fas fa-trophy"></i> 250 puncte</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="simulation-description">
+                        Configurează și gestionează pipeline-uri CI/CD, containere Docker și infrastructură cloud. Automatizează procesele de dezvoltare și deployment.
+                    </p>
+                    <div class="simulation-tags">
+                        <span class="simulation-tag">Docker</span>
+                        <span class="simulation-tag">CI/CD</span>
+                        <span class="simulation-tag">Cloud</span>
+                        <span class="simulation-tag">Automation</span>
+                    </div>
+                    <div class="simulation-actions">
+                        <button class="btn btn-simulation btn-primary-simulation">
+                            <i class="fas fa-play"></i>
+                            Începe Simularea
+                        </button>
+                        <button class="btn btn-simulation btn-secondary-simulation">
+                            <i class="fas fa-info-circle"></i>
+                            Detalii
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Culinary Arts -->
+            <div class="col-12">
+                <div class="simulation-card">
+                    <div class="simulation-header">
+                        <div class="simulation-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <div class="simulation-info">
+                            <h3>Tehnici de Gătit: Bucătărie Internațională</h3>
+                            <div class="simulation-meta">
+                                <span><i class="fas fa-clock"></i> 60 minute</span>
+                                <span><i class="fas fa-signal"></i> Intermediar</span>
+                                <span><i class="fas fa-trophy"></i> 150 puncte</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="simulation-description">
+                        Explorează tehnici de gătit din bucătăria internațională. Învață să pregătești rețete autentice și să stăpânești metodele de preparare specifice.
+                    </p>
+                    <div class="simulation-tags">
+                        <span class="simulation-tag">Tehnici de Bază</span>
+                        <span class="simulation-tag">Rețete Internaționale</span>
+                        <span class="simulation-tag">Prezentare</span>
+                        <span class="simulation-tag">Management Timp</span>
+                    </div>
+                    <div class="simulation-actions">
+                        <button class="btn btn-simulation btn-primary-simulation">
+                            <i class="fas fa-play"></i>
+                            Începe Simularea
+                        </button>
+                        <button class="btn btn-simulation btn-secondary-simulation">
+                            <i class="fas fa-info-circle"></i>
+                            Detalii
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="simulation-card">
+                    <div class="simulation-header">
+                        <div class="simulation-icon">
+                            <i class="fas fa-bread-slice"></i>
+                        </div>
+                        <div class="simulation-info">
+                            <h3>Artă în Cofetărie și Patiserie</h3>
+                            <div class="simulation-meta">
+                                <span><i class="fas fa-clock"></i> 90 minute</span>
+                                <span><i class="fas fa-signal"></i> Avansat</span>
+                                <span><i class="fas fa-trophy"></i> 200 puncte</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="simulation-description">
+                        Descoperă arta cofetăriei și patiseriei. Practică tehnici de decorare, învață despre texturi și temperaturi, și creează deserturi spectaculoase.
+                    </p>
+                    <div class="simulation-tags">
+                        <span class="simulation-tag">Cofetărie</span>
+                        <span class="simulation-tag">Patiserie</span>
+                        <span class="simulation-tag">Decorare</span>
+                        <span class="simulation-tag">Tehnică</span>
+                    </div>
+                    <div class="simulation-actions">
+                        <button class="btn btn-simulation btn-primary-simulation">
+                            <i class="fas fa-play"></i>
+                            Începe Simularea
+                        </button>
+                        <button class="btn btn-simulation btn-secondary-simulation">
+                            <i class="fas fa-info-circle"></i>
+                            Detalii
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo/Video Production -->
+            <div class="col-12">
+                <div class="simulation-card">
+                    <div class="simulation-header">
+                        <div class="simulation-icon">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                        <div class="simulation-info">
+                            <h3>Fotografie Digitală Avansată</h3>
+                            <div class="simulation-meta">
+                                <span><i class="fas fa-clock"></i> 45 minute</span>
+                                <span><i class="fas fa-signal"></i> Intermediar</span>
+                                <span><i class="fas fa-trophy"></i> 120 puncte</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="simulation-description">
+                        Stăpânește setările manuale ale camerei și tehnicile de compoziție. Exersează în diferite scenarii de iluminare și subiecte.
+                    </p>
+                    <div class="simulation-tags">
+                        <span class="simulation-tag">Expunere</span>
+                        <span class="simulation-tag">Compoziție</span>
+                        <span class="simulation-tag">Iluminare</span>
+                        <span class="simulation-tag">Post-procesare</span>
+                    </div>
+                    <div class="simulation-actions">
+                        <button class="btn btn-simulation btn-primary-simulation">
+                            <i class="fas fa-play"></i>
+                            Începe Simularea
+                        </button>
+                        <button class="btn btn-simulation btn-secondary-simulation">
+                            <i class="fas fa-info-circle"></i>
+                            Detalii
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="simulation-card">
+                    <div class="simulation-header">
+                        <div class="simulation-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <div class="simulation-info">
+                            <h3>Producție și Editare Video</h3>
+                            <div class="simulation-meta">
+                                <span><i class="fas fa-clock"></i> 75 minute</span>
+                                <span><i class="fas fa-signal"></i> Avansat</span>
+                                <span><i class="fas fa-trophy"></i> 180 puncte</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="simulation-description">
+                        Învață tehnici profesionale de filmare și editare video. Practică montajul, efectele speciale și corectarea culorii.
+                    </p>
+                    <div class="simulation-tags">
+                        <span class="simulation-tag">Filmare</span>
+                        <span class="simulation-tag">Editare</span>
+                        <span class="simulation-tag">Efecte</span>
+                        <span class="simulation-tag">Color Grading</span>
+                    </div>
+                    <div class="simulation-actions">
+                        <button class="btn btn-simulation btn-primary-simulation">
+                            <i class="fas fa-play"></i>
+                            Începe Simularea
+                        </button>
+                        <button class="btn btn-simulation btn-secondary-simulation">
+                            <i class="fas fa-info-circle"></i>
+                            Detalii
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Language Learning -->
+            <div class="col-12">
+                <div class="simulation-card">
+                    <div class="simulation-header">
+                        <div class="simulation-icon">
+                            <i class="fas fa-language"></i>
+                        </div>
+                        <div class="simulation-info">
+                            <h3>Conversație în Limba Engleză</h3>
+                            <div class="simulation-meta">
+                                <span><i class="fas fa-clock"></i> 30 minute</span>
+                                <span><i class="fas fa-signal"></i> Intermediar</span>
+                                <span><i class="fas fa-trophy"></i> 100 puncte</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="simulation-description">
+                        Practică conversația în limba engleză în situații reale. Îmbunătățește-ți fluența și vocabularul prin dialoguri interactive.
+                    </p>
+                    <div class="simulation-tags">
+                        <span class="simulation-tag">Speaking</span>
+                        <span class="simulation-tag">Listening</span>
+                        <span class="simulation-tag">Vocabulary</span>
+                        <span class="simulation-tag">Pronunciation</span>
+                    </div>
+                    <div class="simulation-actions">
+                        <button class="btn btn-simulation btn-primary-simulation">
+                            <i class="fas fa-play"></i>
+                            Începe Simularea
+                        </button>
+                        <button class="btn btn-simulation btn-secondary-simulation">
+                            <i class="fas fa-info-circle"></i>
+                            Detalii
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="simulation-card">
+                    <div class="simulation-header">
+                        <div class="simulation-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="simulation-info">
+                            <h3>Franceză pentru Conversație și Cultură</h3>
+                            <div class="simulation-meta">
+                                <span><i class="fas fa-clock"></i> 45 minute</span>
+                                <span><i class="fas fa-signal"></i> Intermediar</span>
+                                <span><i class="fas fa-trophy"></i> 150 puncte</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="simulation-description">
+                        Explorează limba și cultura franceză prin conversații interactive. Practică dialoguri în situații cotidiene și descoperă aspecte culturale fascinante.
+                    </p>
+                    <div class="simulation-tags">
+                        <span class="simulation-tag">Conversation</span>
+                        <span class="simulation-tag">Culture</span>
+                        <span class="simulation-tag">Grammaire</span>
+                        <span class="simulation-tag">Vocabulaire</span>
+                    </div>
+                    <div class="simulation-actions">
+                        <button class="btn btn-simulation btn-primary-simulation">
+                            <i class="fas fa-play"></i>
+                            Începe Simularea
+                        </button>
+                        <button class="btn btn-simulation btn-secondary-simulation">
+                            <i class="fas fa-info-circle"></i>
+                            Detalii
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Section -->
+        <div class="progress-section">
+            <h4 class="progress-title">Progresul tău în Simulări</h4>
+            <div class="progress mb-4">
+                <div class="progress-bar" role="progressbar" style="width: 20%;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <div class="progress-stats">
+                <div class="progress-stat-item">
+                    <h5>Simulări Completate</h5>
+                    <div class="stat-value">1/5</div>
+                </div>
+                <div class="progress-stat-item">
+                    <h5>Puncte Acumulate</h5>
+                    <div class="stat-value">150</div>
+                </div>
+                <div class="progress-stat-item">
+                    <h5>Timp Total</h5>
+                    <div class="stat-value">2h 30m</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/chatbot.js"></script>
+    <script>
+        // Verifică starea autentificării
+        function checkAuthStatus() {
+            const authState = JSON.parse(localStorage.getItem('authState') || sessionStorage.getItem('authState') || '{}');
+            const userDropdown = document.querySelector('.account-btn');
+            const authBtn = document.querySelector('.auth-btn');
+            const userName = document.getElementById('userName');
+            
+            console.log('Status autentificare:', authState.isAuthenticated);
+            console.log('Date utilizator:', authState.user);
+            
+            if (authState.isAuthenticated) {
+                if (userDropdown) {
+                    userDropdown.style.display = 'block';
+                    console.log('Buton cont vizibil');
+                }
+                if (authBtn) {
+                    authBtn.style.display = 'none';
+                    console.log('Buton autentificare ascuns');
+                }
+                
+                try {
+                    const displayName = authState.user?.name || authState.user?.numeComplet || 'Contul meu';
+                    if (userName) {
+                        userName.textContent = displayName;
+                        console.log('Nume utilizator setat:', displayName);
+                    }
+                } catch (error) {
+                    console.error('Eroare la setarea numelui utilizatorului:', error);
+                    if (userName) userName.textContent = 'Contul meu';
+                }
+            } else {
+                if (userDropdown) {
+                    userDropdown.style.display = 'none';
+                    console.log('Buton cont ascuns');
+                }
+                if (authBtn) {
+                    authBtn.style.display = 'block';
+                    console.log('Buton autentificare vizibil');
+                }
+            }
+        }
+
+        // Funcție pentru deconectare
+        function logout(e) {
+            if (e) e.preventDefault();
+            console.log('Deconectare inițiată...');
+            
+            localStorage.removeItem('authState');
+            sessionStorage.removeItem('authState');
+            
+            checkAuthStatus();
+            
+            console.log('Redirecționare către pagina de autentificare...');
+            window.location.href = 'autentificare.html';
+            
+            return false;
+        }
+
+        // Verifică starea de autentificare la încărcarea paginii
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM încărcat, verificare status...');
+            checkAuthStatus();
+            
+            // Adaugă event listener pentru butonul de deconectare
+            const logoutBtn = document.querySelector('.dropdown-item[href="#"]:not([onclick])');
+            if (logoutBtn) {
+                logoutBtn.onclick = logout;
+            }
+        });
+
+        // Verifică periodic starea de autentificare
+        setInterval(checkAuthStatus, 1000);
+    </script>
+</body>
+</html> 
