@@ -1,0 +1,169 @@
+/* Container pentru integrări */
+.integrations-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Card pentru fiecare integrare */
+.integration-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.integration-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Header pentru card */
+.integration-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.integration-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    font-size: 1.5rem;
+    color: #ffffff;
+}
+
+.integration-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0;
+}
+
+/* Status indicator */
+.integration-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.status-connected {
+    background: rgba(76, 175, 80, 0.2);
+    color: #4caf50;
+}
+
+.status-disconnected {
+    background: rgba(244, 67, 54, 0.2);
+    color: #f44336;
+}
+
+/* Butoane de acțiune */
+.integration-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.btn-connect {
+    padding: 0.8rem 1.5rem;
+    border-radius: 10px;
+    background: rgba(25, 118, 210, 0.2);
+    border: 1px solid rgba(25, 118, 210, 0.3);
+    color: #ffffff;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.btn-connect:hover {
+    background: rgba(25, 118, 210, 0.3);
+    transform: translateY(-2px);
+}
+
+.btn-disconnect {
+    padding: 0.8rem 1.5rem;
+    border-radius: 10px;
+    background: rgba(244, 67, 54, 0.2);
+    border: 1px solid rgba(244, 67, 54, 0.3);
+    color: #ffffff;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.btn-disconnect:hover {
+    background: rgba(244, 67, 54, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Notificări */
+.notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    color: #ffffff;
+    font-weight: 500;
+    animation: slideIn 0.3s ease-out;
+    z-index: 1000;
+}
+
+.notification.success {
+    background: rgba(76, 175, 80, 0.9);
+}
+
+.notification.error {
+    background: rgba(244, 67, 54, 0.9);
+}
+
+.notification.info {
+    background: rgba(25, 118, 210, 0.9);
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .integrations-container {
+        padding: 1rem;
+        margin: 1rem;
+    }
+
+    .integration-card {
+        padding: 1rem;
+    }
+
+    .integration-actions {
+        flex-direction: column;
+    }
+
+    .btn-connect, .btn-disconnect {
+        width: 100%;
+    }
+} 
