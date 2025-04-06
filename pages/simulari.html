@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="../css/chatbot.css">
+    <link rel="stylesheet" href="../css/integrations.css">
     <style>
         body {
             background: linear-gradient(135deg, #0f2649 0%, #1a3a6d 100%);
@@ -709,6 +710,166 @@
         .list-group-item:hover {
             background: rgba(255, 255, 255, 0.1) !important;
         }
+
+        /* Stiluri pentru simulări */
+        .simulare-container {
+            display: none;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .intrebare {
+            margin-bottom: 2rem;
+        }
+
+        .intrebare h3 {
+            color: #64b5f6;
+            margin-bottom: 1rem;
+        }
+
+        .intrebare p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            white-space: pre-line;
+        }
+
+        .raspunsuri {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-raspuns {
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-raspuns:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .btn-raspuns:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .btn-raspuns.corect {
+            background: rgba(76, 175, 80, 0.3);
+            border-color: #4CAF50;
+        }
+
+        .btn-raspuns.gresit {
+            background: rgba(244, 67, 54, 0.3);
+            border-color: #f44336;
+        }
+
+        .explicatie {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            border-left: 4px solid #64b5f6;
+        }
+
+        .btn-continua {
+            margin-top: 1rem;
+            padding: 0.8rem 1.5rem;
+            background: #64b5f6;
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-continua:hover {
+            background: #42a5f5;
+            transform: translateY(-2px);
+        }
+
+        .rezultat {
+            text-align: center;
+        }
+
+        .scor {
+            margin: 2rem 0;
+        }
+
+        .scor-cerc {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .actiuni {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .btn-reincepe, .btn-inapoi {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-reincepe {
+            background: #64b5f6;
+        }
+
+        .btn-inapoi {
+            background: #f44336;
+        }
+
+        .btn-reincepe:hover, .btn-inapoi:hover {
+            transform: translateY(-2px);
+        }
+
+        .categorii {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .categorie-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .categorie-btn:hover {
+            background: rgba(25, 118, 210, 0.2);
+            border-color: rgba(25, 118, 210, 0.3);
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 <body>
@@ -790,34 +951,16 @@
         </div>
 
         <!-- Simulation Cards -->
-        <div class="row">
-            <!-- Front-End Development -->
-            <div class="col-12">
-                <div class="simulation-card">
-                    <div class="simulation-header">
-                        <div class="simulation-icon">
-                            <i class="fas fa-code"></i>
-                        </div>
-                        <div class="simulation-info">
-                            <h3>HTML & CSS Fundamentals</h3>
-                            <div class="simulation-meta">
-                                <span><i class="fas fa-clock"></i> 30 minute</span>
-                                <span><i class="fas fa-signal"></i> Începător</span>
-                                <span><i class="fas fa-trophy"></i> 50 puncte</span>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="simulation-description">
-                        Creează layout-uri responsive și stilizează elemente HTML folosind CSS modern. Învață prin practică directă cum să construiești interfețe web atractive.
-                    </p>
-                    <div class="simulation-tags">
-                        <span class="simulation-tag">HTML5</span>
-                        <span class="simulation-tag">CSS3</span>
-                        <span class="simulation-tag">Flexbox</span>
-                        <span class="simulation-tag">Grid</span>
-                    </div>
+        <div class="simulation-cards">
+            <div class="simulation-card">
+                <div class="simulation-header">
+                    <i class="fas fa-code"></i>
+                    <h3>Programare</h3>
+                </div>
+                <div class="simulation-content">
+                    <p>Testează-ți cunoștințele de programare cu aceste exerciții practice.</p>
                     <div class="simulation-actions">
-                        <button class="btn btn-simulation btn-primary-simulation">
+                        <button class="btn btn-simulation btn-primary-simulation" data-categorie="programare">
                             <i class="fas fa-play"></i>
                             Începe Simularea
                         </button>
@@ -829,32 +972,15 @@
                 </div>
             </div>
 
-            <div class="col-12">
-                <div class="simulation-card">
-                    <div class="simulation-header">
-                        <div class="simulation-icon">
-                            <i class="fab fa-js"></i>
-                        </div>
-                        <div class="simulation-info">
-                            <h3>JavaScript Interactive</h3>
-                            <div class="simulation-meta">
-                                <span><i class="fas fa-clock"></i> 45 minute</span>
-                                <span><i class="fas fa-signal"></i> Intermediar</span>
-                                <span><i class="fas fa-trophy"></i> 100 puncte</span>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="simulation-description">
-                        Dezvoltă aplicații web interactive folosind JavaScript modern. Practică manipularea DOM-ului, gestionarea evenimentelor și lucrul cu API-uri.
-                    </p>
-                    <div class="simulation-tags">
-                        <span class="simulation-tag">JavaScript ES6+</span>
-                        <span class="simulation-tag">DOM</span>
-                        <span class="simulation-tag">Events</span>
-                        <span class="simulation-tag">APIs</span>
-                    </div>
+            <div class="simulation-card">
+                <div class="simulation-header">
+                    <i class="fas fa-calculator"></i>
+                    <h3>Matematică</h3>
+                </div>
+                <div class="simulation-content">
+                    <p>Rezolvă probleme de matematică și verifică-ți cunoștințele.</p>
                     <div class="simulation-actions">
-                        <button class="btn btn-simulation btn-primary-simulation">
+                        <button class="btn btn-simulation btn-primary-simulation" data-categorie="matematica">
                             <i class="fas fa-play"></i>
                             Începe Simularea
                         </button>
@@ -866,33 +992,15 @@
                 </div>
             </div>
 
-            <!-- Back-End Development -->
-            <div class="col-12">
-                <div class="simulation-card">
-                    <div class="simulation-header">
-                        <div class="simulation-icon">
-                            <i class="fab fa-node-js"></i>
-                        </div>
-                        <div class="simulation-info">
-                            <h3>Node.js & Express</h3>
-                            <div class="simulation-meta">
-                                <span><i class="fas fa-clock"></i> 60 minute</span>
-                                <span><i class="fas fa-signal"></i> Intermediar</span>
-                                <span><i class="fas fa-trophy"></i> 150 puncte</span>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="simulation-description">
-                        Construiește și testează API-uri RESTful folosind Node.js și Express. Implementează rutare, middleware și integrare cu baze de date.
-                    </p>
-                    <div class="simulation-tags">
-                        <span class="simulation-tag">Node.js</span>
-                        <span class="simulation-tag">Express</span>
-                        <span class="simulation-tag">REST API</span>
-                        <span class="simulation-tag">Middleware</span>
-                    </div>
+            <div class="simulation-card">
+                <div class="simulation-header">
+                    <i class="fas fa-atom"></i>
+                    <h3>Fizică</h3>
+                </div>
+                <div class="simulation-content">
+                    <p>Testează-ți cunoștințele de fizică cu aceste probleme practice.</p>
                     <div class="simulation-actions">
-                        <button class="btn btn-simulation btn-primary-simulation">
+                        <button class="btn btn-simulation btn-primary-simulation" data-categorie="fizica">
                             <i class="fas fa-play"></i>
                             Începe Simularea
                         </button>
@@ -904,109 +1012,15 @@
                 </div>
             </div>
 
-            <!-- Database Management -->
-            <div class="col-12">
-                <div class="simulation-card">
-                    <div class="simulation-header">
-                        <div class="simulation-icon">
-                            <i class="fas fa-database"></i>
-                        </div>
-                        <div class="simulation-info">
-                            <h3>SQL & Database Design</h3>
-                            <div class="simulation-meta">
-                                <span><i class="fas fa-clock"></i> 45 minute</span>
-                                <span><i class="fas fa-signal"></i> Intermediar</span>
-                                <span><i class="fas fa-trophy"></i> 120 puncte</span>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="simulation-description">
-                        Proiectează și optimizează baze de date relaționale. Practică queries complexe, normalizare și indexare pentru performanță optimă.
-                    </p>
-                    <div class="simulation-tags">
-                        <span class="simulation-tag">SQL</span>
-                        <span class="simulation-tag">Database Design</span>
-                        <span class="simulation-tag">Optimization</span>
-                        <span class="simulation-tag">Indexing</span>
-                    </div>
-                    <div class="simulation-actions">
-                        <button class="btn btn-simulation btn-primary-simulation">
-                            <i class="fas fa-play"></i>
-                            Începe Simularea
-                        </button>
-                        <button class="btn btn-simulation btn-secondary-simulation">
-                            <i class="fas fa-info-circle"></i>
-                            Detalii
-                        </button>
-                    </div>
+            <div class="simulation-card">
+                <div class="simulation-header">
+                    <i class="fas fa-flask"></i>
+                    <h3>Chimie</h3>
                 </div>
-            </div>
-
-            <!-- UI/UX Design -->
-            <div class="col-12">
-                <div class="simulation-card">
-                    <div class="simulation-header">
-                        <div class="simulation-icon">
-                            <i class="fas fa-paint-brush"></i>
-                        </div>
-                        <div class="simulation-info">
-                            <h3>UI/UX Design Workshop</h3>
-                            <div class="simulation-meta">
-                                <span><i class="fas fa-clock"></i> 75 minute</span>
-                                <span><i class="fas fa-signal"></i> Intermediar</span>
-                                <span><i class="fas fa-trophy"></i> 180 puncte</span>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="simulation-description">
-                        Creează interfețe intuitive și experiențe de utilizator memorabile. Aplică principii de design și realizează prototipuri interactive.
-                    </p>
-                    <div class="simulation-tags">
-                        <span class="simulation-tag">UI Design</span>
-                        <span class="simulation-tag">UX Research</span>
-                        <span class="simulation-tag">Prototyping</span>
-                        <span class="simulation-tag">User Testing</span>
-                    </div>
+                <div class="simulation-content">
+                    <p>Verifică-ți cunoștințele de chimie cu aceste exerciții.</p>
                     <div class="simulation-actions">
-                        <button class="btn btn-simulation btn-primary-simulation">
-                            <i class="fas fa-play"></i>
-                            Începe Simularea
-                        </button>
-                        <button class="btn btn-simulation btn-secondary-simulation">
-                            <i class="fas fa-info-circle"></i>
-                            Detalii
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Mobile Development -->
-            <div class="col-12">
-                <div class="simulation-card">
-                    <div class="simulation-header">
-                        <div class="simulation-icon">
-                            <i class="fas fa-mobile-alt"></i>
-                        </div>
-                        <div class="simulation-info">
-                            <h3>React Native Development</h3>
-                            <div class="simulation-meta">
-                                <span><i class="fas fa-clock"></i> 90 minute</span>
-                                <span><i class="fas fa-signal"></i> Avansat</span>
-                                <span><i class="fas fa-trophy"></i> 200 puncte</span>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="simulation-description">
-                        Dezvoltă aplicații mobile cross-platform folosind React Native. Implementează funcționalități native și optimizează performanța.
-                    </p>
-                    <div class="simulation-tags">
-                        <span class="simulation-tag">React Native</span>
-                        <span class="simulation-tag">Mobile UI</span>
-                        <span class="simulation-tag">Native APIs</span>
-                        <span class="simulation-tag">Performance</span>
-                    </div>
-                    <div class="simulation-actions">
-                        <button class="btn btn-simulation btn-primary-simulation">
+                        <button class="btn btn-simulation btn-primary-simulation" data-categorie="chimie">
                             <i class="fas fa-play"></i>
                             Începe Simularea
                         </button>
@@ -1044,7 +1058,7 @@
                         <span class="simulation-tag">Automation</span>
                     </div>
                     <div class="simulation-actions">
-                        <button class="btn btn-simulation btn-primary-simulation">
+                        <button class="btn btn-simulation btn-primary-simulation" data-categorie="fizica">
                             <i class="fas fa-play"></i>
                             Începe Simularea
                         </button>
@@ -1082,7 +1096,7 @@
                         <span class="simulation-tag">Management Timp</span>
                     </div>
                     <div class="simulation-actions">
-                        <button class="btn btn-simulation btn-primary-simulation">
+                        <button class="btn btn-simulation btn-primary-simulation" data-categorie="chimie">
                             <i class="fas fa-play"></i>
                             Începe Simularea
                         </button>
@@ -1119,7 +1133,7 @@
                         <span class="simulation-tag">Tehnică</span>
                     </div>
                     <div class="simulation-actions">
-                        <button class="btn btn-simulation btn-primary-simulation">
+                        <button class="btn btn-simulation btn-primary-simulation" data-categorie="chimie">
                             <i class="fas fa-play"></i>
                             Începe Simularea
                         </button>
@@ -1157,7 +1171,7 @@
                         <span class="simulation-tag">Post-procesare</span>
                     </div>
                     <div class="simulation-actions">
-                        <button class="btn btn-simulation btn-primary-simulation">
+                        <button class="btn btn-simulation btn-primary-simulation" data-categorie="fizica">
                             <i class="fas fa-play"></i>
                             Începe Simularea
                         </button>
@@ -1194,7 +1208,7 @@
                         <span class="simulation-tag">Color Grading</span>
                     </div>
                     <div class="simulation-actions">
-                        <button class="btn btn-simulation btn-primary-simulation">
+                        <button class="btn btn-simulation btn-primary-simulation" data-categorie="fizica">
                             <i class="fas fa-play"></i>
                             Începe Simularea
                         </button>
@@ -1232,7 +1246,7 @@
                         <span class="simulation-tag">Pronunciation</span>
                     </div>
                     <div class="simulation-actions">
-                        <button class="btn btn-simulation btn-primary-simulation">
+                        <button class="btn btn-simulation btn-primary-simulation" data-categorie="programare">
                             <i class="fas fa-play"></i>
                             Începe Simularea
                         </button>
@@ -1269,7 +1283,7 @@
                         <span class="simulation-tag">Vocabulaire</span>
                     </div>
                     <div class="simulation-actions">
-                        <button class="btn btn-simulation btn-primary-simulation">
+                        <button class="btn btn-simulation btn-primary-simulation" data-categorie="programare">
                             <i class="fas fa-play"></i>
                             Începe Simularea
                         </button>
@@ -1330,9 +1344,17 @@
         </div>
     </div>
 
+    <!-- Container pentru simulări -->
+    <div id="simulare-container" class="simulare-container">
+        <h2 id="simulare-titlu"></h2>
+        <p id="simulare-descriere"></p>
+        <div id="intrebare-container"></div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/auth.js"></script>
     <script src="../js/chatbot.js"></script>
+    <script src="../js/simulari.js"></script>
     <script>
         // Verifică starea autentificării
         function checkAuthStatus() {

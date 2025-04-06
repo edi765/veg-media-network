@@ -76,6 +76,15 @@ let chatbotState = {
     suggestionsShown: false
 };
 
+// Adaugă răspunsurile personalizate
+const raspunsuriPersonalizate = {
+    "cine te a creat": "Creatorul meu este Edoardo Vrajitoru.",
+    "cine este dezvoltatorul acestei platforme": "Edoardo Vrajitoru este dezvoltatorul platformei.",
+    "unde invata edy": "La regina maria dorohoi.",
+    "in ce clasa este edy": "In clasa 11F, care este cea mai tare clasa!!!",
+    "cine este smecherul clasei": "Un baiat pe nume Surmei, n ai cum sa nu l stii....toata lumea il stie!"
+};
+
 // Funcție pentru procesarea mesajelor
 function processMessage(message) {
     message = message.toLowerCase().trim();
@@ -88,6 +97,13 @@ function processMessage(message) {
     // Verifică dacă este o întrebare de ajutor
     if (isHelpRequest(message)) {
         return showSuggestions();
+    }
+
+    // Verificăm dacă mesajul conține vreuna dintre întrebările personalizate
+    for (const [intrebare, raspuns] of Object.entries(raspunsuriPersonalizate)) {
+        if (message.includes(intrebare)) {
+            return raspuns;
+        }
     }
 
     // Caută în baza de cunoștințe
