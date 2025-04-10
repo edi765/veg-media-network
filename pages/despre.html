@@ -683,6 +683,36 @@
                 margin-bottom: 0.8rem;
             }
         }
+
+        /* Stiluri pentru butonul de organigramă */
+        .team-actions {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .team-actions .btn-outline-light {
+            padding: 0.8rem 1.5rem;
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .team-actions .btn-outline-light:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .team-actions .btn-outline-light i {
+            font-size: 1.2rem;
+        }
     </style>
 </head>
 <body>
@@ -816,6 +846,12 @@
     <!-- Team Section -->
     <section class="section">
         <div class="container">
+            <div class="team-actions mb-5">
+                <button class="btn btn-outline-light" onclick="window.open('../docs/organigrama.pdf', '_blank')">
+                    <i class="fas fa-sitemap"></i>
+                    Vezi Organigrama
+                </button>
+            </div>
             <h2 class="section-title">Echipa Noastră</h2>
             <div class="row g-4 justify-content-center">
                 <div class="col-lg-4 col-md-6">
