@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Egalitate de Șanse și Accesibilitate - VEG Media Network</title>
+    <meta name="description" content="Comitetul nostru pentru egalitate de șanse. Exemple practice de tehnologii de asistență: cititoare de ecran, navigare tastatură, contrast ridicat.">
+    <link rel="icon" type="image/png" href="../images/logo.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/chatbot.css">
+    <link rel="stylesheet" href="../css/egalitate-sanse.css">
+</head>
+<body>
+    <!-- Skip Link pentru accesibilitate -->
+    <a href="#main-content" class="skip-link">Sari la conținutul principal</a>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" role="navigation" aria-label="Navigare principală">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html" aria-label="VEG Media Network - Pagina principală">
+                <img src="../images/logo.png" alt="">
+                <div>VEG Media Network - Platformă Educațională</div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Deschide meniul">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="../index.html">Acasă</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cursuri.html">Cursuri</a></li>
+                    <li class="nav-item"><a class="nav-link" href="despre.html">Despre Noi</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="egalitate-sanse.html">Egalitate de șanse</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle account-btn" href="#" role="button" data-bs-toggle="dropdown" style="display: none;" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-user-circle" aria-hidden="true"></i>
+                            <span id="userName">Cont</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" role="menu">
+                            <li><a class="dropdown-item" href="profil.html"><i class="fas fa-user"></i> Profilul meu</a></li>
+                            <li><a class="dropdown-item" href="cursuri-mele.html"><i class="fas fa-book"></i> Cursurile mele</a></li>
+                            <li><a class="dropdown-item" href="certificate.html"><i class="fas fa-certificate"></i> Certificate</a></li>
+                            <li><a class="dropdown-item" href="cariera.html"><i class="fas fa-graduation-cap"></i> Ghid de Carieră</a></li>
+                            <li><a class="dropdown-item" href="setari.html"><i class="fas fa-cog"></i> Setări</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" onclick="logout(event)"><i class="fas fa-sign-out-alt"></i> Deconectare</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link auth-btn" href="autentificare.html">Autentificare</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section" aria-labelledby="hero-title">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10 text-center">
+                        <h1 id="hero-title" class="hero-title">
+                            <i class="fas fa-universal-access me-3" aria-hidden="true"></i>
+                            Egalitate de Șanse și Accesibilitate
+                        </h1>
+                        <p class="hero-text lead">VEG Media Network se angajează să ofere o platformă educațională accesibilă tuturor, indiferent de abilități sau circumstanțe. Descoperă tehnologiile care ne ajută să facem diferența.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Declarație de angajament -->
+        <section class="section commitment-section" aria-labelledby="commitment-title">
+            <div class="container">
+                <h2 id="commitment-title" class="section-title">Comitetul Nostru pentru Egalitate de Șanse</h2>
+                <div class="commitment-card">
+                    <p class="commitment-text">
+                        VEG Media Network este dedicată <strong>egalității de șanse</strong> și <strong>incluziunii digitale</strong>. Ne asigurăm că platforma noastră educațională este proiectată și întreținută astfel încât persoanele cu dizabilități (vizuale, auditive, motorii sau cognitive) să poată accesa conținutul, naviga și învăța fără bariere. Acest angajament se reflectă atât în designul tehnic, cât și în politici și practici interne.
+                    </p>
+                    <ul class="commitment-list">
+                        <li><i class="fas fa-check-circle"></i> Conținut proiectat conform WCAG 2.1</li>
+                        <li><i class="fas fa-check-circle"></i> Testare cu tehnologii de asistență</li>
+                        <li><i class="fas fa-check-circle"></i> Formare continuă pentru echipa noastră</li>
+                        <li><i class="fas fa-check-circle"></i> Feedback și adaptări bazate pe utilizatori</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tehnologii de asistență în practică -->
+        <section class="section tech-section" aria-labelledby="tech-title">
+            <div class="container">
+                <h2 id="tech-title" class="section-title">Tehnologii de Asistență în Practică</h2>
+                <p class="section-intro">Mai jos găsești exemple concrete de tehnologii folosite de milioane de persoane pentru a accesa webul și educația online. Pe această pagină poți experimenta și unele funcționalități.</p>
+
+                <div class="row g-4">
+                    <!-- Cititoare de ecran -->
+                    <div class="col-lg-6">
+                        <article class="tech-card" aria-labelledby="sr-title">
+                            <div class="tech-icon" aria-hidden="true">
+                                <i class="fas fa-headphones"></i>
+                            </div>
+                            <h3 id="sr-title">Cititoare de ecran (Screen readers)</h3>
+                            <p>Softuri precum <strong>NVDA</strong> (Windows, gratuit), <strong>JAWS</strong> (Windows), <strong>VoiceOver</strong> (Mac/iOS) sau <strong>TalkBack</strong> (Android) citesc textul de pe ecran și-l transformă în vorbire sintetizată. Utilizatorii navighează prin elemente (linkuri, titluri, butoane) folosind comenzile tastaturii sau gesturile pe dispozitive tactile.</p>
+                            <div class="tech-example">
+                                <h4>Exemplu practic</h4>
+                                <p>Pe această pagină, elementele importante au etichete ARIA și structură semantică (headings, landmark-uri), astfel încât un cititor de ecran poate anunța corect: „Link, Cursuri”, „Regiune principală”, „Titlu nivel 2, Tehnologii de asistență”.</p>
+                                <p class="small text-muted">Poți testa cu <a href="https://www.nvaccess.org/" target="_blank" rel="noopener">NVDA</a> (gratuit) pe Windows.</p>
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- Navigare cu tastatura -->
+                    <div class="col-lg-6">
+                        <article class="tech-card" aria-labelledby="keyboard-title">
+                            <div class="tech-icon" aria-hidden="true">
+                                <i class="fas fa-keyboard"></i>
+                            </div>
+                            <h3 id="keyboard-title">Navigare cu tastatura</h3>
+                            <p>Multe persoane nu folosesc mouse-ul: folosesc <kbd>Tab</kbd> pentru a trece de la un element la altul, <kbd>Enter</kbd> pentru a activa butoane/ linkuri și <kbd>Escape</kbd> pentru a închide. Site-ul nostru permite navigarea completă doar cu tastatura.</p>
+                            <div class="tech-example">
+                                <h4>Exemplu interactiv</h4>
+                                <p>Apasă <kbd>Tab</kbd> pentru a trece prin elementele de mai jos. Atenție la indicatorul de focus (contur vizibil).</p>
+                                <div class="keyboard-demo" role="group" aria-label="Demo navigare tastatură">
+                                    <button type="button" class="btn btn-outline-light demo-btn">Buton 1</button>
+                                    <button type="button" class="btn btn-outline-light demo-btn">Buton 2</button>
+                                    <a href="#main-content" class="btn btn-outline-light demo-btn">Link exemplu</a>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- Contrast ridicat -->
+                    <div class="col-lg-6">
+                        <article class="tech-card contrast-card" aria-labelledby="contrast-title">
+                            <div class="tech-icon" aria-hidden="true">
+                                <i class="fas fa-adjust"></i>
+                            </div>
+                            <h3 id="contrast-title">Mod contrast ridicat</h3>
+                            <p>Persoanele cu deficiențe de vedere sau sensibilitate la luminozitate beneficiază de un contrast mare între text și fundal. Pe această pagină poți activa un mod de contrast ridicat pentru o lectură mai ușoară.</p>
+                            <div class="tech-example">
+                                <h4>Exemplu interactiv</h4>
+                                <p>Folosește butonul de mai jos pentru a comuta între modul normal și modul contrast ridicat pe această pagină.</p>
+                                <button type="button" id="contrastToggle" class="btn btn-outline-light" aria-pressed="false" aria-label="Activează mod contrast ridicat">
+                                    <i class="fas fa-adjust"></i> Mod contrast ridicat
+                                </button>
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- Lupă / Zoom -->
+                    <div class="col-lg-6">
+                        <article class="tech-card" aria-labelledby="zoom-title">
+                            <div class="tech-icon" aria-hidden="true">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                            <h3 id="zoom-title">Lupă și zoom</h3>
+                            <p>Utilizatorii pot mări conținutul folosind <strong>Ctrl + plus</strong> (sau <strong>Cmd + plus</strong> pe Mac) în browser. Lupi software (ex. Windows Magnifier) permit mărirea unei zone din ecran. Site-ul nostru răspunde la zoom fără să se strice layout-ul.</p>
+                            <div class="tech-example">
+                                <h4>Exemplu practic</h4>
+                                <p>Încearcă: apasă <kbd>Ctrl</kbd> + <kbd>+</kbd> de câteva ori. Textul și elementele se măresc, iar layout-ul rămâne funcțional.</p>
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- Subtitrări și transcrieri -->
+                    <div class="col-lg-6">
+                        <article class="tech-card" aria-labelledby="captions-title">
+                            <div class="tech-icon" aria-hidden="true">
+                                <i class="fas fa-closed-captioning"></i>
+                            </div>
+                            <h3 id="captions-title">Subtitrări și transcrieri</h3>
+                            <p>Pentru conținut video și audio, oferim subtitrări și transcrieri text. Persoanele surde sau cu deficiențe de auz pot citi ce se spune. Subtitrările sunt utile și în medii zgomotoase sau când utilizatorul preferă să citească în liniște.</p>
+                            <div class="tech-example">
+                                <h4>Exemplu practic</h4>
+                                <p>Cursurile noastre video vor include opțiuni de subtitrări în română. Transcrierile text vor fi disponibile pentru materiale audio.</p>
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- Recunoaștere vocală -->
+                    <div class="col-lg-6">
+                        <article class="tech-card" aria-labelledby="voice-title">
+                            <div class="tech-icon" aria-hidden="true">
+                                <i class="fas fa-microphone"></i>
+                            </div>
+                            <h3 id="voice-title">Control vocal și dicție</h3>
+                            <p>Tehnologiile de control vocal (ex. Windows Speech Recognition, comenzi vocale pe dispozitive mobile) permit navigarea și completarea formularilor prin vorbire. Formularele noastre sunt etichetate corect pentru a funcționa cu astfel de instrumente.</p>
+                            <div class="tech-example">
+                                <h4>Exemplu practic</h4>
+                                <p>Formularul de contact are câmpuri cu etichete clare (<code>label</code> asociate). Un utilizator care dictează poate spune „Completează câmpul Email” și sistemul îl identifică corect.</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resurse utile -->
+        <section class="section resources-section" aria-labelledby="resources-title">
+            <div class="container">
+                <h2 id="resources-title" class="section-title">Resurse Utile</h2>
+                <div class="row g-3">
+                    <div class="col-md-6 col-lg-3">
+                        <a href="https://www.nvaccess.org/" target="_blank" rel="noopener" class="resource-link">
+                            <i class="fas fa-external-link-alt"></i> NVDA (cititor ecran gratuit)
+                        </a>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <a href="https://www.w3.org/WAI/WCAG21/quickref/" target="_blank" rel="noopener" class="resource-link">
+                            <i class="fas fa-external-link-alt"></i> WCAG 2.1 – Ghid rapid
+                        </a>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <a href="https://webaim.org/" target="_blank" rel="noopener" class="resource-link">
+                            <i class="fas fa-external-link-alt"></i> WebAIM – Resurse accesibilitate
+                        </a>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <a href="contact.html" class="resource-link">
+                            <i class="fas fa-envelope"></i> Contact – Sugestii accesibilitate
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Chatbot -->
+    <button class="chatbot-button" onclick="toggleChat()" aria-label="Deschide chatbot asistent">
+        <i class="fas fa-comments" aria-hidden="true"></i>
+    </button>
+
+    <div class="chatbot-container" role="dialog" aria-label="Asistent virtual chat">
+        <div class="chatbot-header">
+            <h4><i class="fas fa-robot me-2" aria-hidden="true"></i>Asistent Virtual</h4>
+            <button class="chatbot-close" onclick="toggleChat()" aria-label="Închide chatbot">
+                <i class="fas fa-times" aria-hidden="true"></i>
+            </button>
+        </div>
+        <div class="chatbot-messages">
+            <div class="message bot-message">
+                Bună! Sunt asistentul virtual al platformei VEG Media Network. Cu ce te pot ajuta?
+            </div>
+        </div>
+        <div class="chatbot-input">
+            <label for="chatInput" class="visually-hidden">Scrie mesajul tău</label>
+            <input type="text" id="chatInput" placeholder="Scrie un mesaj..." aria-label="Mesaj chat" onkeypress="handleKeyPress(event)">
+            <button onclick="sendMessage()" aria-label="Trimite mesaj">
+                <i class="fas fa-paper-plane" aria-hidden="true"></i>
+            </button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/chatbot.js"></script>
+    <script>
+        // Mod contrast ridicat
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggle = document.getElementById('contrastToggle');
+            if (toggle) {
+                toggle.addEventListener('click', function() {
+                    const pressed = this.getAttribute('aria-pressed') === 'true';
+                    document.body.classList.toggle('high-contrast', !pressed);
+                    this.setAttribute('aria-pressed', !pressed);
+                    this.setAttribute('aria-label', pressed ? 'Activează mod contrast ridicat' : 'Dezactivează mod contrast ridicat');
+                    this.querySelector('i').className = pressed ? 'fas fa-adjust' : 'fas fa-adjust';
+                    this.innerHTML = (pressed ? '<i class="fas fa-adjust"></i> Mod contrast ridicat' : '<i class="fas fa-adjust"></i> Mod normal');
+                });
+            }
+
+            function checkAuthStatus() {
+                const authState = JSON.parse(localStorage.getItem('authState') || sessionStorage.getItem('authState') || '{}');
+                const accountBtn = document.querySelector('.account-btn');
+                const authBtn = document.querySelector('.auth-btn');
+                const userName = document.getElementById('userName');
+                if (authState.isAuthenticated) {
+                    if (accountBtn) accountBtn.style.display = 'block';
+                    if (authBtn) authBtn.style.display = 'none';
+                    if (userName) userName.textContent = authState.user?.name || authState.user?.numeComplet || 'Contul meu';
+                } else {
+                    if (accountBtn) accountBtn.style.display = 'none';
+                    if (authBtn) authBtn.style.display = 'block';
+                }
+            }
+            function logout(e) { if (e) e.preventDefault(); localStorage.removeItem('authState'); sessionStorage.removeItem('authState'); checkAuthStatus(); window.location.href = 'autentificare.html'; return false; }
+            checkAuthStatus();
+        });
+    </script>
+</body>
+</html>

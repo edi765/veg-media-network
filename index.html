@@ -950,9 +950,30 @@
         .chatbot-messages::-webkit-scrollbar-thumb:hover {
             background: rgba(255, 255, 255, 0.3);
         }
+
+        /* Skip link accesibilitate */
+        .skip-link {
+            position: absolute;
+            top: -100px;
+            left: 0;
+            background: #1976D2;
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            z-index: 9999;
+            font-weight: 600;
+            border-radius: 0 0 8px 0;
+            text-decoration: none;
+            transition: top 0.2s ease;
+        }
+        .skip-link:focus {
+            top: 0;
+            outline: 3px solid #fff;
+            outline-offset: 2px;
+        }
     </style>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Sari la conținutul principal</a>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
@@ -975,6 +996,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="pages/despre.html">Despre Noi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pages/egalitate-sanse.html">Egalitate de șanse</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="pages/contact.html">Contact</a>
@@ -1004,6 +1028,7 @@
     </nav>
 
     <!-- Hero Section -->
+    <main id="main-content">
     <section class="hero">
         <video class="hero-video" autoplay muted loop playsinline>
             <source src="videos/background.mp4" type="video/mp4">
@@ -1096,6 +1121,8 @@
         </div>
     </section>
 
+    </main>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -1115,6 +1142,7 @@
                     <ul class="list-unstyled footer-links">
                         <li><a href="pages/despre.html">Despre Noi</a></li>
                         <li><a href="pages/cursuri.html">Cursuri</a></li>
+                        <li><a href="pages/egalitate-sanse.html">Egalitate de șanse</a></li>
                         <li><a href="pages/contact.html">Contact</a></li>
                         <li><a href="pages/certificate.html">Certificate</a></li>
                     </ul>

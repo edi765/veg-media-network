@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="../css/chatbot.css">
+    <link rel="stylesheet" href="../css/team-animations.css">
     <style>
         body {
             background: linear-gradient(135deg, #0f2649 0%, #1a3a6d 100%);
@@ -524,112 +525,7 @@
             }
         }
 
-        .team-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 2rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            height: 100%;
-        }
-
-        .team-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.15);
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-
-        .hexagon-wrapper {
-            margin: 0 auto 2rem;
-            width: 200px;
-            height: 200px;
-            position: relative;
-            perspective: 1000px;
-            border-radius: 50%;
-            overflow: hidden;
-        }
-
-        .hexagon {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transform-style: preserve-3d;
-            transition: transform 0.5s;
-            border-radius: 50%;
-        }
-
-        .team-card:hover .hexagon {
-            transform: scale(1.1);
-        }
-
-        .team-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border: 4px solid rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-        }
-
-        .team-name {
-            color: #ffffff;
-            font-size: 1.5rem;
-            margin: 1rem 0 0.5rem;
-        }
-
-        .team-role {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 1rem;
-            margin-bottom: 1rem;
-            font-weight: 500;
-        }
-
-        .team-description {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-        }
-
-        .social-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-        }
-
-        .social-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            transform: translateY(-3px);
-        }
-
-        @media (max-width: 768px) {
-            .hexagon-wrapper {
-                width: 150px;
-                height: 150px;
-            }
-
-            .team-card {
-                padding: 1.5rem;
-            }
-
-            .team-name {
-                font-size: 1.3rem;
-            }
-        }
+        /* Designul vizual al cardurilor de echipă este definit în team-animations.css */
 
         .hero-section {
             padding: 30px 0;
@@ -740,6 +636,9 @@
                         <a class="nav-link active" href="despre.html">Despre Noi</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="egalitate-sanse.html">Egalitate de șanse</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="contact.html">Contact</a>
                     </li>
                     <li class="nav-item dropdown">
@@ -844,7 +743,7 @@
     </section>
 
     <!-- Team Section -->
-    <section class="section">
+    <section id="echipa" class="section">
         <div class="container">
             <div class="team-actions mb-5">
                 <button class="btn btn-outline-light" onclick="window.open('../docs/organigrama.pdf', '_blank')">
@@ -856,120 +755,174 @@
             <div class="row g-4 justify-content-center">
                 <div class="col-lg-4 col-md-6">
                     <div class="card-container team-card">
-                        <div class="hexagon-wrapper">
-                            <div class="hexagon">
+                        <div class="team-card-inner">
+                            <!-- Fața jetonului -->
+                            <div class="team-card-front">
                                 <img src="../images/team/edoardo.png" alt="Edoardo Vrăjitoru" class="team-image">
+                                <h3 class="team-name">Edoardo Vrăjitoru</h3>
+                                <div class="team-role">Director General</div>
+                                <p class="team-description">Vizionar și lider, coordonează strategia și dezvoltarea companiei</p>
                             </div>
-                        </div>
-                        <h3 class="team-name">Edoardo Vrăjitoru</h3>
-                        <div class="team-role">Director General</div>
-                        <p class="team-description">Vizionar și lider, coordonează strategia și dezvoltarea companiei</p>
-                        <div class="social-links">
-                            <a href="#" class="social-btn"><i class="fab fa-linkedin"></i></a>
-                            <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
-                            <a href="#" class="social-btn"><i class="fas fa-envelope"></i></a>
+                            <!-- Spatele jetonului -->
+                            <div class="team-card-back">
+                                <a href="membri/membru-edoardo.html" class="member-details-btn">
+                                    <i class="fas fa-user"></i>
+                                    Vezi Detalii
+                                </a>
+                                <div class="social-links">
+                                    <a href="#" class="social-btn"><i class="fab fa-linkedin"></i></a>
+                                    <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
+                                    <a href="#" class="social-btn"><i class="fas fa-envelope"></i></a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="card-container team-card">
-                        <div class="hexagon-wrapper">
-                            <div class="hexagon">
+                        <div class="team-card-inner">
+                            <!-- Fața jetonului -->
+                            <div class="team-card-front">
                                 <img src="../images/team/leonard.png" alt="Rapolti Leonard" class="team-image">
+                                <h3 class="team-name">Rapolti Leonard</h3>
+                                <div class="team-role">Director Adjunct</div>
+                                <p class="team-description">Expert în managementul operațional și dezvoltarea echipei</p>
                             </div>
-                        </div>
-                        <h3 class="team-name">Rapolti Leonard</h3>
-                        <div class="team-role">Director Adjunct</div>
-                        <p class="team-description">Expert în managementul operațional și dezvoltarea echipei</p>
-                        <div class="social-links">
-                            <a href="#" class="social-btn"><i class="fab fa-linkedin"></i></a>
-                            <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
-                            <a href="#" class="social-btn"><i class="fas fa-envelope"></i></a>
+                            <!-- Spatele jetonului -->
+                            <div class="team-card-back">
+                                <a href="membri/membru-leonard.html" class="member-details-btn">
+                                    <i class="fas fa-user"></i>
+                                    Vezi Detalii
+                                </a>
+                                <div class="social-links">
+                                    <a href="#" class="social-btn"><i class="fab fa-linkedin"></i></a>
+                                    <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
+                                    <a href="#" class="social-btn"><i class="fas fa-envelope"></i></a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="card-container team-card">
-                        <div class="hexagon-wrapper">
-                            <div class="hexagon">
+                        <div class="team-card-inner">
+                            <!-- Fața jetonului -->
+                            <div class="team-card-front">
                                 <img src="../images/team/maria.png" alt="Rusu Maria" class="team-image">
+                                <h3 class="team-name">Rusu Maria</h3>
+                                <div class="team-role">Manager Financiar</div>
+                                <p class="team-description">Specialistă în gestiunea resurselor și planificare financiară</p>
                             </div>
-                        </div>
-                        <h3 class="team-name">Rusu Maria</h3>
-                        <div class="team-role">Manager Financiar</div>
-                        <p class="team-description">Specialistă în gestiunea resurselor și planificare financiară</p>
-                        <div class="social-links">
-                            <a href="#" class="social-btn"><i class="fab fa-linkedin"></i></a>
-                            <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
-                            <a href="#" class="social-btn"><i class="fas fa-envelope"></i></a>
+                            <!-- Spatele jetonului -->
+                            <div class="team-card-back">
+                                <a href="membri/membru-maria.html" class="member-details-btn">
+                                    <i class="fas fa-user"></i>
+                                    Vezi Detalii
+                                </a>
+                                <div class="social-links">
+                                    <a href="#" class="social-btn"><i class="fab fa-linkedin"></i></a>
+                                    <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
+                                    <a href="#" class="social-btn"><i class="fas fa-envelope"></i></a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="card-container team-card">
-                        <div class="hexagon-wrapper">
-                            <div class="hexagon">
+                        <div class="team-card-inner">
+                            <!-- Fața jetonului -->
+                            <div class="team-card-front">
                                 <img src="../images/team/marian.png" alt="Leontescu Marian" class="team-image">
+                                <h3 class="team-name">Leontescu Marian</h3>
+                                <div class="team-role">Designer UI/UX</div>
+                                <p class="team-description">Creator de experiențe digitale intuitive și atractive</p>
                             </div>
-                        </div>
-                        <h3 class="team-name">Leontescu Marian</h3>
-                        <div class="team-role">Designer UI/UX</div>
-                        <p class="team-description">Creator de experiențe digitale intuitive și atractive</p>
-                        <div class="social-links">
-                            <a href="#" class="social-btn"><i class="fab fa-linkedin"></i></a>
-                            <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
-                            <a href="#" class="social-btn"><i class="fas fa-envelope"></i></a>
+                            <!-- Spatele jetonului -->
+                            <div class="team-card-back">
+                                <a href="membri/membru-marian.html" class="member-details-btn">
+                                    <i class="fas fa-user"></i>
+                                    Vezi Detalii
+                                </a>
+                                <div class="social-links">
+                                    <a href="#" class="social-btn"><i class="fab fa-linkedin"></i></a>
+                                    <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
+                                    <a href="#" class="social-btn"><i class="fas fa-envelope"></i></a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="card-container team-card">
-                        <div class="hexagon-wrapper">
-                            <div class="hexagon">
+                        <div class="team-card-inner">
+                            <!-- Fața jetonului -->
+                            <div class="team-card-front">
                                 <img src="../images/team/cristi.png" alt="Ciobanu Ruben" class="team-image">
+                                <h3 class="team-name">Ciobanu Ruben</h3>
+                                <div class="team-role">Specialist Marketing</div>
+                                <p class="team-description">Expert în strategii digitale și comunicare online</p>
                             </div>
-                        </div>
-                        <h3 class="team-name">Ciobanu Ruben</h3>
-                        <div class="team-role">Specialist Marketing</div>
-                        <p class="team-description">Expert în strategii digitale și comunicare online</p>
-                        <div class="social-links">
-                            <a href="#" class="social-btn"><i class="fab fa-linkedin"></i></a>
-                            <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
-                            <a href="#" class="social-btn"><i class="fas fa-envelope"></i></a>
+                            <!-- Spatele jetonului -->
+                            <div class="team-card-back">
+                                <a href="membri/membru-ruben.html" class="member-details-btn">
+                                    <i class="fas fa-user"></i>
+                                    Vezi Detalii
+                                </a>
+                                <div class="social-links">
+                                    <a href="#" class="social-btn"><i class="fab fa-linkedin"></i></a>
+                                    <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
+                                    <a href="#" class="social-btn"><i class="fas fa-envelope"></i></a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="card-container team-card">
-                        <div class="hexagon-wrapper">
-                            <div class="hexagon">
+                        <div class="team-card-inner">
+                            <!-- Fața jetonului -->
+                            <div class="team-card-front">
                                 <img src="../images/team/ionut.png" alt="Cucu Ionuț" class="team-image">
+                                <h3 class="team-name">Cucu Ionuț</h3>
+                                <div class="team-role">Dezvoltator Software</div>
+                                <p class="team-description">Programator talentat și pasionat de inovație tehnologică</p>
                             </div>
-                        </div>
-                        <h3 class="team-name">Cucu Ionuț</h3>
-                        <div class="team-role">Dezvoltator Software</div>
-                        <p class="team-description">Programator talentat și pasionat de inovație tehnologică</p>
-                        <div class="social-links">
-                            <a href="#" class="social-btn"><i class="fab fa-linkedin"></i></a>
-                            <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
-                            <a href="#" class="social-btn"><i class="fas fa-envelope"></i></a>
+                            <!-- Spatele jetonului -->
+                            <div class="team-card-back">
+                                <a href="membri/membru-ionut.html" class="member-details-btn">
+                                    <i class="fas fa-user"></i> Vezi Detalii
+                                </a>
+                                <div class="social-links">
+                                    <a href="#" class="social-btn"><i class="fab fa-linkedin"></i></a>
+                                    <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
+                                    <a href="#" class="social-btn"><i class="fas fa-envelope"></i></a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="card-container team-card">
-                        <div class="hexagon-wrapper">
-                            <div class="hexagon">
+                        <div class="team-card-inner">
+                            <!-- Fața jetonului -->
+                            <div class="team-card-front">
                                 <img src="../images/team/petronela.png" alt="Nacu Petronela" class="team-image">
+                                <h3 class="team-name">Nacu Petronela</h3>
+                                <div class="team-role">Manager de Proiect</div>
+                                <p class="team-description">Coordonator de proiecte cu experiență în livrare la timp</p>
                             </div>
-                        </div>
-                        <h3 class="team-name">Nacu Petronela</h3>
-                        <div class="team-role">Manager de Proiect</div>
-                        <p class="team-description">Coordonator de proiecte cu experiență în livrare la timp</p>
-                        <div class="social-links">
-                            <a href="#" class="social-btn"><i class="fab fa-linkedin"></i></a>
-                            <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
-                            <a href="#" class="social-btn"><i class="fas fa-envelope"></i></a>
+                            <!-- Spatele jetonului -->
+                            <div class="team-card-back">
+                                <a href="membri/membru-petronela.html" class="member-details-btn">
+                                    <i class="fas fa-user"></i> Vezi Detalii
+                                </a>
+                                <div class="social-links">
+                                    <a href="#" class="social-btn"><i class="fab fa-linkedin"></i></a>
+                                    <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
+                                    <a href="#" class="social-btn"><i class="fas fa-envelope"></i></a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1070,6 +1023,88 @@
 
         // Verifică periodic starea de autentificare
         setInterval(checkAuthStatus, 1000);
+
+        // Funcții pentru animațiile echipei
+        function initTeamAnimations() {
+            const teamCards = document.querySelectorAll('.team-card');
+            
+            // Adaugă clasa pentru animații la scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('reveal');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            teamCards.forEach(card => {
+                observer.observe(card);
+            });
+        }
+
+        // Efect flip 3D la click
+        function flipCard(card) {
+            card.classList.toggle('flipped');
+        }
+
+        // Funcție pentru efecte de particule
+        function createParticleEffect(event) {
+            const card = event.currentTarget;
+            const rect = card.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+
+            for (let i = 0; i < 5; i++) {
+                const particle = document.createElement('div');
+                particle.style.position = 'absolute';
+                particle.style.left = x + 'px';
+                particle.style.top = y + 'px';
+                particle.style.width = '4px';
+                particle.style.height = '4px';
+                particle.style.background = 'rgba(255, 255, 255, 0.8)';
+                particle.style.borderRadius = '50%';
+                particle.style.pointerEvents = 'none';
+                particle.style.zIndex = '1000';
+                particle.style.animation = `particleFloat 1s ease-out forwards`;
+
+                card.appendChild(particle);
+
+                setTimeout(() => {
+                    particle.remove();
+                }, 1000);
+            }
+        }
+
+        // Adaugă CSS pentru particule
+        const particleStyle = document.createElement('style');
+        particleStyle.textContent = `
+            @keyframes particleFloat {
+                0% {
+                    transform: translate(0, 0) scale(1);
+                    opacity: 1;
+                }
+                100% {
+                    transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) scale(0);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(particleStyle);
+
+        // Inițializează animațiile la încărcarea paginii
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuthStatus();
+            initTeamAnimations();
+            
+            // Adaugă efecte de particule la click pe jetoane
+            const teamCards = document.querySelectorAll('.team-card');
+            teamCards.forEach(card => {
+                card.addEventListener('click', createParticleEffect);
+            });
+        });
     </script>
 </body>
 </html> 

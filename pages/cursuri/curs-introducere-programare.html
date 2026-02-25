@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introducere în Programare | VEG Media Network</title>
+    <link rel="icon" type="image/png" href="../../images/logo.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #0f2649 0%, #1a3a6d 100%);
+            min-height: 100vh;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding-top: 70px;
+        }
+
+        .course-hero { padding: 60px 0 40px; }
+
+        .course-card {
+            background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.10), transparent 55%),
+                        radial-gradient(circle at bottom right, rgba(0, 0, 0, 0.55), transparent 55%),
+                        linear-gradient(145deg, rgba(8, 43, 92, 0.95), rgba(5, 24, 58, 0.98));
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+            padding: 2.5rem;
+        }
+
+        .course-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .course-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.95rem;
+        }
+
+        .course-meta span i { margin-right: 0.4rem; }
+
+        .start-btn {
+            background: linear-gradient(135deg, rgba(25, 118, 210, 1), rgba(25, 118, 210, 0.85));
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: #ffffff;
+            padding: 0.9rem 1.8rem;
+            border-radius: 999px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            margin-bottom: 2rem;
+        }
+
+        .modules-list h3 { font-size: 1.2rem; margin-bottom: 1rem; }
+        .modules-list ul { padding-left: 1.2rem; }
+        .modules-list li {
+            margin-bottom: 0.4rem;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .back-to-courses { margin-bottom: 1.5rem; }
+        .back-to-courses a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+        }
+        .back-to-courses a:hover { color: #ffffff; text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="../../index.html">
+                <img src="../../images/logo.png" alt="VEG Media Network Logo">
+                <div>VEG Media Network - Platformă Educațională</div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="../../index.html">Acasă</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="../cursuri.html">Cursuri</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../despre.html">Despre Noi</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../egalitate-sanse.html">Egalitate de șanse</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="course-hero">
+        <div class="container">
+            <div class="back-to-courses">
+                <a href="../cursuri.html">
+                    <i class="fas fa-arrow-left"></i>
+                    Înapoi la toate cursurile
+                </a>
+            </div>
+
+            <div class="course-card">
+                <div class="row g-4 align-items-start">
+                    <div class="col-lg-5 text-center">
+                        <img src="../../images/courses/programming.jpeg" alt="Introducere în Programare" class="img-fluid rounded-4 mb-3">
+                    </div>
+                    <div class="col-lg-7">
+                        <h1 class="course-title">Introducere în Programare</h1>
+                        <p class="mb-3">Python, JavaScript, HTML &amp; CSS – de la zero la dezvoltator web. Curs gândit pentru începători complet, cu explicații clare și exemple practice.</p>
+
+                        <div class="course-meta">
+                            <span><i class="fas fa-clock"></i>40 ore de conținut</span>
+                            <span><i class="fas fa-layer-group"></i>8 module</span>
+                            <span><i class="fas fa-user-graduate"></i>450+ cursanți</span>
+                            <span><i class="fas fa-star text-warning"></i>Rating 4.9</span>
+                        </div>
+
+                        <a href="#" class="start-btn" onclick="return showCourseWipModal(event)">
+                            <i class="fas fa-play"></i>
+                            Începe cursul
+                        </a>
+
+                        <div class="modules-list" id="modul1">
+                            <h3>Ce vei învăța</h3>
+                            <ul>
+                                <li>Bazele gândirii algoritmice și cum „gândește” un calculator;</li>
+                                <li>Noțiuni esențiale de Python (variabile, condiții, bucle, funcții);</li>
+                                <li>Introducere în HTML &amp; CSS pentru pagini web moderne;</li>
+                                <li>Primele scripturi în JavaScript pentru interactivitate;</li>
+                                <li>Cum să îți structurezi proiectele și să lucrezi organizat.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal curs în lucru -->
+    <div class="modal fade" id="courseWipModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="background: linear-gradient(145deg, #0f2649, #1a3a6d); color: #ffffff;">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title"><i class="fas fa-hourglass-half me-2"></i>Curs în pregătire</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Închide"></button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        Lucrăm la conținutul acestui curs pentru a-ți oferi o experiență completă și interactivă.
+                        Te invităm să revii în curând – va merita așteptarea.
+                    </p>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Înțeleg</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function showCourseWipModal(e) {
+            if (e) e.preventDefault();
+            var modalEl = document.getElementById('courseWipModal');
+            if (!modalEl || !window.bootstrap) return false;
+            var modal = new bootstrap.Modal(modalEl);
+            modal.show();
+            return false;
+        }
+    </script>
+</body>
+</html>
